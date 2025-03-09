@@ -18,22 +18,22 @@ const Hero = () => {
         ></div>
       </div>
 
-      {/* Floating elements - now bigger and more animated */}
-      <div className="absolute top-40 right-[20%] animate-dance" style={{ zIndex: 5 }}>
+      {/* Floating elements - positioned to not overlap with text */}
+      <div className="absolute top-32 right-[15%] animate-dance" style={{ zIndex: 5 }}>
         <div className="floating-icon">
           <div className="floating-icon-inner bg-reform-cyan/20"></div>
           <Lightbulb className="floating-icon-svg text-reform-cyan" />
         </div>
       </div>
       
-      <div className="absolute bottom-1/3 left-[15%] animate-bounce-soft" style={{ zIndex: 5 }}>
+      <div className="absolute bottom-[40%] left-[10%] animate-bounce-soft" style={{ zIndex: 5 }}>
         <div className="floating-icon">
           <div className="floating-icon-inner bg-reform-violet/20"></div>
           <Stars className="floating-icon-svg text-reform-violet" />
         </div>
       </div>
       
-      <div className="absolute top-1/2 left-[30%] animate-orbit" style={{ zIndex: 5, animationDuration: '15s' }}>
+      <div className="absolute top-[40%] left-[25%] animate-orbit" style={{ zIndex: 5, animationDuration: '15s' }}>
         <div className="floating-icon">
           <div className="floating-icon-inner bg-reform-yellow/20"></div>
           <Gamepad2 className="floating-icon-svg text-reform-orange" />
@@ -41,11 +41,11 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="container max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+      <div className="container max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center mt-10">
         <div className="mb-6 md:mb-10 flex justify-center">
-          <h1 className="logo-text text-4xl sm:text-5xl md:text-6xl text-neon-glow">Re:Form Hub</h1>
+          <h1 className="reformed-logo text-4xl sm:text-5xl md:text-6xl">Re:Form Hub</h1>
         </div>
-        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-gradient heading-glow">
+        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-gradient">
           {t('hero.title')}
         </h2>
         <p className="text-lg md:text-xl text-foreground/80 mb-10 max-w-2xl mx-auto animate-slide-up">

@@ -37,11 +37,12 @@ const Header = () => {
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <div className="flex items-center">
           <a href="#" className="flex items-center">
-            <h1 className="logo-text text-2xl sm:text-3xl">Re:Form Hub</h1>
+            <h1 className="reformed-logo text-2xl sm:text-3xl">Re:Form Hub</h1>
           </a>
         </div>
 
-        <nav className="hidden md:flex items-center space-x-8">
+        {/* Desktop navigation hidden on mobile */}
+        <nav className="hidden md:hidden items-center space-x-8">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -57,8 +58,9 @@ const Header = () => {
           <ThemeToggle />
           <LanguageToggle />
           <button
-            className="md:hidden ml-4 text-foreground/80 hover:text-foreground transition-colors"
+            className="ml-4 text-foreground/80 hover:text-foreground transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -67,7 +69,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 glassmorphism transition-all duration-300 ease-expo-out ${
+        className={`absolute top-full left-0 right-0 glassmorphism transition-all duration-300 ease-expo-out ${
           isMenuOpen ? 'max-h-screen py-4' : 'max-h-0 py-0 overflow-hidden'
         }`}
       >
