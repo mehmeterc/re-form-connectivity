@@ -18,25 +18,25 @@ const Hero = () => {
         ></div>
       </div>
 
-      {/* Floating elements */}
-      <div className="absolute top-1/3 right-1/4 animate-float">
-        <div className="relative w-12 h-12 md:w-16 md:h-16 flex items-center justify-center">
-          <div className="absolute inset-0 bg-reform-cyan/20 rounded-full blur-xl animate-pulse-soft"></div>
-          <Lightbulb className="w-8 h-8 md:w-10 md:h-10 text-reform-cyan" />
+      {/* Floating elements - now bigger and more animated */}
+      <div className="absolute top-40 right-[20%] animate-dance" style={{ zIndex: 5 }}>
+        <div className="floating-icon">
+          <div className="floating-icon-inner bg-reform-cyan/20"></div>
+          <Lightbulb className="floating-icon-svg text-reform-cyan" />
         </div>
       </div>
       
-      <div className="absolute bottom-1/3 left-1/5 animate-bounce-soft">
-        <div className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center">
-          <div className="absolute inset-0 bg-reform-violet/20 rounded-full blur-xl animate-pulse-soft"></div>
-          <Stars className="w-7 h-7 md:w-8 md:h-8 text-reform-violet" />
+      <div className="absolute bottom-1/3 left-[15%] animate-bounce-soft" style={{ zIndex: 5 }}>
+        <div className="floating-icon">
+          <div className="floating-icon-inner bg-reform-violet/20"></div>
+          <Stars className="floating-icon-svg text-reform-violet" />
         </div>
       </div>
       
-      <div className="absolute top-1/2 left-1/4 animate-float" style={{ animationDelay: '1s' }}>
-        <div className="relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
-          <div className="absolute inset-0 bg-reform-yellow/20 rounded-full blur-xl animate-pulse-soft"></div>
-          <Gamepad2 className="w-6 h-6 md:w-7 md:h-7 text-reform-orange" />
+      <div className="absolute top-1/2 left-[30%] animate-orbit" style={{ zIndex: 5, animationDuration: '15s' }}>
+        <div className="floating-icon">
+          <div className="floating-icon-inner bg-reform-yellow/20"></div>
+          <Gamepad2 className="floating-icon-svg text-reform-orange" />
         </div>
       </div>
 
@@ -48,7 +48,7 @@ const Hero = () => {
         <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-gradient heading-glow">
           {t('hero.title')}
         </h2>
-        <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto animate-slide-up">
+        <p className="text-lg md:text-xl text-foreground/80 mb-10 max-w-2xl mx-auto animate-slide-up">
           {t('hero.subtitle')}
         </p>
         <a

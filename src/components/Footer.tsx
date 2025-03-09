@@ -7,7 +7,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-16 px-4 sm:px-6 relative glassmorphism border-t border-white/10">
+    <footer className="py-16 px-4 sm:px-6 relative glassmorphism border-t border-foreground/10">
       <div className="container max-w-6xl mx-auto">
         <div className="text-center mb-10">
           <h3 className="text-2xl md:text-3xl font-bold mb-6 max-w-3xl mx-auto">
@@ -21,13 +21,13 @@ const Footer = () => {
           </a>
         </div>
 
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
+        <div className="pt-8 border-t border-foreground/10 flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <a href="#" className="flex items-center">
               <h2 className="logo-text text-2xl">Re:Form Hub</h2>
             </a>
           </div>
-          <div className="text-sm text-white/60">
+          <div className="text-sm text-foreground/60">
             &copy; {currentYear} Re:Form Hub. {t('footer.rights')}
           </div>
         </div>

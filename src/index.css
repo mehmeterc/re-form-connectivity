@@ -8,6 +8,41 @@
 
 @layer base {
   :root {
+    --background: 0 0% 100%;
+    --foreground: 210 25% 20%;
+
+    --card: 0 0% 97%;
+    --card-foreground: 210 25% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 25% 20%;
+
+    --primary: 177 50% 52%;
+    --primary-foreground: 210 25% 20%;
+
+    --secondary: 210 30% 95%;
+    --secondary-foreground: 210 25% 20%;
+
+    --muted: 210 30% 95%;
+    --muted-foreground: 215 20% 45%;
+
+    --accent: 177 50% 40%;
+    --accent-foreground: 210 25% 20%;
+
+    --destructive: 0 62% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 30% 90%;
+    --input: 210 30% 90%;
+    --ring: 212 26% 70%;
+    
+    --radius: 0.75rem;
+
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .dark {
     --background: 210 35% 8%;
     --foreground: 210 40% 98%;
 
@@ -35,11 +70,6 @@
     --border: 210 30% 15%;
     --input: 210 30% 15%;
     --ring: 212 26% 83%;
-    
-    --radius: 0.75rem;
-
-    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-display: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
 
   * {
@@ -67,7 +97,7 @@
 
   /* Custom classes */
   .glassmorphism {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg;
+    @apply dark:bg-white/5 bg-white/90 backdrop-blur-xl border dark:border-white/10 border-gray-200 shadow-lg;
   }
 
   .text-gradient {
@@ -177,6 +207,18 @@
 
   .text-neon-glow {
     animation: neon-pulse 2s infinite alternate;
+  }
+
+  .floating-icon {
+    @apply w-16 h-16 md:w-20 md:h-20 flex items-center justify-center;
+  }
+
+  .floating-icon-inner {
+    @apply absolute inset-0 rounded-full blur-xl animate-pulse-soft;
+  }
+
+  .floating-icon-svg {
+    @apply w-10 h-10 md:w-12 md:h-12 relative z-10;
   }
 
   @keyframes neon-pulse {

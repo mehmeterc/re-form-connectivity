@@ -126,6 +126,16 @@ export default {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-15px)' },
 				},
+				'orbit': {
+					'0%': { transform: 'rotate(0deg) translateX(20px) rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg) translateX(20px) rotate(-360deg)' }
+				},
+				'dance': {
+					'0%, 100%': { transform: 'scale(1) rotate(0deg)' },
+					'25%': { transform: 'scale(1.1) rotate(-5deg)' },
+					'50%': { transform: 'scale(1) rotate(0deg)' },
+					'75%': { transform: 'scale(1.1) rotate(5deg)' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -138,6 +148,8 @@ export default {
 				'shimmer': 'shimmer 2s linear infinite',
 				'glow': 'glow 3s ease-in-out infinite',
 				'bounce-soft': 'bounce-soft 3s ease-in-out infinite',
+				'orbit': 'orbit 10s linear infinite',
+				'dance': 'dance 4s ease-in-out infinite',
 			},
 			transitionTimingFunction: {
 				'expo-out': 'cubic-bezier(0.16, 1, 0.3, 1)',
