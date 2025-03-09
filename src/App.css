@@ -43,10 +43,10 @@
 /* Custom animations */
 @keyframes cyber-glow {
   0%, 100% {
-    box-shadow: 0 0 10px rgba(78, 205, 196, 0.7);
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.6), 0 0 20px rgba(78, 205, 196, 0.4);
   }
   50% {
-    box-shadow: 0 0 20px rgba(78, 205, 196, 0.9);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.8), 0 0 30px rgba(78, 205, 196, 0.6);
   }
 }
 
@@ -68,4 +68,26 @@
   100% {
     transform: scale(1);
   }
+}
+
+@keyframes text-flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  8%, 10% {
+    opacity: 0.8;
+  }
+  20%, 25% {
+    opacity: 1;
+  }
+  30%, 70% {
+    opacity: 0.9;
+  }
+  80%, 90% {
+    opacity: 1;
+  }
+}
+
+.text-flicker {
+  animation: text-flicker 5s infinite alternate;
 }

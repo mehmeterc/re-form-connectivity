@@ -43,15 +43,11 @@ const Hero = () => {
       {/* Content */}
       <div className="container max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
         <div className="mb-6 md:mb-10 flex justify-center">
-          <img 
-            src="/lovable-uploads/24ee9b20-39b4-46f7-9e11-d461a3b02494.png" 
-            alt="Re:Form Hub Logo" 
-            className="h-24 sm:h-32 animate-fade-in"
-          />
+          <h1 className="logo-text text-4xl sm:text-5xl md:text-6xl text-neon-glow">Re:Form Hub</h1>
         </div>
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in">
+        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-gradient heading-glow">
           {t('hero.title')}
-        </h1>
+        </h2>
         <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto animate-slide-up">
           {t('hero.subtitle')}
         </p>

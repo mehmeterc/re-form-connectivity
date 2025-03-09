@@ -55,7 +55,7 @@ const About = () => {
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            <span className="text-gradient">{t('about.title')}</span>
+            <span className="text-gradient heading-glow">{t('about.title')}</span>
           </h2>
           <p className="text-lg text-white/80 max-w-3xl mx-auto">
             {t('about.description')}

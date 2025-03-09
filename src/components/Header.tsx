@@ -36,11 +36,7 @@ const Header = () => {
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <div className="flex items-center">
           <a href="#" className="flex items-center">
-            <img 
-              src="/lovable-uploads/24ee9b20-39b4-46f7-9e11-d461a3b02494.png" 
-              alt="Re:Form Hub Logo" 
-              className="h-10 sm:h-12 mr-3 transition-transform hover:scale-105 duration-300" 
-            />
+            <h1 className="logo-text text-2xl sm:text-3xl">Re:Form Hub</h1>
           </a>
         </div>
 
