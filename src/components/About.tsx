@@ -30,17 +30,17 @@ const About = () => {
 
   const features = [
     {
-      icon: <Wifi className="h-10 w-10 text-reform-blue" />,
+      icon: <Wifi className="h-10 w-10 text-reform-cyan" />,
       title: t('about.coworking.title'),
       description: t('about.coworking.description'),
     },
     {
-      icon: <Calendar className="h-10 w-10 text-reform-purple" />,
+      icon: <Calendar className="h-10 w-10 text-reform-violet" />,
       title: t('about.workshops.title'),
       description: t('about.workshops.description'),
     },
     {
-      icon: <TestTube className="h-10 w-10 text-reform-pink" />,
+      icon: <TestTube className="h-10 w-10 text-reform-orange" />,
       title: t('about.experiments.title'),
       description: t('about.experiments.description'),
     },
@@ -54,7 +54,9 @@ const About = () => {
     >
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('about.title')}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <span className="text-gradient">{t('about.title')}</span>
+          </h2>
           <p className="text-lg text-white/80 max-w-3xl mx-auto">
             {t('about.description')}
           </p>
@@ -64,13 +66,13 @@ const About = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="glassmorphism p-8 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1"
+              className="glow-card glassmorphism p-8 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-reform-teal/20 hover:-translate-y-1 pixel-corners"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="mb-4 p-3 rounded-xl bg-white/5 inline-block">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+              <h3 className="text-xl font-semibold mb-3 neon-text">{feature.title}</h3>
               <p className="text-white/70">{feature.description}</p>
             </div>
           ))}

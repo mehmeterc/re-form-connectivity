@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,41 +8,42 @@
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
+    --background: 210 35% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 13%;
+    --card: 210 35% 11%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 11%;
+    --popover: 210 35% 8%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
+    --primary: 177 50% 52%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 217 33% 17%;
+    --secondary: 210 30% 15%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
+    --muted: 210 30% 15%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 217 33% 17%;
+    --accent: 177 50% 25%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
+    --border: 210 30% 15%;
+    --input: 210 30% 15%;
     --ring: 212 26% 83%;
     
     --radius: 0.75rem;
 
     --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
 
   * {
-    @apply border-border selection:bg-primary/20 selection:text-foreground;
+    @apply border-border selection:bg-reform-teal/20 selection:text-foreground;
     scroll-behavior: smooth;
   }
 
@@ -69,7 +71,7 @@
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-reform-blue via-reform-purple to-reform-pink;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-reform-teal via-reform-cyan to-reform-teal-light;
   }
 
   .section-transition {
@@ -90,7 +92,7 @@
   }
 
   .calendar-day {
-    @apply relative p-2 rounded-lg transition-all hover:bg-primary/20 cursor-pointer;
+    @apply relative p-2 rounded-lg transition-all hover:bg-reform-teal/20 cursor-pointer;
   }
 
   .calendar-day.has-event::after {
@@ -109,5 +111,48 @@
 
   .outlined-text {
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  }
+  
+  .glow-card {
+    @apply relative overflow-hidden;
+  }
+  
+  .glow-card::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-reform-teal-light/20 to-reform-cyan/20 opacity-0 transition-opacity duration-300;
+  }
+  
+  .glow-card:hover::after {
+    @apply opacity-100;
+  }
+  
+  .cyber-button {
+    @apply relative overflow-hidden border-2 border-reform-cyan/50 bg-gradient-to-r from-reform-teal-dark to-reform-teal transition-all duration-300;
+  }
+  
+  .cyber-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-reform-cyan/20 via-reform-teal-light/10 to-reform-cyan/20 opacity-0 transition-opacity duration-300;
+  }
+  
+  .cyber-button:hover {
+    @apply border-reform-cyan shadow-[0_0_15px_rgba(78,205,196,0.5)];
+  }
+  
+  .cyber-button:hover::before {
+    @apply opacity-100;
+  }
+  
+  .neon-text {
+    text-shadow: 0 0 5px rgba(78, 205, 196, 0.7), 0 0 10px rgba(78, 205, 196, 0.5);
+    @apply text-reform-cyan;
+  }
+  
+  .pixel-corners {
+    clip-path: polygon(
+      0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 
+      100% calc(100% - 10px), calc(100% - 10px) 100%, 
+      10px 100%, 0 calc(100% - 10px)
+    );
   }
 }

@@ -35,8 +35,12 @@ const Header = () => {
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <div className="flex items-center">
-          <a href="#" className="text-2xl font-bold text-gradient">
-            Re:Form Hub
+          <a href="#" className="flex items-center">
+            <img 
+              src="/lovable-uploads/24ee9b20-39b4-46f7-9e11-d461a3b02494.png" 
+              alt="Re:Form Hub Logo" 
+              className="h-10 sm:h-12 mr-3 transition-transform hover:scale-105 duration-300" 
+            />
           </a>
         </div>
 
@@ -45,7 +49,7 @@ const Header = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-white/80 hover:text-white transition-colors relative after:absolute after:w-full after:h-0.5 after:bg-primary after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:origin-right hover:after:origin-left after:transition-transform after:duration-300"
+              className="text-sm font-medium text-white/80 hover:text-reform-cyan transition-colors relative after:absolute after:w-full after:h-0.5 after:bg-reform-cyan after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:origin-right hover:after:origin-left after:transition-transform after:duration-300"
             >
               {link.label}
             </a>
@@ -74,7 +78,7 @@ const Header = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-base font-medium text-white/80 hover:text-white py-2 transition-colors"
+              className="text-base font-medium text-white/80 hover:text-reform-cyan py-2 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               {link.label}

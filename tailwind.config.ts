@@ -68,11 +68,15 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				reform: {
-					blue: '#2563EB',
-					purple: '#7C3AED',
-					pink: '#EC4899',
-					orange: '#F97316',
-					yellow: '#FBBF24',
+					teal: '#1A6C6C',
+					'teal-light': '#2A9D9D',
+					'teal-dark': '#0E4F4F',
+					cyan: '#4ECDC4',
+					violet: '#9B87F5',
+					pink: '#FF6B9E',
+					orange: '#FF9671',
+					yellow: '#FFC75F',
+					neon: '#39FF14',
 				}
 			},
 			borderRadius: {
@@ -114,6 +118,14 @@ export default {
 					'0%': { backgroundPosition: '-1000px 0' },
 					'100%': { backgroundPosition: '1000px 0' },
 				},
+				'glow': {
+					'0%, 100%': { boxShadow: '0 0 15px 5px rgba(78, 205, 196, 0.4)' },
+					'50%': { boxShadow: '0 0 25px 10px rgba(78, 205, 196, 0.6)' },
+				},
+				'bounce-soft': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-15px)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -124,6 +136,8 @@ export default {
 				'fade-in': 'fade-in 0.8s ease-out',
 				'shake': 'shake 0.82s cubic-bezier(.36,.07,.19,.97) both',
 				'shimmer': 'shimmer 2s linear infinite',
+				'glow': 'glow 3s ease-in-out infinite',
+				'bounce-soft': 'bounce-soft 3s ease-in-out infinite',
 			},
 			transitionTimingFunction: {
 				'expo-out': 'cubic-bezier(0.16, 1, 0.3, 1)',

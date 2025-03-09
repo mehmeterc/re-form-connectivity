@@ -1,7 +1,8 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
@@ -11,11 +12,9 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em rgba(78, 205, 196, 0.7));
 }
 
 @keyframes logo-spin {
@@ -39,4 +38,34 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Custom animations */
+@keyframes cyber-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(78, 205, 196, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.9);
+  }
+}
+
+.cyber-glow {
+  animation: cyber-glow 3s infinite;
+}
+
+.btn-hover-effect:hover {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

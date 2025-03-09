@@ -11,11 +11,11 @@ const Footer = () => {
       <div className="container max-w-6xl mx-auto">
         <div className="text-center mb-10">
           <h3 className="text-2xl md:text-3xl font-bold mb-6 max-w-3xl mx-auto">
-            {t('footer.cta.title')}
+            <span className="text-gradient">{t('footer.cta.title')}</span>
           </h3>
           <a
             href="#events"
-            className="shimmer-button inline-flex items-center justify-center px-8 py-4 bg-reform-pink text-white font-medium rounded-full shadow-lg hover:shadow-reform-pink/30 transition-all duration-300 hover:-translate-y-1 animate-shake"
+            className="cyber-button inline-flex items-center justify-center px-8 py-4 text-white font-medium rounded-md shadow-lg hover:shadow-reform-cyan/30 transition-all duration-300 hover:-translate-y-1 animate-shake"
           >
             {t('footer.cta.button')}
           </a>
@@ -23,8 +23,12 @@ const Footer = () => {
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <a href="#" className="text-lg font-bold text-gradient">
-              Re:Form Hub
+            <a href="#" className="flex items-center">
+              <img 
+                src="/lovable-uploads/24ee9b20-39b4-46f7-9e11-d461a3b02494.png" 
+                alt="Re:Form Hub Logo" 
+                className="h-10 transition-transform hover:scale-105 duration-300" 
+              />
             </a>
           </div>
           <div className="text-sm text-white/60">
