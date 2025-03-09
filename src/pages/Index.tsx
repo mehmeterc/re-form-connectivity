@@ -1,13 +1,53 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useEffect } from 'react';
+import { LanguageProvider } from '@/contexts/LanguageContext';
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import About from '@/components/About';
+import Features from '@/components/Features';
+import EventCalendar from '@/components/EventCalendar';
+import Testimonials from '@/components/Testimonials';
+import FAQ from '@/components/FAQ';
+import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 
 const Index = () => {
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('.section-transition');
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const isInView = (
+          rect.top <= (window.innerHeight * 0.75) && 
+          rect.bottom >= 0
+        );
+        
+        if (isInView) {
+          section.classList.add('in-view');
+        }
+      });
+    };
+
+    // Call once on load
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <LanguageProvider>
+      <div className="bg-background text-foreground min-h-screen overflow-x-hidden">
+        <Header />
+        <Hero />
+        <About />
+        <Features />
+        <EventCalendar />
+        <Testimonials />
+        <FAQ />
+        <Contact />
+        <Footer />
       </div>
-    </div>
+    </LanguageProvider>
   );
 };
 
