@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { useToast } from './use-toast';
+import { supabase } from "@/integrations/supabase/client";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -19,24 +20,17 @@ export const useChat = () => {
       const newMessage: Message = { role: 'user', content };
       setMessages(prev => [...prev, newMessage]);
 
-      // Call API endpoint (to be implemented with actual OpenAI integration)
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: content }),
+      // Call Supabase Edge Function
+      const { data, error } = await supabase.functions.invoke('chat', {
+        body: { messages: [...messages, newMessage] }
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to send message');
-      }
-
-      const data = await response.json();
+      if (error) throw error;
       
       // Add AI response to chat
       setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
     } catch (error) {
+      console.error('Chat error:', error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
