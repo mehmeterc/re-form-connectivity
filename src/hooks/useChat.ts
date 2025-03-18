@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useToast } from './use-toast';
 import { supabase } from "@/integrations/supabase/client";
 
-interface Message {
+export interface Message {
   role: 'user' | 'assistant';
   content: string;
 }
@@ -13,36 +13,41 @@ export const popularQuestions = [
   "Wer sind die Initiatoren des Re:Form Hubs?"
 ];
 
-export const useChat = () => {
-  const initialMessages: Message[] = [
-    {
-      role: 'assistant',
-      content: `Beliebte Fragen:\n${popularQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}\n\nKlicke auf eine Frage oder schreib mir direkt!`,
-    },
-  ];
+const initialMessages: Message[] = [
+  {
+    role: 'assistant',
+    content: `Beliebte Fragen:\n${popularQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}\n\nKlicke auf eine Frage oder schreib mir direkt!`,
+  },
+];
 
+export const useChat = () => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const sendMessage = async (content: string) => {
-    try {
-      setIsLoading(true);
-      const newMessage: Message = { role: 'user', content };
-      setMessages(prev => [...prev, newMessage]);
+    setIsLoading(true);
+    const newMessage: Message = { role: 'user', content };
+    setMessages(prev => [...prev, newMessage]);
 
+    try {
       const { data, error } = await supabase.functions.invoke('chat', {
-        body: { messages: [...messages, newMessage] }
+        body: { messages: [...messages, newMessage] },
       });
 
-      if (error) throw new Error(error.message || 'Failed to send message');
-      if (!data?.message) throw new Error('Invalid response from chat function');
+      if (error) {
+        throw new Error(error.message || 'Nachricht konnte nicht gesendet werden.');
+      }
+
+      if (!data?.message) {
+        throw new Error('Ungültige Antwort vom Server.');
+      }
 
       setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
-    } catch (error) {
+    } catch (error: any) {
       toast({
-        title: "Error",
-        description: error.message || "Failed to send message. Please try again.",
+        title: "Fehler",
+        description: error.message || "Etwas ist schief gelaufen!",
         variant: "destructive",
       });
     } finally {

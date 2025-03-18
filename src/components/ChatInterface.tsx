@@ -37,8 +37,8 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
   };
 
   const handlePopularQuestionClick = async (question: string) => {
-    setInput(question);
     await sendMessage(question);
+    setInput('');
   };
 
   React.useEffect(() => {
@@ -70,30 +70,28 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
             </Alert>
           )}
 
-          {messages.length === 1 && messages[0].role === 'assistant' && (
-            <div className="text-center text-muted-foreground p-4">
-              <p className="font-semibold mb-2">Beliebte Fragen:</p>
-              {popularQuestions.map((question, idx) => (
-                <Button
-                  key={idx}
-                  variant="link"
-                  className="block mx-auto"
-                  onClick={() => handlePopularQuestionClick(question)}
-                >
-                  {question}
-                </Button>
-              ))}
-              <p className="mt-4">Klicke auf eine Frage oder schreib mir direkt!</p>
-            </div>
-          )}
+          <div className="text-center text-muted-foreground p-4">
+            <p className="font-semibold mb-2">Beliebte Fragen:</p>
+            {popularQuestions.map((question, idx) => (
+              <Button
+                key={idx}
+                variant="link"
+                className="block mx-auto"
+                onClick={() => handlePopularQuestionClick(question)}
+              >
+                {question}
+              </Button>
+            ))}
+            <p className="mt-4">Klicke auf eine Frage oder schreib mir direkt!</p>
+          </div>
 
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`rounded-lg px-4 py-2 max-w-[80%] whitespace-pre-wrap break-words ${
-                  msg.role === 'user'
-                    ? 'bg-reform-teal text-white ml-4'
-                    : 'bg-muted mr-4'
-                }`}>
+              <div
+                className={`rounded-lg px-4 py-2 max-w-[80%] whitespace-pre-wrap break-words ${
+                  msg.role === 'user' ? 'bg-reform-teal text-white ml-4' : 'bg-muted mr-4'
+                }`}
+              >
                 {msg.content}
               </div>
             </div>
@@ -121,8 +119,8 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
             placeholder={t('chat.placeholder') || "Frag mich etwas über Re:Form Hub..."}
             disabled={isLoading}
           />
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             disabled={isLoading || !input.trim()}
             className="bg-reform-teal hover:bg-reform-teal-light"
           >

@@ -6,39 +6,39 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const SYSTEM_PROMPT = `Du bist ein hilfreicher Assistent für den Re:Form Hub Wittenberg. Antworte kurz, direkt und locker auf Augenhöhe mit Jugendlichen. Nutze Deutsch als Hauptsprache und Englisch bei Bedarf.
+const SYSTEM_PROMPT = `Du bist ein hilfreicher Assistent für den Re:Form Hub Wittenberg. Antworte kurz, direkt und locker auf Augenhöhe mit Jugendlichen. Hauptsprache Deutsch, Englisch bei Bedarf.
 
 (DE) Was ist der Re:Form Hub?
-Re:Form Hub ist ein kreativer, offener, konsumfreier Raum in Wittenberg speziell für junge Menschen zwischen 8 und 18 Jahren. Hier kannst du Technik ausprobieren, eigene Ideen umsetzen und gemeinsam die Zukunft gestalten.
+Ein offener, kreativer Raum in Wittenberg für junge Leute (8-18 Jahre), um Technik auszuprobieren, Projekte umzusetzen und Ideen zu entwickeln.
 
 (EN) What is the Re:Form Hub?
-The Re:Form Hub is a creative, open, consumer-free space in Wittenberg specifically for young people aged 8-18. Here, you can experiment with technology, implement your own ideas, and shape the future together.
+A creative space in Wittenberg for youth (8-18) to experiment with tech, realize projects, and develop ideas.
 
-(DE) Wer sind die Gründer des Re:Form Hub?
-Re:Form Hub wurde von Mehmet Ercan und Elif Ercan gegründet.
+(DE) Wer sind die Gründer des Re:Form Hubs?
+Mehmet und Elif Ercan.
 
 (EN) Who founded the Re:Form Hub?
-Re:Form Hub was founded by Mehmet Ercan and Elif Ercan.
+Mehmet and Elif Ercan.
 
-(DE) Was bietet Re:Form Hub an?
-Von August bis Oktober 2025 finden regelmäßig Workshops und Veranstaltungen statt. Jugendliche können Technologien wie 360-Grad-Kameras, VR-Brillen und Monitore nutzen, eigene Projekte realisieren, KI-generierte Inhalte erstellen und kreativ arbeiten.
+(DE) Was bietet der Re:Form Hub?
+Workshops und Veranstaltungen von August bis Oktober 2025. Zugang zu VR, 360°-Kameras und KI-Werkzeugen für kreative Projekte.
 
 (EN) What does Re:Form Hub offer?
-From August to October 2025, regular workshops and events will take place. Youth can use technologies such as 360-degree cameras, VR headsets, and monitors, realize their own projects, create AI-generated content, and work creatively.
+Workshops and events from August to October 2025. Access to VR, 360° cameras, and AI tools for creative projects.
 
-(DE) Welche Ausstattung gibt es?
-Der Re:Form Hub befindet sich im Stadtlabor Wittenberg und bietet WLAN, kreative Arbeitsplätze und eine inspirierende Atmosphäre, inklusive eines Co-Working-Bereichs.
+(DE) Ausstattung?
+WLAN, kreative Arbeitsplätze, Co-Working im Stadtlabor Wittenberg.
 
-(EN) What equipment is available?
-Re:Form Hub is located in Stadtlabor Wittenberg and provides Wi-Fi, creative workspaces, and an inspiring atmosphere, including a co-working area.
+(EN) Equipment?
+Wi-Fi, creative workspaces, co-working at Stadtlabor Wittenberg.
 
-(DE) Wo befindet sich Re:Form Hub genau?
-Standort: Stadtlabor Wittenberg, Markt 3, 06886 Lutherstadt Wittenberg.
+(DE) Wo befindet sich der Re:Form Hub genau?
+Stadtlabor Wittenberg, Markt 3, 06886 Lutherstadt Wittenberg.
 
 (EN) Where exactly is Re:Form Hub located?
-Location: Stadtlabor Wittenberg, Markt 3, 06886 Lutherstadt Wittenberg.
+Stadtlabor Wittenberg, Markt 3, 06886 Lutherstadt Wittenberg.
 
-Weitere Informationen:
+Mehr Infos:
 - Google Maps: https://goo.gl/maps/5tXqpDTPF9bmgniy5
 - OpenStreetMap: https://www.openstreetmap.org/?mlat=51.86746&mlon=12.64418#map=19/51.86746/12.64483
 
@@ -54,27 +54,26 @@ serve(async (req) => {
 
   try {
     const { messages } = await req.json();
-
     if (!messages || !Array.isArray(messages)) {
-      throw new Error("Invalid messages format");
+      throw new Error("Ungültiges Nachrichtenformat.");
     }
 
     const apiKey = Deno.env.get("GEMINI_API_KEY");
     if (!apiKey) {
-      throw new Error("Gemini API key is not configured");
+      throw new Error("Gemini API-Schlüssel fehlt.");
     }
 
     const requestBody = {
       contents: [
         {
-          parts: [{ text: `${SYSTEM_PROMPT}\n\n${messages.map((m) => m.content).join("\n")}` }],
+          parts: [{ text: `${SYSTEM_PROMPT}\n\n${messages.map(m => m.content).join("\n")}` }],
         },
       ],
       generationConfig: {
         temperature: 0.7,
-        topK: 40,
-        topP: 0.95,
         maxOutputTokens: 1024,
+        topP: 0.95,
+        topK: 40,
       },
     };
 
@@ -82,28 +81,27 @@ serve(async (req) => {
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),
       }
     );
 
     if (!geminiResponse.ok) {
       const errorData = await geminiResponse.json();
-      throw new Error(errorData.error?.message || "Gemini API error");
+      throw new Error(errorData.error?.message || "Gemini API Fehler.");
     }
 
     const data = await geminiResponse.json();
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Keine Antwort erhalten.";
 
-    return new Response(
-      JSON.stringify({ message: data.candidates?.[0]?.content?.parts?.[0]?.text || "No response from Gemini." }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    return new Response(JSON.stringify({ message: reply }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+
   } catch (error) {
-    return new Response(
-      JSON.stringify({ error: error.message || "Failed to process chat request" }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    return new Response(JSON.stringify({ error: error.message || "Verarbeitung der Anfrage fehlgeschlagen." }), {
+      status: 500,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   }
 });
