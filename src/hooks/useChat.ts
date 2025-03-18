@@ -21,6 +21,7 @@ export const useChat = () => {
       setMessages(prev => [...prev, newMessage]);
 
       // Call Supabase Edge Function
+      console.log('Sending message to Supabase function');
       const { data, error } = await supabase.functions.invoke('chat', {
         body: { messages: [...messages, newMessage] }
       });
@@ -31,16 +32,18 @@ export const useChat = () => {
       }
 
       if (!data?.message) {
+        console.error('Invalid response from chat function:', data);
         throw new Error('Invalid response from chat function');
       }
       
+      console.log('Received response from AI');
       // Add AI response to chat
       setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
     } catch (error) {
       console.error('Chat error:', error);
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again.",
+        description: error.message || "Failed to send message. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -48,9 +51,14 @@ export const useChat = () => {
     }
   };
 
+  const clearMessages = () => {
+    setMessages([]);
+  };
+
   return {
     messages,
     sendMessage,
     isLoading,
+    clearMessages,
   };
 };

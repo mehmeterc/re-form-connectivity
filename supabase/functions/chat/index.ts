@@ -20,10 +20,17 @@ serve(async (req) => {
       throw new Error('Invalid messages format')
     }
 
+    const apiKey = Deno.env.get('OPENAI_API_KEY')
+    if (!apiKey) {
+      throw new Error('OpenAI API key is not configured')
+    }
+
+    console.log('Sending request to OpenAI with messages:', JSON.stringify(messages.length))
+
     const openAIResponse = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${Deno.env.get('OPENAI_API_KEY')}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -39,11 +46,13 @@ serve(async (req) => {
     })
 
     if (!openAIResponse.ok) {
-      const error = await openAIResponse.json()
-      throw new Error(error.error?.message || 'OpenAI API error')
+      const errorData = await openAIResponse.json()
+      console.error('OpenAI API error response:', JSON.stringify(errorData))
+      throw new Error(errorData.error?.message || 'OpenAI API error')
     }
 
     const data = await openAIResponse.json()
+    console.log('Received successful response from OpenAI')
 
     return new Response(JSON.stringify({
       message: data.choices[0].message.content
