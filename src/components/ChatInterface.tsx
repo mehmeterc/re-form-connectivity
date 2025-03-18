@@ -48,8 +48,9 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
   }, [messages]);
 
   const renderMessageWithLinks = (content: string) => {
-    return content.split(/(https?:\/\/[^\s]+)/g).map((part, idx) =>
-      part.match(/https?:\/\/[^\s]+/) ? (
+    const urlRegex = /(https?:\/\/[^\s)]+)/g;
+    return content.split(urlRegex).map((part, idx) =>
+      urlRegex.test(part) ? (
         <a
           key={idx}
           href={part}
