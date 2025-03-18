@@ -38,8 +38,8 @@ Stadtlabor Wittenberg, Markt 3, 06886 Lutherstadt Wittenberg.
 (EN) Where exactly is Re:Form Hub located?
 Stadtlabor Wittenberg, Markt 3, 06886 Lutherstadt Wittenberg.
 
-Mehr Infos:
-- Google Maps: https://goo.gl/maps/5tXqpDTPF9bmgniy5
+Weitere Informationen:
+- Google Maps: https://maps.app.goo.gl/E9PUgJ6v3aC7fKTWA
 - OpenStreetMap: https://www.openstreetmap.org/?mlat=51.86746&mlon=12.64418#map=19/51.86746/12.64483
 
 (DE) Beliebte Fragen:
