@@ -7,31 +7,17 @@ interface Message {
   content: string;
 }
 
-const initialMessages: Message[] = [
-  {
-    role: 'assistant',
-    content: `👋 Willkommen beim Re:Form Hub AI Assistant!
-
-(DE) Beliebte Fragen:
-1. Was ist der Re:Form Hub?
-2. Wo befindet sich der Re:Form Hub?
-3. Wer sind die Initiatoren des Re:Form Hubs?`
-
-Klicke auf eine Frage oder schreib mir direkt!`,
-  },
-];
-
 export const useChat = () => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const sendMessage = async (content: string) => {
-    setIsLoading(true);
-    const newMessage: Message = { role: 'user', content };
-    setMessages(prev => [...prev, newMessage]);
-
     try {
+      setIsLoading(true);
+      const newMessage: Message = { role: 'user', content };
+      setMessages(prev => [...prev, newMessage]);
+
       const { data, error } = await supabase.functions.invoke('chat', {
         body: { messages: [...messages, newMessage] }
       });
@@ -57,8 +43,25 @@ export const useChat = () => {
   };
 
   const clearMessages = () => {
-    setMessages(initialMessages);
+    setMessages([]);
   };
 
-  return { messages, sendMessage, isLoading, clearMessages };
+  const initialMessages: Message[] = [
+    {
+      role: 'assistant',
+      content: `Beliebte Fragen:
+1. Was ist der Re:Form Hub?
+2. Wo befindet sich der Re:Form Hub?
+3. Wer sind die Initiatoren des Re:Form Hubs?
+
+Klicke auf eine Frage oder schreib mir direkt!`,
+    },
+  ];
+
+  return {
+    messages: messages.length ? messages : initialMessages,
+    sendMessage,
+    isLoading,
+    clearMessages,
+  };
 };
