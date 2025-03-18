@@ -4,18 +4,12 @@ import { Send, X, RefreshCw } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { ScrollArea } from './ui/scroll-area';
-import { useChat } from '@/hooks/useChat';
+import { useChat, popularQuestions } from '@/hooks/useChat';
 import { Alert, AlertTitle, AlertDescription } from './ui/alert';
 
 interface ChatInterfaceProps {
   onClose: () => void;
 }
-
-const popularQuestions = [
-  "Was ist der Re:Form Hub?",
-  "Wo befindet sich der Re:Form Hub?",
-  "Wer sind die Initiatoren des Re:Form Hubs?",
-];
 
 const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
   const { t } = useLanguage();
@@ -32,7 +26,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
         await sendMessage(input);
         setInput('');
       } catch (err) {
-        setError(err.message || 'Failed to send message');
+        setError(err.message || 'Nachricht konnte nicht gesendet werden.');
       }
     }
   };
@@ -42,9 +36,9 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
     setError(null);
   };
 
-  const handlePopularQuestionClick = (question: string) => {
+  const handlePopularQuestionClick = async (question: string) => {
     setInput(question);
-    sendMessage(question);
+    await sendMessage(question);
   };
 
   React.useEffect(() => {
@@ -66,7 +60,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
           </Button>
         </div>
       </div>
-      
+
       <ScrollArea className="flex-1 p-4">
         <div className="space-y-4" ref={scrollRef}>
           {error && (
@@ -76,14 +70,14 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
             </Alert>
           )}
 
-          {messages.length === 0 && (
+          {messages.length === 1 && messages[0].role === 'assistant' && (
             <div className="text-center text-muted-foreground p-4">
-              <p className="font-semibold">Beliebte Fragen:</p>
+              <p className="font-semibold mb-2">Beliebte Fragen:</p>
               {popularQuestions.map((question, idx) => (
                 <Button
                   key={idx}
                   variant="link"
-                  className="block mx-auto text-center"
+                  className="block mx-auto"
                   onClick={() => handlePopularQuestionClick(question)}
                 >
                   {question}
@@ -95,14 +89,12 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
 
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`rounded-lg px-4 py-2 max-w-[80%] ${
+              <div className={`rounded-lg px-4 py-2 max-w-[80%] whitespace-pre-wrap break-words ${
                   msg.role === 'user'
                     ? 'bg-reform-teal text-white ml-4'
                     : 'bg-muted mr-4'
                 }`}>
-                {msg.content.split("\n").map((line, idx) => (
-                  <p key={idx}>{line}</p>
-                ))}
+                {msg.content}
               </div>
             </div>
           ))}

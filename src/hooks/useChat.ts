@@ -7,8 +7,21 @@ interface Message {
   content: string;
 }
 
+export const popularQuestions = [
+  "Was ist der Re:Form Hub?",
+  "Wo befindet sich der Re:Form Hub?",
+  "Wer sind die Initiatoren des Re:Form Hubs?"
+];
+
 export const useChat = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const initialMessages: Message[] = [
+    {
+      role: 'assistant',
+      content: `Beliebte Fragen:\n${popularQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}\n\nKlicke auf eine Frage oder schreib mir direkt!`,
+    },
+  ];
+
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -22,13 +35,8 @@ export const useChat = () => {
         body: { messages: [...messages, newMessage] }
       });
 
-      if (error) {
-        throw new Error(error.message || 'Failed to send message');
-      }
-
-      if (!data?.message) {
-        throw new Error('Invalid response from chat function');
-      }
+      if (error) throw new Error(error.message || 'Failed to send message');
+      if (!data?.message) throw new Error('Invalid response from chat function');
 
       setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
     } catch (error) {
@@ -43,25 +51,14 @@ export const useChat = () => {
   };
 
   const clearMessages = () => {
-    setMessages([]);
+    setMessages(initialMessages);
   };
 
-  const initialMessages: Message[] = [
-    {
-      role: 'assistant',
-      content: `Beliebte Fragen:
-1. Was ist der Re:Form Hub?
-2. Wo befindet sich der Re:Form Hub?
-3. Wer sind die Initiatoren des Re:Form Hubs?
-
-Klicke auf eine Frage oder schreib mir direkt!`,
-    },
-  ];
-
   return {
-    messages: messages.length ? messages : initialMessages,
+    messages,
     sendMessage,
     isLoading,
     clearMessages,
+    popularQuestions,
   };
 };
