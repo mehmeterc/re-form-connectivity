@@ -39,7 +39,7 @@ Stadtlabor Wittenberg, Markt 3, 06886 Lutherstadt Wittenberg.
 Stadtlabor Wittenberg, Markt 3, 06886 Lutherstadt Wittenberg.
 
 Weitere Informationen:
-- Google Maps: https://maps.app.goo.gl/E9PUgJ6v3aC7fKTWA
+- Google Maps: https://maps.app.goo.gl/7SsGSTE3mHuwWyFP9
 - OpenStreetMap: https://www.openstreetmap.org/?mlat=51.86746&mlon=12.64418#map=19/51.86746/12.64483
 
 (DE) Beliebte Fragen:
