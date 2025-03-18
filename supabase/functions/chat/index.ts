@@ -16,7 +16,11 @@ serve(async (req) => {
   try {
     const { messages } = await req.json()
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    if (!messages || !Array.isArray(messages)) {
+      throw new Error('Invalid messages format')
+    }
+
+    const openAIResponse = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${Deno.env.get('OPENAI_API_KEY')}`,
@@ -34,11 +38,12 @@ serve(async (req) => {
       }),
     })
 
-    const data = await response.json()
-
-    if (!response.ok) {
-      throw new Error(data.error?.message || 'Failed to get AI response')
+    if (!openAIResponse.ok) {
+      const error = await openAIResponse.json()
+      throw new Error(error.error?.message || 'OpenAI API error')
     }
+
+    const data = await openAIResponse.json()
 
     return new Response(JSON.stringify({
       message: data.choices[0].message.content
@@ -47,7 +52,9 @@ serve(async (req) => {
     })
   } catch (error) {
     console.error('Chat function error:', error)
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ 
+      error: error.message || 'Failed to process chat request'
+    }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })

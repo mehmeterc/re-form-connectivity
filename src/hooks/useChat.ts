@@ -25,7 +25,14 @@ export const useChat = () => {
         body: { messages: [...messages, newMessage] }
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw new Error(error.message || 'Failed to send message');
+      }
+
+      if (!data?.message) {
+        throw new Error('Invalid response from chat function');
+      }
       
       // Add AI response to chat
       setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
