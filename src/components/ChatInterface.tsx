@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Send, X, RefreshCw } from 'lucide-react';
@@ -48,12 +47,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
       <div className="flex items-center justify-between p-4 border-b">
         <h3 className="font-semibold text-lg">Re:Form Hub AI Assistant</h3>
         <div className="flex gap-2">
-          <Button 
-            variant="outline" 
-            size="icon" 
-            onClick={handleReset}
-            title="Reset conversation"
-          >
+          <Button variant="outline" size="icon" onClick={handleReset}>
             <RefreshCw className="h-4 w-4" />
           </Button>
           <Button variant="ghost" size="icon" onClick={onClose}>
@@ -65,37 +59,26 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
       <ScrollArea className="flex-1 p-4">
         <div className="space-y-4" ref={scrollRef}>
           {error && (
-            <Alert variant="destructive" className="mb-4">
+            <Alert variant="destructive">
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
-          
-          {messages.length === 0 && (
-            <div className="text-center text-muted-foreground p-4">
-              Ask me anything about Re:Form Hub, education reform, or community development...
-            </div>
-          )}
-          
+
           {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`flex ${
-                msg.role === 'user' ? 'justify-end' : 'justify-start'
-              }`}
-            >
-              <div
-                className={`rounded-lg px-4 py-2 max-w-[80%] ${
+            <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div className={`rounded-lg px-4 py-2 max-w-[80%] ${
                   msg.role === 'user'
                     ? 'bg-reform-teal text-white ml-4'
                     : 'bg-muted mr-4'
-                }`}
-              >
-                {msg.content}
+                }`}>
+                {msg.content.split("\n").map((line, idx) => (
+                  <p key={idx}>{line}</p>
+                ))}
               </div>
             </div>
           ))}
-          
+
           {isLoading && (
             <div className="flex justify-start">
               <div className="rounded-lg px-4 py-2 bg-muted mr-4">
@@ -115,8 +98,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={t('chat.placeholder') || "Ask me anything about Re:Form Hub..."}
-            className="flex-1"
+            placeholder={t('chat.placeholder') || "Frag mich etwas über Re:Form Hub..."}
             disabled={isLoading}
           />
           <Button 
