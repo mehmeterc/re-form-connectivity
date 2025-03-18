@@ -47,6 +47,24 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
     }
   }, [messages]);
 
+  const renderMessageWithLinks = (content: string) => {
+    return content.split(/(https?:\/\/[^\s]+)/g).map((part, idx) =>
+      part.match(/https?:\/\/[^\s]+/) ? (
+        <a
+          key={idx}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline text-blue-400"
+        >
+          {part}
+        </a>
+      ) : (
+        part
+      )
+    );
+  };
+
   return (
     <div className="flex flex-col h-[100dvh]">
       <div className="flex items-center justify-between p-4 border-b">
@@ -86,13 +104,18 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
           </div>
 
           {messages.map((msg, i) => (
-            <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+            <div
+              key={i}
+              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
               <div
                 className={`rounded-lg px-4 py-2 max-w-[80%] whitespace-pre-wrap break-words ${
-                  msg.role === 'user' ? 'bg-reform-teal text-white ml-4' : 'bg-muted mr-4'
+                  msg.role === 'user'
+                    ? 'bg-reform-teal text-white ml-4'
+                    : 'bg-muted mr-4'
                 }`}
               >
-                {msg.content}
+                {renderMessageWithLinks(msg.content)}
               </div>
             </div>
           ))}
@@ -116,7 +139,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={t('chat.placeholder') || "Frag mich etwas über Re:Form Hub..."}
+            placeholder={t('chat.placeholder') || 'Frag mich etwas über Re:Form Hub...'}
             disabled={isLoading}
           />
           <Button
