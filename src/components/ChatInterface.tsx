@@ -11,6 +11,12 @@ interface ChatInterfaceProps {
   onClose: () => void;
 }
 
+const popularQuestions = [
+  "Was ist der Re:Form Hub?",
+  "Wo befindet sich der Re:Form Hub?",
+  "Wer sind die Initiatoren des Re:Form Hubs?",
+];
+
 const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
   const { t } = useLanguage();
   const { messages, sendMessage, isLoading, clearMessages } = useChat();
@@ -34,6 +40,11 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
   const handleReset = () => {
     clearMessages();
     setError(null);
+  };
+
+  const handlePopularQuestionClick = (question: string) => {
+    setInput(question);
+    sendMessage(question);
   };
 
   React.useEffect(() => {
@@ -63,6 +74,23 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>{error}</AlertDescription>
             </Alert>
+          )}
+
+          {messages.length === 0 && (
+            <div className="text-center text-muted-foreground p-4">
+              <p className="font-semibold">Beliebte Fragen:</p>
+              {popularQuestions.map((question, idx) => (
+                <Button
+                  key={idx}
+                  variant="link"
+                  className="block mx-auto text-center"
+                  onClick={() => handlePopularQuestionClick(question)}
+                >
+                  {question}
+                </Button>
+              ))}
+              <p className="mt-4">Klicke auf eine Frage oder schreib mir direkt!</p>
+            </div>
           )}
 
           {messages.map((msg, i) => (
