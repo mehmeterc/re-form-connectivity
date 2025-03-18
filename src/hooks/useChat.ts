@@ -13,15 +13,8 @@ export const popularQuestions = [
   "Wer sind die Initiatoren des Re:Form Hubs?"
 ];
 
-const initialMessages: Message[] = [
-  {
-    role: 'assistant',
-    content: `Beliebte Fragen:\n${popularQuestions.map((q, i) => `${i + 1}. ${q}`).join('\n')}\n\nKlicke auf eine Frage oder schreib mir direkt!`,
-  },
-];
-
 export const useChat = () => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -56,7 +49,7 @@ export const useChat = () => {
   };
 
   const clearMessages = () => {
-    setMessages(initialMessages);
+    setMessages([]);
   };
 
   return {
