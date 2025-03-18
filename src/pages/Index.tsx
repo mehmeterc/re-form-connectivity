@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
@@ -10,6 +9,7 @@ import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import ChatButton from '@/components/ChatButton';
 
 const Index = () => {
   useEffect(() => {
@@ -46,6 +46,7 @@ const Index = () => {
         <FAQ />
         <Contact />
         <Footer />
+        <ChatButton />
       </div>
     </LanguageProvider>
   );

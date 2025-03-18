@@ -1,4 +1,3 @@
-
 export const translations = {
   de: {
     nav: {
@@ -77,6 +76,10 @@ export const translations = {
         button: 'Jetzt Teil der Bewegung werden!'
       },
       rights: 'Alle Rechte vorbehalten.'
+    },
+    chat: {
+      placeholder: 'Fragen Sie mich etwas über Re:Form Hub...',
+      error: 'Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.',
     }
   },
   en: {
@@ -156,6 +159,10 @@ export const translations = {
         button: 'Join the movement now!'
       },
       rights: 'All rights reserved.'
+    },
+    chat: {
+      placeholder: 'Ask me anything about Re:Form Hub...',
+      error: 'Failed to send message. Please try again.',
     }
   }
 };
