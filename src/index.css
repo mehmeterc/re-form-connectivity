@@ -209,11 +209,15 @@
   }
 
   .heading-glow {
-    @apply dark:text-shadow-[0_0_5px_rgba(78,205,196,0.2)] text-shadow-[0_0_3px_rgba(26,108,108,0.1)];
+    @apply text-shadow-teal-light dark:text-shadow-neon-light;
   }
 
   .text-outline {
-    @apply dark:-webkit-text-stroke-[1px_rgba(78,205,196,0.3)] -webkit-text-stroke-[1px_rgba(26,108,108,0.2)];
+    -webkit-text-stroke: 1px rgba(26, 108, 108, 0.2);
+  }
+
+  .dark .text-outline {
+    -webkit-text-stroke: 1px rgba(78, 205, 196, 0.3);
   }
 
   .floating-icon {

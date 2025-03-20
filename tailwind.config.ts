@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -159,19 +158,40 @@ export default {
 				sm: '0 1px 2px var(--tw-shadow-color)',
 				DEFAULT: '0 2px 4px var(--tw-shadow-color)',
 				lg: '0 8px 16px var(--tw-shadow-color)',
+				teal: {
+					light: '0 0 3px rgba(26, 108, 108, 0.1)',
+					DEFAULT: '0 0 3px rgba(26, 108, 108, 0.5), 0 0 6px rgba(42, 157, 157, 0.3)',
+				},
+				neon: {
+					light: '0 0 5px rgba(78, 205, 196, 0.2)',
+					DEFAULT: '0 0 5px rgba(78, 205, 196, 0.7), 0 0 10px rgba(78, 205, 196, 0.5)',
+				},
 			},
 		}
 	},
 	plugins: [
 		require("tailwindcss-animate"),
 		function({ addUtilities, theme, variants }) {
-			const textShadowUtilities = {};
-			Object.entries(theme('textShadow')).forEach(([key, value]) => {
-				textShadowUtilities[`.text-shadow${key === 'DEFAULT' ? '' : `-${key}`}`] = {
-					textShadow: value,
-				};
+			const textShadows = theme('textShadow', {});
+			const utilities = {};
+			
+			Object.entries(textShadows).forEach(([key, value]) => {
+				if (typeof value === 'object') {
+					Object.entries(value).forEach(([subKey, subValue]) => {
+						const className = subKey === 'DEFAULT' 
+							? `.text-shadow-${key}`
+							: `.text-shadow-${key}-${subKey}`;
+						utilities[className] = { textShadow: subValue };
+					});
+				} else {
+					const className = key === 'DEFAULT' 
+						? '.text-shadow'
+						: `.text-shadow-${key}`;
+					utilities[className] = { textShadow: value };
+				}
 			});
-			addUtilities(textShadowUtilities, variants('textShadow'));
+			
+			addUtilities(utilities, ['responsive', 'hover', 'dark']);
 		},
 	],
 } satisfies Config;
