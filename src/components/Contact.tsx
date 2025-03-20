@@ -118,13 +118,13 @@ const Contact = () => {
                   className="flex-grow bg-secondary/50 border-input text-foreground"
                   required
                 />
-                <Button 
+                <a 
                   type="submit" 
                   className="ml-2 p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
                   aria-label="Send"
                 >
                   <Send className="h-5 w-5" />
-                </Button>
+                </a>
               </form>
             </div>
           </div>
