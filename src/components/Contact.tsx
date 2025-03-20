@@ -59,23 +59,23 @@ const Contact = () => {
       
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('contact.title')}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">{t('contact.title')}</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="glassmorphism p-8 rounded-2xl">
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-4">{t('contact.email')}</h3>
+              <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.email')}</h3>
               <a 
                 href="mailto:elifnurm@gmail.com" 
-                className="flex items-center text-white/80 hover:text-white transition-colors"
+                className="flex items-center text-foreground/80 hover:text-foreground transition-colors"
               >
                 <Mail className="mr-2 h-5 w-5 text-reform-blue" />
                 <span>elifnurm@gmail.com</span>
               </a>
               <a 
                 href="mailto:mehmeterc@gmail.com" 
-                className="flex items-center mt-2 text-white/80 hover:text-white transition-colors"
+                className="flex items-center mt-2 text-foreground/80 hover:text-foreground transition-colors"
               >
                 <Mail className="mr-2 h-5 w-5 text-reform-blue" />
                 <span>mehmeterc@gmail.com</span>
@@ -83,25 +83,25 @@ const Contact = () => {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-4">{t('contact.follow')}</h3>
+              <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.follow')}</h3>
               <div className="flex space-x-4">
                 <a 
                   href="#" 
-                  className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white/80 hover:text-white transition-colors"
+                  className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
                   aria-label="Instagram"
                 >
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a 
                   href="#" 
-                  className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white/80 hover:text-white transition-colors"
+                  className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
                 <a 
                   href="#" 
-                  className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white/80 hover:text-white transition-colors"
+                  className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
                   aria-label="Twitter"
                 >
                   <Twitter className="h-5 w-5" />
@@ -110,13 +110,13 @@ const Contact = () => {
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold mb-4">{t('contact.newsletter.title')}</h3>
+              <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.newsletter.title')}</h3>
               <form onSubmit={handleSubscribe} className="flex">
                 <Input
                   ref={emailRef}
                   type="email"
                   placeholder={t('contact.newsletter.placeholder')}
-                  className="flex-grow bg-white/5 border-white/10 text-white"
+                  className="flex-grow bg-secondary/50 border-input text-foreground"
                   required
                 />
                 <Button 
@@ -130,10 +130,10 @@ const Contact = () => {
           </div>
 
           <div className="glassmorphism p-8 rounded-2xl">
-            <h3 className="text-xl font-semibold mb-4">{t('contact.location')}</h3>
+            <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.location')}</h3>
             <div className="flex items-start mb-4">
               <MapPin className="mr-2 h-5 w-5 text-reform-pink mt-1" />
-              <p className="text-white/80">{t('contact.address')}</p>
+              <p className="text-foreground/80">{t('contact.address')}</p>
             </div>
             
             <div className="rounded-xl overflow-hidden h-64 mt-6">

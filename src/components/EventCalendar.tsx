@@ -128,7 +128,7 @@ const EventCalendar = () => {
       
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('events.title')}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">{t('events.title')}</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -164,12 +164,12 @@ const EventCalendar = () => {
                     key={event.id}
                     className={`p-4 rounded-xl transition-all cursor-pointer ${
                       selectedEventId === event.id 
-                        ? 'dark:bg-white/10 bg-slate-100 shadow-lg' 
-                        : 'dark:bg-white/5 bg-white hover:bg-slate-50 dark:hover:bg-white/8'
+                        ? 'bg-secondary/80 shadow-lg' 
+                        : 'dark:bg-white/5 bg-white/80 hover:bg-secondary/50 dark:hover:bg-white/8'
                     }`}
                     onClick={() => handleEventSelect(event.id)}
                   >
-                    <h3 className="font-semibold text-lg mb-2">{event.title}</h3>
+                    <h3 className="font-semibold text-lg mb-2 text-foreground">{event.title}</h3>
                     <div className="flex items-center text-sm text-muted-foreground mb-1">
                       <Clock className="mr-2 h-4 w-4" />
                       <span>{event.startTime} - {event.endTime}</span>
@@ -196,8 +196,8 @@ const EventCalendar = () => {
             ) : (
               <div className="flex flex-col items-center justify-center h-64 text-muted-foreground">
                 <CalendarIcon className="h-10 w-10 mb-4 opacity-30" />
-                <p>{language === 'de' ? 'Keine Veranstaltungen an diesem Tag' : 'No events on this day'}</p>
-                <p className="text-sm mt-2">{language === 'de' ? 'Wähle ein anderes Datum' : 'Please select another date'}</p>
+                <p className="text-foreground/70">{language === 'de' ? 'Keine Veranstaltungen an diesem Tag' : 'No events on this day'}</p>
+                <p className="text-sm mt-2 text-foreground/70">{language === 'de' ? 'Wähle ein anderes Datum' : 'Please select another date'}</p>
               </div>
             )}
 
@@ -206,7 +206,7 @@ const EventCalendar = () => {
                 {t('events.location')}
               </p>
               <Button 
-                className="shimmer-button w-full bg-reform-purple hover:bg-reform-purple/90 text-white animate-pulse-soft"
+                className="shimmer-button w-full bg-reform-purple hover:bg-reform-purple/90 text-white"
               >
                 {t('events.cta')}
               </Button>

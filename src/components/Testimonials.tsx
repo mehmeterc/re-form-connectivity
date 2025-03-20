@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
@@ -94,7 +95,7 @@ const Testimonials = () => {
       
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('testimonials.title')}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">{t('testimonials.title')}</h2>
         </div>
 
         <div className="relative glassmorphism p-8 md:p-12 rounded-2xl overflow-hidden">
@@ -116,7 +117,7 @@ const Testimonials = () => {
                   </p>
                   <div className="flex items-center">
                     <div className="mr-4">
-                      <div className="font-medium">{testimonial.author}</div>
+                      <div className="font-medium text-foreground">{testimonial.author}</div>
                       <div className="text-sm text-muted-foreground">{testimonial.role}</div>
                     </div>
                   </div>
@@ -143,7 +144,7 @@ const Testimonials = () => {
               
               <div className="flex items-center mt-6">
                 <button 
-                  className="p-2 rounded-full border border-border hover:bg-secondary transition-colors mr-2"
+                  className="p-2 rounded-full border border-border hover:bg-secondary transition-colors mr-2 text-foreground"
                   onClick={goToPrevious}
                 >
                   <ChevronLeft size={20} />
@@ -160,7 +161,7 @@ const Testimonials = () => {
                   ))}
                 </div>
                 <button 
-                  className="p-2 rounded-full border border-border hover:bg-secondary transition-colors ml-2"
+                  className="p-2 rounded-full border border-border hover:bg-secondary transition-colors ml-2 text-foreground"
                   onClick={goToNext}
                 >
                   <ChevronRight size={20} />
@@ -190,4 +191,3 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
-
