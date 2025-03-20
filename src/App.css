@@ -134,21 +134,3 @@
 .light .floating-icon-inner {
   opacity: 0.7;
 }
-
-/* Ensure icons are visible in both light and dark modes */
-.light svg.lucide {
-  @apply text-foreground;
-}
-
-.light button svg.lucide, 
-.light a svg.lucide {
-  @apply text-current;
-}
-
-/* Override for specific buttons with white text */
-button.bg-reform-purple svg.lucide,
-button.bg-reform-teal svg.lucide,
-button.bg-reform-teal-light svg.lucide,
-button.bg-reform-teal-dark svg.lucide {
-  @apply text-white;
-}
