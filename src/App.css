@@ -122,8 +122,13 @@
   text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
 }
 
+/* Updated button styles for both modes */
 .light .cyber-button {
   @apply bg-gradient-to-r from-reform-teal to-reform-teal-light text-white;
+}
+
+.dark .cyber-button {
+  @apply bg-gradient-to-r from-reform-teal-dark to-reform-teal text-white;
 }
 
 .light .floating-icon-inner {

@@ -20,7 +20,7 @@ const Hero = () => {
         ></div>
       </div>
 
-      {/* Floating elements - positioned to not overlap with text */}
+      {/* Floating elements - repositioned to not overlap with text */}
       <div className="absolute top-32 right-[15%] animate-dance" style={{ zIndex: 5 }}>
         <div className="floating-icon">
           <div className="floating-icon-inner bg-reform-teal/20 dark:bg-reform-cyan/20"></div>
@@ -35,7 +35,8 @@ const Hero = () => {
         </div>
       </div>
       
-      <div className="absolute top-[40%] left-[25%] animate-orbit" style={{ zIndex: 5, animationDuration: '15s' }}>
+      {/* Repositioned the gamepad icon to the left side where there's no text */}
+      <div className="absolute top-[15%] left-[8%] animate-orbit" style={{ zIndex: 5, animationDuration: '15s' }}>
         <div className="floating-icon">
           <div className="floating-icon-inner bg-reform-yellow/10 dark:bg-reform-yellow/20"></div>
           <Gamepad2 className="floating-icon-svg text-reform-orange" />

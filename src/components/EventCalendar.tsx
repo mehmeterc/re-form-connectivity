@@ -206,7 +206,8 @@ const EventCalendar = () => {
                 {t('events.location')}
               </p>
               <Button 
-                className="shimmer-button w-full bg-reform-purple hover:bg-reform-purple/90 text-white"
+                variant="teal"
+                className="shimmer-button w-full text-white font-medium hover:bg-reform-teal-light/90 dark:hover:bg-reform-teal/90"
               >
                 {t('events.cta')}
               </Button>
