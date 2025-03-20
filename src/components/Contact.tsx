@@ -121,9 +121,9 @@ const Contact = () => {
                 />
                 <Button 
                   type="submit" 
-                  className="ml-2 bg-reform-purple hover:bg-reform-purple/90"
+                  className="ml-2 bg-reform-purple hover:bg-reform-purple/90 text-white"
                 >
-                  <Send className="h-4 w-4" />
+                  <Send className="h-4 w-4 text-white" />
                 </Button>
               </form>
             </div>
