@@ -121,7 +121,7 @@ const Contact = () => {
                 />
                 <Button 
                   type="submit" 
-                  className="ml-2 bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
+                  className="ml-2 bg-black text-white hover:bg-black/90 dark:bg-black dark:text-black dark:hover:bg-black/90"
                 >
                   <Send className="h-4 w-4 text-white" />
                 </Button>
