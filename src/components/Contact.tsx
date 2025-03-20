@@ -119,12 +119,12 @@ const Contact = () => {
                   className="flex-grow bg-secondary/50 border-input text-foreground"
                   required
                 />
-                <Button 
+                <button 
                   type="submit" 
-                  className="ml-2 bg-reform-purple hover:bg-reform-purple/90"
+                  className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
                 >
                   <Send className="h-4 w-4" />
-                </Button>
+                </button>
               </form>
             </div>
           </div>
