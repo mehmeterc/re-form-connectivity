@@ -133,7 +133,7 @@ const EventCalendar = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="glassmorphism p-6 rounded-2xl">
-            <div className="flex items-center mb-4 text-white/80">
+            <div className="flex items-center mb-4 text-foreground">
               <CalendarIcon className="mr-2 h-5 w-5" />
               <span>{language === 'de' ? 'Veranstaltungen' : 'Events'}</span>
             </div>
@@ -152,7 +152,7 @@ const EventCalendar = () => {
           </div>
 
           <div className="glassmorphism p-6 rounded-2xl">
-            <div className="flex items-center mb-4 text-white/80">
+            <div className="flex items-center mb-4 text-foreground">
               <Users className="mr-2 h-5 w-5" />
               <span>{language === 'de' ? 'Details & Anmeldung' : 'Details & RSVP'}</span>
             </div>
@@ -164,24 +164,24 @@ const EventCalendar = () => {
                     key={event.id}
                     className={`p-4 rounded-xl transition-all cursor-pointer ${
                       selectedEventId === event.id 
-                        ? 'bg-white/10 shadow-lg' 
-                        : 'bg-white/5 hover:bg-white/8'
+                        ? 'dark:bg-white/10 bg-slate-100 shadow-lg' 
+                        : 'dark:bg-white/5 bg-white hover:bg-slate-50 dark:hover:bg-white/8'
                     }`}
                     onClick={() => handleEventSelect(event.id)}
                   >
                     <h3 className="font-semibold text-lg mb-2">{event.title}</h3>
-                    <div className="flex items-center text-sm text-white/60 mb-1">
+                    <div className="flex items-center text-sm text-muted-foreground mb-1">
                       <Clock className="mr-2 h-4 w-4" />
                       <span>{event.startTime} - {event.endTime}</span>
                     </div>
-                    <div className="flex items-center text-sm text-white/60">
+                    <div className="flex items-center text-sm text-muted-foreground">
                       <MapPin className="mr-2 h-4 w-4" />
                       <span>{event.location}</span>
                     </div>
                     
                     {selectedEventId === event.id && (
-                      <div className="mt-3 pt-3 border-t border-white/10 animate-slide-up">
-                        <p className="text-sm text-white/70 mb-3">{event.description}</p>
+                      <div className="mt-3 pt-3 border-t border-border animate-slide-up">
+                        <p className="text-sm text-foreground/70 mb-3">{event.description}</p>
                         <Button 
                           className="shimmer-button w-full bg-reform-orange hover:bg-reform-orange/90 text-white"
                           onClick={() => handleRSVP(event.id)}
@@ -194,7 +194,7 @@ const EventCalendar = () => {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-64 text-white/50">
+              <div className="flex flex-col items-center justify-center h-64 text-muted-foreground">
                 <CalendarIcon className="h-10 w-10 mb-4 opacity-30" />
                 <p>{language === 'de' ? 'Keine Veranstaltungen an diesem Tag' : 'No events on this day'}</p>
                 <p className="text-sm mt-2">{language === 'de' ? 'Wähle ein anderes Datum' : 'Please select another date'}</p>
@@ -202,7 +202,7 @@ const EventCalendar = () => {
             )}
 
             <div className="mt-6">
-              <p className="text-sm text-white/70 mb-3">
+              <p className="text-sm text-foreground/70 mb-3">
                 {t('events.location')}
               </p>
               <Button 

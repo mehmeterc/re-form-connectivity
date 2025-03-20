@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
@@ -89,7 +88,7 @@ const Testimonials = () => {
     <section
       id="testimonials"
       ref={sectionRef}
-      className="section-transition py-24 relative bg-white/[0.02]"
+      className="section-transition py-24 relative bg-white/[0.02] dark:bg-transparent"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-pink/10"></div>
       
@@ -112,13 +111,13 @@ const Testimonials = () => {
                     index === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
                   }`}
                 >
-                  <p className="text-xl md:text-2xl italic text-white/90 mb-6">
+                  <p className="text-xl md:text-2xl italic text-foreground mb-6">
                     "{testimonial.text}"
                   </p>
                   <div className="flex items-center">
                     <div className="mr-4">
                       <div className="font-medium">{testimonial.author}</div>
-                      <div className="text-sm text-white/60">{testimonial.role}</div>
+                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
                     </div>
                   </div>
                 </div>
@@ -126,7 +125,7 @@ const Testimonials = () => {
             </div>
             
             <div className="w-full md:w-1/3 flex flex-col items-center">
-              <div className="relative w-60 h-60 rounded-full overflow-hidden border-4 border-white/10">
+              <div className="relative w-60 h-60 rounded-full overflow-hidden border-4 border-border">
                 {testimonials.map((testimonial, index) => (
                   <div 
                     key={testimonial.id}
@@ -144,7 +143,7 @@ const Testimonials = () => {
               
               <div className="flex items-center mt-6">
                 <button 
-                  className="p-2 rounded-full border border-white/20 hover:bg-white/10 transition-colors mr-2"
+                  className="p-2 rounded-full border border-border hover:bg-secondary transition-colors mr-2"
                   onClick={goToPrevious}
                 >
                   <ChevronLeft size={20} />
@@ -154,14 +153,14 @@ const Testimonials = () => {
                     <button
                       key={index}
                       className={`w-2 h-2 rounded-full transition-colors ${
-                        index === activeIndex ? 'bg-white' : 'bg-white/30'
+                        index === activeIndex ? 'bg-foreground' : 'bg-muted-foreground'
                       }`}
                       onClick={() => goToIndex(index)}
                     />
                   ))}
                 </div>
                 <button 
-                  className="p-2 rounded-full border border-white/20 hover:bg-white/10 transition-colors ml-2"
+                  className="p-2 rounded-full border border-border hover:bg-secondary transition-colors ml-2"
                   onClick={goToNext}
                 >
                   <ChevronRight size={20} />
@@ -174,15 +173,15 @@ const Testimonials = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
           <div className="glassmorphism p-6 rounded-2xl text-center">
             <div className="text-3xl md:text-4xl font-bold text-reform-blue mb-2">25+</div>
-            <p className="text-white/70">{language === 'de' ? 'Workshops' : 'Workshops'}</p>
+            <p className="text-foreground/70">{language === 'de' ? 'Workshops' : 'Workshops'}</p>
           </div>
           <div className="glassmorphism p-6 rounded-2xl text-center">
             <div className="text-3xl md:text-4xl font-bold text-reform-purple mb-2">300+</div>
-            <p className="text-white/70">{language === 'de' ? 'Teilnehmer' : 'Participants'}</p>
+            <p className="text-foreground/70">{language === 'de' ? 'Teilnehmer' : 'Participants'}</p>
           </div>
           <div className="glassmorphism p-6 rounded-2xl text-center">
             <div className="text-3xl md:text-4xl font-bold text-reform-pink mb-2">15+</div>
-            <p className="text-white/70">{language === 'de' ? 'Digitale Projekte' : 'Digital Projects'}</p>
+            <p className="text-foreground/70">{language === 'de' ? 'Digitale Projekte' : 'Digital Projects'}</p>
           </div>
         </div>
       </div>
@@ -191,3 +190,4 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+
