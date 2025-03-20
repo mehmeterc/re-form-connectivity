@@ -2,9 +2,11 @@
 import React, { useRef, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Wifi, Code, Headset, Building2 } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Features = () => {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const Features = () => {
     {
       icon: <Wifi className="h-6 w-6" />,
       text: t('features.coworking'),
-      color: 'bg-reform-cyan/10 text-reform-cyan',
+      color: 'bg-reform-cyan/10 text-reform-teal-dark dark:text-reform-cyan',
     },
     {
       icon: <Code className="h-6 w-6" />,
@@ -42,7 +44,7 @@ const Features = () => {
     {
       icon: <Headset className="h-6 w-6" />,
       text: t('features.workshops'),
-      color: 'bg-reform-yellow/10 text-reform-yellow',
+      color: 'bg-reform-yellow/10 text-reform-orange',
     },
     {
       icon: <Building2 className="h-6 w-6" />,
@@ -55,16 +57,16 @@ const Features = () => {
     <section
       id="features"
       ref={sectionRef}
-      className="section-transition py-24 relative bg-white/[0.02]"
+      className="section-transition py-24 relative bg-foreground/[0.02]"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-teal/10"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-teal/5 dark:from-reform-teal/10"></div>
       
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-gradient">{t('features.title')}</span>
           </h2>
-          <p className="text-lg text-white/80 max-w-3xl mx-auto">
+          <p className="text-lg text-foreground/80 max-w-3xl mx-auto">
             {t('features.subtitle')}
           </p>
         </div>
@@ -79,7 +81,7 @@ const Features = () => {
               <div className={`mr-4 p-3 rounded-xl ${feature.color} transition-all duration-300 group-hover:scale-110`}>
                 {feature.icon}
               </div>
-              <p className="font-medium text-lg group-hover:text-reform-cyan transition-colors duration-300">{feature.text}</p>
+              <p className="font-medium text-lg group-hover:text-reform-teal dark:group-hover:text-reform-cyan transition-colors duration-300">{feature.text}</p>
             </div>
           ))}
         </div>

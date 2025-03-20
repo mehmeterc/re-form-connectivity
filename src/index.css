@@ -8,32 +8,32 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 30% 98%;
     --foreground: 210 25% 20%;
 
-    --card: 0 0% 97%;
+    --card: 210 30% 99%;
     --card-foreground: 210 25% 20%;
 
-    --popover: 0 0% 100%;
+    --popover: 210 30% 99%;
     --popover-foreground: 210 25% 20%;
 
-    --primary: 177 50% 52%;
-    --primary-foreground: 210 25% 20%;
+    --primary: 177 45% 42%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 30% 95%;
     --secondary-foreground: 210 25% 20%;
 
-    --muted: 210 30% 95%;
+    --muted: 210 30% 92%;
     --muted-foreground: 215 20% 45%;
 
-    --accent: 177 50% 40%;
-    --accent-foreground: 210 25% 20%;
+    --accent: 177 50% 35%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 210 30% 90%;
-    --input: 210 30% 90%;
+    --input: 210 30% 85%;
     --ring: 212 26% 70%;
     
     --radius: 0.75rem;
@@ -101,11 +101,11 @@
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-reform-cyan via-reform-violet to-reform-pink;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-reform-teal-dark via-reform-violet to-reform-pink dark:from-reform-cyan dark:via-reform-violet dark:to-reform-pink;
   }
 
   .logo-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-reform-neon via-reform-cyan to-reform-pink font-bold tracking-tight;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-reform-teal-dark via-reform-cyan to-reform-pink dark:from-reform-neon dark:via-reform-cyan dark:to-reform-pink font-bold tracking-tight;
   }
 
   .section-transition {
@@ -117,12 +117,12 @@
   }
 
   .scroll-indicator {
-    @apply absolute bottom-8 left-1/2 transform -translate-x-1/2 w-8 h-12 border-2 border-white/30 rounded-full;
+    @apply absolute bottom-8 left-1/2 transform -translate-x-1/2 w-8 h-12 border-2 border-reform-teal/50 dark:border-white/30 rounded-full;
   }
 
   .scroll-indicator::after {
     content: '';
-    @apply absolute w-1.5 h-1.5 bg-white rounded-full left-1/2 top-1/3 transform -translate-x-1/2 animate-pulse;
+    @apply absolute w-1.5 h-1.5 bg-reform-teal dark:bg-white rounded-full left-1/2 top-1/3 transform -translate-x-1/2 animate-pulse;
   }
 
   .calendar-day {
@@ -178,8 +178,15 @@
   }
   
   .neon-text {
+    @apply text-reform-teal-dark dark:text-reform-cyan;
+  }
+
+  .light .neon-text {
+    text-shadow: 0 0 3px rgba(26, 108, 108, 0.5), 0 0 6px rgba(42, 157, 157, 0.3);
+  }
+  
+  .dark .neon-text {
     text-shadow: 0 0 5px rgba(78, 205, 196, 0.7), 0 0 10px rgba(78, 205, 196, 0.5);
-    @apply text-reform-cyan;
   }
   
   .pixel-corners {
@@ -190,19 +197,23 @@
     );
   }
 
-  /* More subtle logo style to match the gradient text */
+  /* Updated logo style for both modes */
   .reformed-logo {
     @apply font-display font-bold tracking-tight text-transparent bg-clip-text;
-    background-image: linear-gradient(90deg, #39FF14, #4ECDC4, #FF6B9E);
+    background-image: linear-gradient(90deg, #1A6C6C, #2A9D9D, #FF6B9E);
     letter-spacing: -0.05em;
   }
 
+  .dark .reformed-logo {
+    background-image: linear-gradient(90deg, #39FF14, #4ECDC4, #FF6B9E);
+  }
+
   .heading-glow {
-    text-shadow: 0 0 5px rgba(78, 205, 196, 0.2);
+    @apply dark:text-shadow-[0_0_5px_rgba(78,205,196,0.2)] text-shadow-[0_0_3px_rgba(26,108,108,0.1)];
   }
 
   .text-outline {
-    -webkit-text-stroke: 1px rgba(78, 205, 196, 0.3);
+    @apply dark:-webkit-text-stroke-[1px_rgba(78,205,196,0.3)] -webkit-text-stroke-[1px_rgba(26,108,108,0.2)];
   }
 
   .floating-icon {

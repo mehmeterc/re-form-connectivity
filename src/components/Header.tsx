@@ -31,7 +31,7 @@ const Header = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-expo-out ${
-        isScrolled ? 'py-3 glassmorphism' : 'py-6 bg-transparent'
+        isScrolled ? 'py-3 glassmorphism shadow-md' : 'py-6 bg-transparent'
       }`}
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
@@ -47,7 +47,7 @@ const Header = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-foreground/80 hover:text-reform-cyan transition-colors relative after:absolute after:w-full after:h-0.5 after:bg-reform-cyan after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:origin-right hover:after:origin-left after:transition-transform after:duration-300"
+              className="text-sm font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan transition-colors relative after:absolute after:w-full after:h-0.5 after:bg-reform-teal dark:after:bg-reform-cyan after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:origin-right hover:after:origin-left after:transition-transform after:duration-300"
             >
               {link.label}
             </a>
@@ -69,7 +69,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`absolute top-full left-0 right-0 glassmorphism transition-all duration-300 ease-expo-out ${
+        className={`absolute top-full left-0 right-0 glassmorphism shadow-md transition-all duration-300 ease-expo-out ${
           isMenuOpen ? 'max-h-screen py-4' : 'max-h-0 py-0 overflow-hidden'
         }`}
       >
@@ -78,7 +78,7 @@ const Header = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-base font-medium text-foreground/80 hover:text-reform-cyan py-2 transition-colors"
+              className="text-base font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan py-2 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               {link.label}

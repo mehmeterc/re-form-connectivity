@@ -14,6 +14,10 @@
 }
 
 .logo:hover {
+  filter: drop-shadow(0 0 2em rgba(26, 108, 108, 0.7));
+}
+
+.dark .logo:hover {
   filter: drop-shadow(0 0 2em rgba(78, 205, 196, 0.7));
 }
 
@@ -42,6 +46,15 @@
 
 /* Custom animations */
 @keyframes cyber-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(26, 108, 108, 0.6), 0 0 20px rgba(42, 157, 157, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(26, 108, 108, 0.8), 0 0 30px rgba(42, 157, 157, 0.6);
+  }
+}
+
+.dark @keyframes cyber-glow {
   0%, 100% {
     box-shadow: 0 0 10px rgba(57, 255, 20, 0.6), 0 0 20px rgba(78, 205, 196, 0.4);
   }
@@ -93,17 +106,20 @@
 }
 
 /* Dynamic theme color adjustments */
+.light .text-gradient {
+  text-shadow: 0 0 5px rgba(26, 108, 108, 0.2), 0 0 10px rgba(42, 157, 157, 0.1);
+}
+
 .dark .text-gradient {
   text-shadow: 0 0 10px rgba(57, 255, 20, 0.4), 0 0 20px rgba(78, 205, 196, 0.3);
 }
 
-.light .text-gradient {
-  text-shadow: 0 0 5px rgba(57, 255, 20, 0.2), 0 0 10px rgba(78, 205, 196, 0.1);
+.light .logo-text {
+  text-shadow: 0 0 8px rgba(26, 108, 108, 0.3);
 }
 
-.light .neon-text {
-  text-shadow: 0 0 3px rgba(78, 205, 196, 0.5), 0 0 6px rgba(78, 205, 196, 0.3);
-  color: #1A6C6C;
+.dark .logo-text {
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
 }
 
 .light .cyber-button {
@@ -112,8 +128,4 @@
 
 .light .floating-icon-inner {
   opacity: 0.7;
-}
-
-.light .logo-text {
-  text-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
 }

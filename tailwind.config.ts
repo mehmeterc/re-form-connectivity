@@ -155,7 +155,23 @@ export default {
 				'expo-out': 'cubic-bezier(0.16, 1, 0.3, 1)',
 				'expo-in-out': 'cubic-bezier(0.87, 0, 0.13, 1)',
 			},
+			textShadow: {
+				sm: '0 1px 2px var(--tw-shadow-color)',
+				DEFAULT: '0 2px 4px var(--tw-shadow-color)',
+				lg: '0 8px 16px var(--tw-shadow-color)',
+			},
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function({ addUtilities, theme, variants }) {
+			const textShadowUtilities = {};
+			Object.entries(theme('textShadow')).forEach(([key, value]) => {
+				textShadowUtilities[`.text-shadow${key === 'DEFAULT' ? '' : `-${key}`}`] = {
+					textShadow: value,
+				};
+			});
+			addUtilities(textShadowUtilities, variants('textShadow'));
+		},
+	],
 } satisfies Config;

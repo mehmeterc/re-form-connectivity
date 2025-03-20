@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Send, X, RefreshCw } from 'lucide-react';
@@ -146,7 +147,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
           <Button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="bg-reform-teal hover:bg-reform-teal-light"
+            variant="teal"
           >
             <Send className="h-4 w-4" />
           </Button>
