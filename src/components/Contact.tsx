@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Mail, Instagram, Linkedin, Twitter, Send, MapPin } from 'lucide-react';
@@ -121,9 +120,10 @@ const Contact = () => {
                 />
                 <Button 
                   type="submit" 
-                  className="ml-2 bg-#1C262F text-white hover:bg-#1C262F/90 dark:bg-#1C262F dark:text-#1C262F dark:hover:bg-#1C262F/90"
+                  className="ml-2 p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
+                  aria-label="Send"
                 >
-                  <Send className="h-4 w-4 text-white" />
+                  <Send className="h-5 w-5" />
                 </Button>
               </form>
             </div>
