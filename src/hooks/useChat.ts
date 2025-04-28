@@ -1,7 +1,5 @@
-
 import { useState } from 'react';
 import { useToast } from './use-toast';
-import { supabase } from "@/integrations/supabase/client";
 
 export interface Message {
   role: 'user' | 'assistant';
@@ -25,25 +23,27 @@ export const useChat = () => {
     setMessages(prev => [...prev, newMessage]);
 
     try {
-      // Get user's browser language and simplify to 'en' or 'de'
-      const userLang = navigator.language.startsWith('de') ? 'de' : 'en';
+      const userLang = navigator.language.startsWith('en') ? 'en' : 'de';
 
-      const { data, error } = await supabase.functions.invoke('chat', {
-        body: { 
-          messages: [...messages, newMessage],
-          lang: userLang 
+      const response = await fetch('/functions/v1/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          messages: [...messages, newMessage],
+          lang: userLang,
+        }),
       });
 
-      if (error) {
-        throw new Error(error.message || 'Nachricht konnte nicht gesendet werden.');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Chat server error.");
       }
 
-      if (!data?.message) {
-        throw new Error('Ungültige Antwort vom Server.');
-      }
-
-      setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
+      const data = await response.json();
+      const reply = data.message || "No reply received.";
+      setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
     } catch (error: any) {
       toast({
         title: "Fehler",
