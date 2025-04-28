@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useToast } from './use-toast';
 import { supabase } from "@/integrations/supabase/client";
@@ -24,8 +25,14 @@ export const useChat = () => {
     setMessages(prev => [...prev, newMessage]);
 
     try {
+      // Get user's browser language and simplify to 'en' or 'de'
+      const userLang = navigator.language.startsWith('de') ? 'de' : 'en';
+
       const { data, error } = await supabase.functions.invoke('chat', {
-        body: { messages: [...messages, newMessage] },
+        body: { 
+          messages: [...messages, newMessage],
+          lang: userLang 
+        },
       });
 
       if (error) {
