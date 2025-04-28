@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+
+import { useState } from 'react';
 import { useToast } from './use-toast';
 
 export interface Message {
@@ -12,39 +13,7 @@ export const popularQuestions = [
   "Wer sind die Initiatoren des Re:Form Hubs?"
 ];
 
-const API_KEY_STORAGE_KEY = 'gemini_api_key';
-
-export const useChat = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [apiKey, setApiKey] = useState<string | null>(localStorage.getItem(API_KEY_STORAGE_KEY));
-  const { toast } = useToast();
-
-  const saveApiKey = (key: string) => {
-    localStorage.setItem(API_KEY_STORAGE_KEY, key);
-    setApiKey(key);
-    toast({
-      title: "API-Schlüssel gespeichert",
-      description: "Dein Gemini API-Schlüssel wurde erfolgreich gespeichert.",
-    });
-  };
-
-  const sendMessage = async (content: string) => {
-    if (!apiKey) {
-      toast({
-        title: "API-Schlüssel fehlt",
-        description: "Bitte gib zuerst deinen Gemini API-Schlüssel ein.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsLoading(true);
-    const newMessage: Message = { role: 'user', content };
-    setMessages(prev => [...prev, newMessage]);
-
-    try {
-      const SYSTEM_PROMPT = `Du bist ein hilfreicher Assistent für den Re:Form Hub Wittenberg. Antworte kurz, direkt aber mit links wenn nötgi, und locker auf Augenhöhe mit Jugendlichen. Hauptsprache Deutsch, Englisch bei Bedarf.
+const SYSTEM_PROMPT = `Du bist ein hilfreicher Assistent für den Re:Form Hub Wittenberg. Antworte kurz, direkt aber mit links wenn nötgi, und locker auf Augenhöhe mit Jugendlichen. Hauptsprache Deutsch, Englisch bei Bedarf.
 
 (DE) Was ist der Re:Form Hub?
 Ein offener, kreativer Raum in Wittenberg für junge Leute (8-18 Jahre), um Technik auszuprobieren, Projekte umzusetzen und Ideen zu entwickeln.
@@ -84,11 +53,22 @@ Weitere Informationen:
 2. Wo befindet sich der Re:Form Hub?
 3. Wer sind die Initiatoren des Re:Form Hubs?`;
 
+export const useChat = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
+  const sendMessage = async (content: string) => {
+    setIsLoading(true);
+    const newMessage: Message = { role: 'user', content };
+    setMessages(prev => [...prev, newMessage]);
+
+    try {
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${import.meta.env.VITE_GEMINI_API_KEY}`,
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             contents: [
               {
@@ -107,7 +87,7 @@ Weitere Informationen:
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error?.message || "Gemini API Fehler.");
+        throw new Error(errorData.error?.message || "Gemini API error");
       }
 
       const data = await response.json();
@@ -134,7 +114,5 @@ Weitere Informationen:
     isLoading,
     clearMessages,
     popularQuestions,
-    apiKey,
-    saveApiKey,
   };
 };
