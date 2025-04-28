@@ -1,13 +1,12 @@
 
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Send, X, RefreshCw, Key } from 'lucide-react';
+import { Send, X, RefreshCw } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { ScrollArea } from './ui/scroll-area';
 import { useChat, popularQuestions } from '@/hooks/useChat';
 import { Alert, AlertTitle, AlertDescription } from './ui/alert';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 
 interface ChatInterfaceProps {
   onClose: () => void;
@@ -15,10 +14,8 @@ interface ChatInterfaceProps {
 
 const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
   const { t } = useLanguage();
-  const { messages, sendMessage, isLoading, clearMessages, apiKey, saveApiKey } = useChat();
+  const { messages, sendMessage, isLoading, clearMessages } = useChat();
   const [input, setInput] = React.useState('');
-  const [apiKeyInput, setApiKeyInput] = React.useState('');
-  const [showApiKeyDialog, setShowApiKeyDialog] = React.useState(!apiKey);
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [error, setError] = React.useState<string | null>(null);
 
@@ -29,18 +26,9 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
         setError(null);
         await sendMessage(input);
         setInput('');
-      } catch (err: any) {
+      } catch (err) {
         setError(err.message || 'Nachricht konnte nicht gesendet werden.');
       }
-    }
-  };
-
-  const handleApiKeySubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (apiKeyInput.trim()) {
-      saveApiKey(apiKeyInput.trim());
-      setShowApiKeyDialog(false);
-      setApiKeyInput('');
     }
   };
 
@@ -84,32 +72,6 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
       <div className="flex items-center justify-between p-4 border-b">
         <h3 className="font-semibold text-lg">Re:Form Hub AI Assistant</h3>
         <div className="flex gap-2">
-          <Dialog open={showApiKeyDialog} onOpenChange={setShowApiKeyDialog}>
-            <DialogTrigger asChild>
-              <Button variant="outline" size="icon">
-                <Key className="h-4 w-4" />
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Gemini API-Schlüssel eingeben</DialogTitle>
-              </DialogHeader>
-              <form onSubmit={handleApiKeySubmit} className="space-y-4">
-                <Input
-                  value={apiKeyInput}
-                  onChange={(e) => setApiKeyInput(e.target.value)}
-                  placeholder="Dein Gemini API-Schlüssel"
-                  type="password"
-                />
-                <Button type="submit" disabled={!apiKeyInput.trim()}>
-                  Speichern
-                </Button>
-              </form>
-              <p className="text-sm text-muted-foreground mt-4">
-                Der API-Schlüssel wird sicher in deinem Browser gespeichert.
-              </p>
-            </DialogContent>
-          </Dialog>
           <Button variant="outline" size="icon" onClick={handleReset}>
             <RefreshCw className="h-4 w-4" />
           </Button>
@@ -125,16 +87,6 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
             <Alert variant="destructive">
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-
-          {!apiKey && (
-            <Alert>
-              <AlertTitle>API-Schlüssel erforderlich</AlertTitle>
-              <AlertDescription>
-                Bitte gib deinen Gemini API-Schlüssel ein, um den Chat zu nutzen.
-                Klicke auf das Schlüssel-Symbol oben rechts.
-              </AlertDescription>
             </Alert>
           )}
 
@@ -190,11 +142,11 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={t('chat.placeholder') || 'Frag mich etwas über Re:Form Hub...'}
-            disabled={isLoading || !apiKey}
+            disabled={isLoading}
           />
           <Button
             type="submit"
-            disabled={isLoading || !input.trim() || !apiKey}
+            disabled={isLoading || !input.trim()}
             variant="teal"
           >
             <Send className="h-4 w-4" />
