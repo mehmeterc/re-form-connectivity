@@ -86,7 +86,9 @@ const Contact = () => {
               <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.follow')}</h3>
               <div className="flex space-x-4">
                 <a 
-                  href="#" 
+                  href="https://www.instagram.com/antiapp.berlin/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
                   aria-label="Instagram"
                 >
