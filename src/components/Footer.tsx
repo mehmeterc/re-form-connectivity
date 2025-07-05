@@ -23,28 +23,56 @@ const Footer = () => {
 
         {/* Partner Logos Section */}
         <div className="mb-12">
-          <h4 className="text-lg font-semibold text-center mb-6 text-foreground/80">Partner</h4>
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-70 hover:opacity-100 transition-opacity">
-            <img 
-              src="/lovable-uploads/b82bad27-d345-40ed-b5d1-867a5b950b97.png" 
-              alt="Lutherstadt Wittenberg" 
-              className="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
-            />
-            <img 
-              src="/lovable-uploads/bbf4a0c8-67eb-40f1-8f71-b8f85725c5f5.png" 
-              alt="Stadtwerke Lutherstadt Wittenberg" 
-              className="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
-            />
-            <img 
-              src="/lovable-uploads/4bb19773-fdc8-4ed7-978d-728751f3abc1.png" 
-              alt="Sachsen-Anhalt Ministerium für Infrastruktur und Digitales" 
-              className="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
-            />
-            <img 
-              src="/lovable-uploads/1e9f5d26-fb28-48df-8f41-5b6442fd782d.png" 
-              alt="Lutherstadt Wittenberg Stadtbibliothek" 
-              className="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
-            />
+          <h4 className="text-lg font-semibold text-center mb-8 text-foreground/80">Partner</h4>
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16">
+            <a 
+              href="https://www.wittenberg.de/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-reform-cyan/20"
+            >
+              <img 
+                src="/lovable-uploads/b82bad27-d345-40ed-b5d1-867a5b950b97.png" 
+                alt="Lutherstadt Wittenberg" 
+                className="h-20 md:h-28 w-auto transition-all duration-300 hover:brightness-110"
+              />
+            </a>
+            <a 
+              href="https://www.stadtwerke-wittenberg.de/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-reform-cyan/20"
+            >
+              <img 
+                src="/lovable-uploads/bbf4a0c8-67eb-40f1-8f71-b8f85725c5f5.png" 
+                alt="Stadtwerke Lutherstadt Wittenberg" 
+                className="h-20 md:h-28 w-auto transition-all duration-300 hover:brightness-110"
+              />
+            </a>
+            <a 
+              href="https://moderndenken.de/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-reform-cyan/20"
+            >
+              <img 
+                src="/lovable-uploads/4bb19773-fdc8-4ed7-978d-728751f3abc1.png" 
+                alt="Sachsen-Anhalt Ministerium für Infrastruktur und Digitales" 
+                className="h-20 md:h-28 w-auto transition-all duration-300 hover:brightness-110"
+              />
+            </a>
+            <a 
+              href="https://stadtbibliothek-wittenberg.bibliotheca-open.de/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-reform-cyan/20"
+            >
+              <img 
+                src="/lovable-uploads/1e9f5d26-fb28-48df-8f41-5b6442fd782d.png" 
+                alt="Lutherstadt Wittenberg Stadtbibliothek" 
+                className="h-20 md:h-28 w-auto transition-all duration-300 hover:brightness-110"
+              />
+            </a>
           </div>
         </div>
 
