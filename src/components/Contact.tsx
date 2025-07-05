@@ -133,14 +133,14 @@ const Contact = () => {
             <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.location')}</h3>
             <div className="flex items-start mb-4">
               <MapPin className="mr-2 h-5 w-5 text-reform-pink mt-1" />
-              <p className="text-foreground/80">{t('contact.address')}</p>
+              <p className="text-foreground/80">Re:Form Hub - Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg</p>
             </div>
             
             <div className="rounded-xl overflow-hidden h-64 mt-6">
               <iframe
                 title="Re:Form Hub Location"
                 className="w-full h-full border-0"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2451.9374636010254!2d12.643844015816656!3d51.86730219784913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a65a7c06a21e85%3A0xe0a01bccf8e3ccf7!2sLutherstadt%20Wittenberg!5e0!3m2!1sen!2sde!4v1621458252045!5m2!1sen!2sde"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2449.8472636010254!2d12.648844015816656!3d51.86730219784913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a65a7c06a21e85%3A0xe0a01bccf8e3ccf7!2sStrasse%20der%20Befreiung%20139%2C%2006886%20Lutherstadt%20Wittenberg!5e0!3m2!1sen!2sde!4v1621458252045!5m2!1sen!2sde"
                 loading="lazy"
               ></iframe>
             </div>

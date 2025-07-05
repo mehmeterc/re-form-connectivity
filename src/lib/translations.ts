@@ -1,3 +1,4 @@
+
 export const translations = {
   de: {
     nav: {
@@ -40,7 +41,7 @@ export const translations = {
     events: {
       title: 'Jetzt dabei sein!',
       rsvp: 'Anmelden',
-      location: 'Ort: Stadtlabor Wittenberg & Stadtbibliothek Wittenberg',
+      location: 'Ort: Re:Form Hub - Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg',
       cta: 'Jetzt anmelden'
     },
     testimonials: {
@@ -68,14 +69,15 @@ export const translations = {
         button: 'Abonnieren'
       },
       location: 'Standort',
-      address: 'Re:Form Hub – Stadtlabor Wittenberg & Stadtbibliothek Wittenberg'
+      address: 'Re:Form Hub - Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg'
     },
     footer: {
       cta: {
         title: 'Re:Form Hub ist der Treffpunkt für kreativen Austausch & digitale Innovation in Wittenberg. Sei dabei!',
         button: 'Jetzt Teil der Bewegung werden!'
       },
-      rights: 'Alle Rechte vorbehalten.'
+      rights: 'Alle Rechte vorbehalten.',
+      madeWith: 'Made with ❤️ in Lutherstadt Wittenberg'
     },
     chat: {
       placeholder: 'Fragen Sie mich etwas über Re:Form Hub...',
@@ -123,7 +125,7 @@ export const translations = {
     events: {
       title: 'Join Now!',
       rsvp: 'RSVP',
-      location: 'Location: Stadtlabor Wittenberg & Stadtbibliothek Wittenberg',
+      location: 'Location: Re:Form Hub - Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg',
       cta: 'Sign up now'
     },
     testimonials: {
@@ -151,14 +153,15 @@ export const translations = {
         button: 'Subscribe'
       },
       location: 'Location',
-      address: 'Re:Form Hub – Stadtlabor Wittenberg & Stadtbibliothek Wittenberg'
+      address: 'Re:Form Hub - Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg'
     },
     footer: {
       cta: {
         title: 'Re:Form Hub is the meeting place for creative exchange & digital innovation in Wittenberg. Join us!',
         button: 'Join the movement now!'
       },
-      rights: 'All rights reserved.'
+      rights: 'All rights reserved.',
+      madeWith: 'Made with ❤️ in Lutherstadt Wittenberg'
     },
     chat: {
       placeholder: 'Ask me anything about Re:Form Hub...',

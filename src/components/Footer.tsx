@@ -21,14 +21,42 @@ const Footer = () => {
           </a>
         </div>
 
+        {/* Partner Logos Section */}
+        <div className="mb-12">
+          <h4 className="text-lg font-semibold text-center mb-6 text-foreground/80">Partner</h4>
+          <div className="flex flex-wrap justify-center items-center gap-8 opacity-70 hover:opacity-100 transition-opacity">
+            <img 
+              src="/lovable-uploads/b82bad27-d345-40ed-b5d1-867a5b950b97.png" 
+              alt="Lutherstadt Wittenberg" 
+              className="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
+            />
+            <img 
+              src="/lovable-uploads/bbf4a0c8-67eb-40f1-8f71-b8f85725c5f5.png" 
+              alt="Stadtwerke Lutherstadt Wittenberg" 
+              className="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
+            />
+            <img 
+              src="/lovable-uploads/4bb19773-fdc8-4ed7-978d-728751f3abc1.png" 
+              alt="Sachsen-Anhalt Ministerium für Infrastruktur und Digitales" 
+              className="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
+            />
+            <img 
+              src="/lovable-uploads/1e9f5d26-fb28-48df-8f41-5b6442fd782d.png" 
+              alt="Lutherstadt Wittenberg Stadtbibliothek" 
+              className="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
+            />
+          </div>
+        </div>
+
         <div className="pt-8 border-t border-foreground/10 flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <a href="#" className="flex items-center">
               <h2 className="reformed-logo text-2xl">Re:Form Hub</h2>
             </a>
           </div>
-          <div className="text-sm text-foreground/60">
-            &copy; {currentYear} Re:Form Hub. {t('footer.rights')}
+          <div className="flex flex-col items-center md:items-end text-sm text-foreground/60 space-y-1">
+            <div>{t('footer.madeWith')}</div>
+            <div>&copy; {currentYear} Re:Form Hub. {t('footer.rights')}</div>
           </div>
         </div>
       </div>
