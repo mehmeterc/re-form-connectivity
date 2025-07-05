@@ -1,7 +1,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 
 interface Testimonial {
   id: number;
@@ -9,6 +9,7 @@ interface Testimonial {
   author: string;
   role: string;
   image: string;
+  rating: number;
 }
 
 const Testimonials = () => {
@@ -22,7 +23,8 @@ const Testimonials = () => {
       text: t('testimonials.quote'),
       author: language === 'de' ? 'Marie Schmidt' : 'Marie Schmidt',
       role: language === 'de' ? 'Stadtplanerin' : 'Urban Planner',
-      image: '/images/testimonial-1.jpg',
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b5395bf1?w=400&h=400&fit=crop&crop=face',
+      rating: 5,
     },
     {
       id: 2,
@@ -31,7 +33,8 @@ const Testimonials = () => {
         : 'A fascinating place where digital innovation meets historical heritage.',
       author: language === 'de' ? 'Thomas Weber' : 'Thomas Weber',
       role: language === 'de' ? 'Digitalkünstler' : 'Digital Artist',
-      image: '/images/testimonial-2.jpg',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+      rating: 5,
     },
     {
       id: 3,
@@ -40,7 +43,8 @@ const Testimonials = () => {
         : 'The workshops have opened up completely new perspectives for my work.',
       author: language === 'de' ? 'Lena Meyer' : 'Lena Meyer',
       role: language === 'de' ? 'Studentin' : 'Student',
-      image: '/images/testimonial-3.jpg',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
+      rating: 5,
     },
   ];
 
@@ -96,93 +100,119 @@ const Testimonials = () => {
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">{t('testimonials.title')}</h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-reform-cyan to-reform-purple mx-auto rounded-full"></div>
         </div>
 
-        <div className="relative glassmorphism p-8 md:p-12 rounded-2xl overflow-hidden">
-          <div className="absolute top-6 left-6 text-reform-purple opacity-30">
-            <Quote size={60} />
-          </div>
-          
-          <div className="relative z-10 flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-2/3 mb-8 md:mb-0 md:pr-8">
-              {testimonials.map((testimonial, index) => (
-                <div 
-                  key={testimonial.id}
-                  className={`transition-opacity duration-500 absolute inset-0 ${
-                    index === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                  }`}
-                >
-                  <p className="text-xl md:text-2xl italic text-foreground mb-6">
-                    "{testimonial.text}"
-                  </p>
-                  <div className="flex items-center">
-                    <div className="mr-4">
-                      <div className="font-medium text-foreground">{testimonial.author}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+        <div className="relative">
+          {/* Main Testimonial Card */}
+          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+            <div className="absolute -top-6 left-8">
+              <div className="bg-gradient-to-r from-reform-cyan to-reform-purple p-4 rounded-2xl shadow-lg">
+                <Quote size={32} className="text-white" />
+              </div>
             </div>
             
-            <div className="w-full md:w-1/3 flex flex-col items-center">
-              <div className="relative w-60 h-60 rounded-full overflow-hidden border-4 border-border">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center mt-6">
+              {/* Testimonial Content */}
+              <div className="lg:col-span-2 space-y-6">
                 {testimonials.map((testimonial, index) => (
                   <div 
                     key={testimonial.id}
-                    className={`absolute inset-0 transition-opacity duration-500 ${
-                      index === activeIndex ? 'opacity-100' : 'opacity-0'
+                    className={`transition-all duration-700 ${
+                      index === activeIndex ? 'opacity-100 transform translate-x-0' : 'opacity-0 transform translate-x-8 absolute'
                     }`}
                   >
-                    <div 
-                      className="w-full h-full bg-cover bg-center"
-                      style={{ backgroundImage: `url(${testimonial.image})` }}
-                    ></div>
+                    <div className="flex mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} size={20} className="text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <blockquote className="text-xl md:text-2xl font-medium text-foreground leading-relaxed mb-8">
+                      "{testimonial.text}"
+                    </blockquote>
+                    <div className="flex items-center space-x-4">
+                      <div className="w-16 h-16 rounded-full overflow-hidden border-3 border-white/20 shadow-lg">
+                        <img 
+                          src={testimonial.image} 
+                          alt={testimonial.author}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-lg text-foreground">{testimonial.author}</div>
+                        <div className="text-sm text-foreground/70">{testimonial.role}</div>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
               
-              <div className="flex items-center mt-6">
-                <button 
-                  className="p-2 rounded-full border border-border hover:bg-secondary transition-colors mr-2 text-foreground"
-                  onClick={goToPrevious}
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <div className="flex space-x-2">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        index === activeIndex ? 'bg-foreground' : 'bg-muted-foreground'
-                      }`}
-                      onClick={() => goToIndex(index)}
-                    />
-                  ))}
+              {/* Large User Image */}
+              <div className="flex flex-col items-center space-y-8">
+                <div className="relative">
+                  <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
+                    {testimonials.map((testimonial, index) => (
+                      <img 
+                        key={testimonial.id}
+                        src={testimonial.image}
+                        alt={testimonial.author}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                          index === activeIndex ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <div className="absolute -inset-4 bg-gradient-to-r from-reform-cyan via-reform-purple to-reform-pink rounded-full opacity-20 animate-pulse"></div>
                 </div>
-                <button 
-                  className="p-2 rounded-full border border-border hover:bg-secondary transition-colors ml-2 text-foreground"
-                  onClick={goToNext}
-                >
-                  <ChevronRight size={20} />
-                </button>
+                
+                {/* Navigation Controls */}
+                <div className="flex items-center space-x-4">
+                  <button 
+                    className="p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 text-foreground transition-all duration-300 backdrop-blur-sm"
+                    onClick={goToPrevious}
+                  >
+                    <ChevronLeft size={20} />
+                  </button>
+                  
+                  <div className="flex space-x-2">
+                    {testimonials.map((_, index) => (
+                      <button
+                        key={index}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                          index === activeIndex 
+                            ? 'bg-reform-cyan shadow-lg shadow-reform-cyan/50' 
+                            : 'bg-white/30 hover:bg-white/50'
+                        }`}
+                        onClick={() => goToIndex(index)}
+                      />
+                    ))}
+                  </div>
+                  
+                  <button 
+                    className="p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 text-foreground transition-all duration-300 backdrop-blur-sm"
+                    onClick={goToNext}
+                  >
+                    <ChevronRight size={20} />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-          <div className="glassmorphism p-6 rounded-2xl text-center">
-            <div className="text-3xl md:text-4xl font-bold text-reform-blue mb-2">25+</div>
-            <p className="text-foreground/70">{language === 'de' ? 'Workshops' : 'Workshops'}</p>
+        {/* Stats Section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl p-8 rounded-2xl text-center border border-white/20 shadow-lg">
+            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-reform-blue to-reform-cyan bg-clip-text text-transparent mb-3">25+</div>
+            <p className="text-foreground/80 font-medium">{language === 'de' ? 'Workshops' : 'Workshops'}</p>
           </div>
-          <div className="glassmorphism p-6 rounded-2xl text-center">
-            <div className="text-3xl md:text-4xl font-bold text-reform-purple mb-2">300+</div>
-            <p className="text-foreground/70">{language === 'de' ? 'Teilnehmer' : 'Participants'}</p>
+          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl p-8 rounded-2xl text-center border border-white/20 shadow-lg">
+            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-reform-purple to-reform-pink bg-clip-text text-transparent mb-3">300+</div>
+            <p className="text-foreground/80 font-medium">{language === 'de' ? 'Teilnehmer' : 'Participants'}</p>
           </div>
-          <div className="glassmorphism p-6 rounded-2xl text-center">
-            <div className="text-3xl md:text-4xl font-bold text-reform-pink mb-2">15+</div>
-            <p className="text-foreground/70">{language === 'de' ? 'Digitale Projekte' : 'Digital Projects'}</p>
+          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl p-8 rounded-2xl text-center border border-white/20 shadow-lg">
+            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-reform-pink to-reform-orange bg-clip-text text-transparent mb-3">15+</div>
+            <p className="text-foreground/80 font-medium">{language === 'de' ? 'Digitale Projekte' : 'Digital Projects'}</p>
           </div>
         </div>
       </div>

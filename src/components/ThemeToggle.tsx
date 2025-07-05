@@ -7,12 +7,12 @@ const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex items-center space-x-1 px-2 py-1 rounded-full bg-foreground/5 border border-foreground/10">
+    <div className="flex items-center space-x-1 px-2 py-1 rounded-full bg-black/10 dark:bg-white/10 border border-black/20 dark:border-white/20 backdrop-blur-sm">
       <button
         className={`text-xs font-medium p-1.5 rounded-full transition-all ${
           theme === 'light'
-            ? 'bg-foreground/15 text-foreground'
-            : 'text-foreground/60 hover:text-foreground/80'
+            ? 'bg-black/20 dark:bg-white/20 text-black dark:text-white shadow-sm'
+            : 'text-black/60 dark:text-white/60 hover:text-black/80 dark:hover:text-white/80'
         }`}
         onClick={() => setTheme('light')}
         aria-label="Light Mode"
@@ -22,8 +22,8 @@ const ThemeToggle = () => {
       <button
         className={`text-xs font-medium p-1.5 rounded-full transition-all ${
           theme === 'dark'
-            ? 'bg-foreground/15 text-foreground'
-            : 'text-foreground/60 hover:text-foreground/80'
+            ? 'bg-black/20 dark:bg-white/20 text-black dark:text-white shadow-sm'
+            : 'text-black/60 dark:text-white/60 hover:text-black/80 dark:hover:text-white/80'
         }`}
         onClick={() => setTheme('dark')}
         aria-label="Dark Mode"
