@@ -7,7 +7,7 @@ import About from '@/components/About';
 import Partners from '@/components/Partners';
 import Features from '@/components/Features';
 import EventCalendar from '@/components/EventCalendar';
-import Testimonials from '@/components/Testimonials';
+import Vision from '@/components/Vision';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -45,7 +45,7 @@ const Index = () => {
         <Partners />
         <Features />
         <EventCalendar />
-        <Testimonials />
+        <Vision />
         <FAQ />
         <Contact />
         <Footer />
