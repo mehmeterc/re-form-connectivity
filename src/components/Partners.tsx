@@ -27,79 +27,72 @@ const Partners = () => {
     };
   }, []);
 
+  const partners = [
+    {
+      name: "Lutherstadt Wittenberg",
+      url: "https://www.wittenberg.de/",
+      logo: "/lovable-uploads/b82bad27-d345-40ed-b5d1-867a5b950b97.png"
+    },
+    {
+      name: "Stadtwerke Lutherstadt Wittenberg",
+      url: "https://www.stadtwerke-wittenberg.de/",
+      logo: "/lovable-uploads/bbf4a0c8-67eb-40f1-8f71-b8f85725c5f5.png"
+    },
+    {
+      name: "Sachsen-Anhalt Ministerium für Infrastruktur und Digitales",
+      url: "https://moderndenken.de/",
+      logo: "/lovable-uploads/4bb19773-fdc8-4ed7-978d-728751f3abc1.png"
+    },
+    {
+      name: "Lutherstadt Wittenberg Stadtbibliothek",
+      url: "https://stadtbibliothek-wittenberg.bibliotheca-open.de/",
+      logo: "/lovable-uploads/1e9f5d26-fb28-48df-8f41-5b6442fd782d.png"
+    }
+  ];
+
   return (
     <section
       id="partners"
       ref={sectionRef}
-      className="section-transition py-24 relative bg-foreground/[0.02]"
+      className="section-transition py-16 bg-gray-50 dark:bg-gray-900/30"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-violet/5"></div>
-      
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+      <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-gradient heading-glow">Partner</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-reform-cyan to-reform-purple mx-auto rounded-full mb-6"></div>
-          <p className="text-lg text-foreground/80 max-w-3xl mx-auto">
-            Gemeinsam mit starken Partnern schaffen wir Innovation und digitale Zukunft in Wittenberg
+          <p className="text-lg text-foreground/80 max-w-3xl mx-auto leading-relaxed">
+            Diese Institutionen unterstützen Re:Form Hub ideell und/oder finanziell
           </p>
         </div>
         
-        <div className="glassmorphism p-8 md:p-12 rounded-3xl border border-white/10">
-          <div className="flex flex-wrap lg:flex-nowrap justify-center items-center gap-8 lg:gap-12">
-            <a 
-              href="https://www.wittenberg.de/" 
-              target="_blank" 
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          {partners.map((partner, index) => (
+            <a
+              key={index}
+              href={partner.url}
+              target="_blank"
               rel="noopener noreferrer"
-              className="group flex-shrink-0 transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-reform-cyan/25 rounded-2xl p-4 hover:bg-white/10"
+              title={partner.name}
+              className="group relative block"
             >
-              <img 
-                src="/lovable-uploads/b82bad27-d345-40ed-b5d1-867a5b950b97.png" 
-                alt="Lutherstadt Wittenberg" 
-                className="h-20 lg:h-24 w-auto transition-all duration-500 group-hover:brightness-110 group-hover:drop-shadow-lg"
-              />
+              <div className="bg-white dark:bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 p-6 h-24 flex items-center justify-center group-hover:scale-105 border border-gray-100 dark:border-gray-200">
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="max-w-full max-h-12 w-auto h-auto object-contain transition-all duration-300 group-hover:brightness-110"
+                  loading="lazy"
+                />
+              </div>
+              
+              {/* Tooltip */}
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-gray-900 dark:bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                {partner.name}
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+              </div>
             </a>
-            
-            <a 
-              href="https://www.stadtwerke-wittenberg.de/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="group flex-shrink-0 transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-reform-cyan/25 rounded-2xl p-4 hover:bg-white/10"
-            >
-              <img 
-                src="/lovable-uploads/bbf4a0c8-67eb-40f1-8f71-b8f85725c5f5.png" 
-                alt="Stadtwerke Lutherstadt Wittenberg" 
-                className="h-20 lg:h-24 w-auto transition-all duration-500 group-hover:brightness-110 group-hover:drop-shadow-lg"
-              />
-            </a>
-            
-            <a 
-              href="https://moderndenken.de/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="group flex-shrink-0 transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-reform-cyan/25 rounded-2xl p-4 hover:bg-white/10"
-            >
-              <img 
-                src="/lovable-uploads/4bb19773-fdc8-4ed7-978d-728751f3abc1.png" 
-                alt="Sachsen-Anhalt Ministerium für Infrastruktur und Digitales" 
-                className="h-20 lg:h-24 w-auto transition-all duration-500 group-hover:brightness-110 group-hover:drop-shadow-lg"
-              />
-            </a>
-            
-            <a 
-              href="https://stadtbibliothek-wittenberg.bibliotheca-open.de/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="group flex-shrink-0 transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-reform-cyan/25 rounded-2xl p-4 hover:bg-white/10"
-            >
-              <img 
-                src="/lovable-uploads/1e9f5d26-fb28-48df-8f41-5b6442fd782d.png" 
-                alt="Lutherstadt Wittenberg Stadtbibliothek" 
-                className="h-20 lg:h-24 w-auto transition-all duration-500 group-hover:brightness-110 group-hover:drop-shadow-lg"
-              />
-            </a>
-          </div>
+          ))}
         </div>
       </div>
     </section>
