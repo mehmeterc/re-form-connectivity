@@ -46,7 +46,43 @@ export const translations = {
     },
     vision: {
       title: 'Unsere Vision',
-      quote: 'Re:Form Hub verändert, wie wir Stadtentwicklung & Innovation denken.'
+      quote: 'Re:Form Hub verändert, wie wir Stadtentwicklung & Innovation denken.',
+      community: {
+        title: 'Gemeinschaft',
+        description: 'Über 500+ Kreative, Entwickler und Innovatoren sind bereits Teil unserer wachsenden Community.',
+        stats: {
+          members: '500+',
+          membersLabel: 'Community Mitglieder',
+          projects: '50+',
+          projectsLabel: 'Laufende Projekte',
+          events: '100+',
+          eventsLabel: 'Veranstaltungen geplant',
+          partnerships: '15+',
+          partnershipsLabel: 'Partnerschaften'
+        }
+      },
+      slides: [
+        {
+          title: 'Digitale Innovation',
+          description: 'Wir schaffen einen Raum, wo traditionelle Handwerkskunst auf modernste Technologie trifft.',
+          category: 'Innovation'
+        },
+        {
+          title: 'Kreative Zusammenarbeit',
+          description: 'Menschen verschiedener Disziplinen arbeiten gemeinsam an zukunftsweisenden Projekten.',
+          category: 'Kollaboration'
+        },
+        {
+          title: 'Nachhaltige Entwicklung',
+          description: 'Durch innovative Ansätze gestalten wir eine nachhaltige Zukunft für Wittenberg.',
+          category: 'Nachhaltigkeit'
+        },
+        {
+          title: 'Bildung & Lernen',
+          description: 'Workshops und Kurse vermitteln digitale Kompetenzen für alle Altersgruppen.',
+          category: 'Bildung'
+        }
+      ]
     },
     faq: {
       title: 'Häufig gestellte Fragen',
@@ -54,7 +90,7 @@ export const translations = {
         q1: 'Wie kann ich mitmachen?',
         a1: 'Jeder ist willkommen, einfach vorbeikommen oder online anmelden!',
         q2: 'Kostet die Teilnahme etwas?',
-        a2: 'Nein, das Projekt ist öffentlich zugänglich.',
+        a2: 'Wir arbeiten daran, das Projekt durch Förderung und Spenden kostenfrei zu halten. Kontaktieren Sie uns für aktuelle Informationen.',
         q3: 'Welche Technologien werden genutzt?',
         a3: 'KI, VR, interaktive digitale Tools.'
       }
@@ -130,7 +166,43 @@ export const translations = {
     },
     vision: {
       title: 'Our Vision',
-      quote: 'Re:Form Hub is changing how we think about urban development & innovation.'
+      quote: 'Re:Form Hub is changing how we think about urban development & innovation.',
+      community: {
+        title: 'Community',
+        description: 'Over 500+ creatives, developers and innovators are already part of our growing community.',
+        stats: {
+          members: '500+',
+          membersLabel: 'Community Members',
+          projects: '50+',
+          projectsLabel: 'Active Projects',
+          events: '100+',
+          eventsLabel: 'Events Planned',
+          partnerships: '15+',
+          partnershipsLabel: 'Partnerships'
+        }
+      },
+      slides: [
+        {
+          title: 'Digital Innovation',
+          description: 'We create a space where traditional craftsmanship meets cutting-edge technology.',
+          category: 'Innovation'
+        },
+        {
+          title: 'Creative Collaboration',
+          description: 'People from different disciplines work together on forward-thinking projects.',
+          category: 'Collaboration'
+        },
+        {
+          title: 'Sustainable Development',
+          description: 'Through innovative approaches, we shape a sustainable future for Wittenberg.',
+          category: 'Sustainability'
+        },
+        {
+          title: 'Education & Learning',
+          description: 'Workshops and courses provide digital skills for all age groups.',
+          category: 'Education'
+        }
+      ]
     },
     faq: {
       title: 'Frequently Asked Questions',
@@ -138,7 +210,7 @@ export const translations = {
         q1: 'How can I participate?',
         a1: 'Everyone is welcome, just drop by or sign up online!',
         q2: 'Is participation free?',
-        a2: 'No, the project is publicly accessible.',
+        a2: 'We are working to keep the project free through funding and donations. Contact us for current information.',
         q3: 'What technologies are used?',
         a3: 'AI, VR, interactive digital tools.'
       }

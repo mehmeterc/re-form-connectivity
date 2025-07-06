@@ -55,7 +55,7 @@ const Hero = () => {
           {t('hero.subtitle')}
         </p>
         <a
-          href="#events"
+          href="#contact"
           className="cyber-button inline-flex items-center justify-center px-8 py-4 text-white font-medium rounded-md shadow-lg hover:shadow-reform-teal/30 dark:hover:shadow-reform-cyan/30 transition-all duration-300 hover:-translate-y-1 animate-fade-in"
         >
           {t('hero.cta')}

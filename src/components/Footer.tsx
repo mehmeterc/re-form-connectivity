@@ -1,35 +1,42 @@
 
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Button } from '@/components/ui/button';
 
 const Footer = () => {
   const { t } = useLanguage();
-  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-16 px-4 sm:px-6 relative glassmorphism border-t border-foreground/10">
-      <div className="container max-w-6xl mx-auto">
-        <div className="text-center mb-10">
-          <h3 className="text-2xl md:text-3xl font-bold mb-6 max-w-3xl mx-auto">
-            <span className="text-gradient">{t('footer.cta.title')}</span>
-          </h3>
-          <a
-            href="#events"
-            className="cyber-button inline-flex items-center justify-center px-8 py-4 text-white font-medium rounded-md shadow-lg hover:shadow-reform-cyan/30 transition-all duration-300 hover:-translate-y-1 animate-shake"
-          >
-            {t('footer.cta.button')}
+    <footer className="relative bg-gradient-to-br from-background via-background to-reform-teal/10 dark:to-reform-cyan/10 border-t border-border/50">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-purple/10"></div>
+      
+      <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+        {/* CTA Section */}
+        <div className="py-16 text-center border-b border-border/50">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 max-w-3xl mx-auto">
+            <span className="text-gradient heading-glow">{t('footer.cta.title')}</span>
+          </h2>
+          <a href="#contact">
+            <Button 
+              size="lg" 
+              className="cyber-button px-8 py-3 text-white font-medium rounded-md shadow-lg hover:shadow-reform-teal/30 dark:hover:shadow-reform-cyan/30 transition-all duration-300 hover:-translate-y-1"
+            >
+              {t('footer.cta.button')}
+            </Button>
           </a>
         </div>
 
-        <div className="pt-8 border-t border-foreground/10 flex flex-col md:flex-row justify-between items-center">
+        {/* Footer Content */}
+        <div className="py-8 flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <a href="#" className="flex items-center">
-              <h2 className="reformed-logo text-2xl">Re:Form Hub</h2>
-            </a>
+            <p className="text-foreground/60 text-sm">
+              © 2025 Re:Form Hub. {t('footer.rights')}
+            </p>
           </div>
-          <div className="flex flex-col items-center md:items-end text-sm text-foreground/80 space-y-1">
-            <div>{t('footer.madeWith')}</div>
-            <div>&copy; {currentYear} Re:Form Hub. {t('footer.rights')}</div>
+          <div>
+            <p className="text-foreground/60 text-sm">
+              {t('footer.madeWith')}
+            </p>
           </div>
         </div>
       </div>

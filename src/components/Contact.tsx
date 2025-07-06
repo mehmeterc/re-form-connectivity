@@ -1,7 +1,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Mail, Instagram, Linkedin, Twitter, Send, MapPin } from 'lucide-react';
+import { Mail, Instagram, Linkedin, Send, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -98,18 +98,13 @@ const Contact = () => {
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a 
-                  href="#" 
+                  href="https://www.linkedin.com/in/mehmet-ercan/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
-                </a>
-                <a 
-                  href="#" 
-                  className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="h-5 w-5" />
                 </a>
               </div>
             </div>
