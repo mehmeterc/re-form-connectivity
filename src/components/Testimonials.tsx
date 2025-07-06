@@ -1,50 +1,58 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Maximize2, ArrowRight } from 'lucide-react';
 
-interface Testimonial {
+interface VisionSlide {
   id: number;
-  text: string;
-  author: string;
-  role: string;
+  title: string;
+  description: string;
   image: string;
-  rating: number;
+  category: string;
 }
 
 const Testimonials = () => {
   const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const testimonials: Testimonial[] = [
+  const visionSlides: VisionSlide[] = [
     {
       id: 1,
-      text: t('testimonials.quote'),
-      author: language === 'de' ? 'Marie Schmidt' : 'Marie Schmidt',
-      role: language === 'de' ? 'Stadtplanerin' : 'Urban Planner',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b5395bf1?w=400&h=400&fit=crop&crop=face',
-      rating: 5,
+      title: language === 'de' ? 'Moderne Innovation in historischem Umfeld' : 'Modern Innovation in Historic Setting',
+      description: language === 'de' 
+        ? 'Ein containerbasierter Workspace, der sich harmonisch in Wittenbergs historische Nachbarschaft einfügt und Vergangenheit mit Zukunft verbindet.' 
+        : 'A container-based workspace that harmoniously integrates into Wittenberg\'s historic neighborhood, connecting past with future.',
+      image: '/lovable-uploads/5efbb8c7-0dbd-4c06-bb32-c8fe002885e6.png',
+      category: language === 'de' ? 'Architektur' : 'Architecture',
     },
     {
       id: 2,
-      text: language === 'de' 
-        ? 'Ein faszinierender Ort, an dem digitale Innovation auf historisches Erbe trifft.' 
-        : 'A fascinating place where digital innovation meets historical heritage.',
-      author: language === 'de' ? 'Thomas Weber' : 'Thomas Weber',
-      role: language === 'de' ? 'Digitalkünstler' : 'Digital Artist',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
-      rating: 5,
+      title: language === 'de' ? 'Strategische Partnerschaften' : 'Strategic Partnerships',
+      description: language === 'de' 
+        ? 'Zusammenarbeit mit führenden Technologieunternehmen und Finanzpartnern für nachhaltige Innovation und digitale Transformation.' 
+        : 'Collaboration with leading technology companies and financial partners for sustainable innovation and digital transformation.',
+      image: '/lovable-uploads/6b76c5f0-b6a7-4806-be04-fd9355737d69.png',
+      category: language === 'de' ? 'Partnerschaften' : 'Partnerships',
     },
     {
       id: 3,
-      text: language === 'de' 
-        ? 'Die Workshops haben mir völlig neue Perspektiven für meine Arbeit eröffnet.' 
-        : 'The workshops have opened up completely new perspectives for my work.',
-      author: language === 'de' ? 'Lena Meyer' : 'Lena Meyer',
-      role: language === 'de' ? 'Studentin' : 'Student',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-      rating: 5,
+      title: language === 'de' ? 'Zentrale Lage & Erreichbarkeit' : 'Central Location & Accessibility',
+      description: language === 'de' 
+        ? 'Strategisch positioniert an der Straße der Befreiung für optimale Sichtbarkeit und einfachen Zugang für alle Bürger:innen.' 
+        : 'Strategically positioned on Straße der Befreiung for optimal visibility and easy access for all citizens.',
+      image: '/lovable-uploads/2a946dda-f238-4b0f-b0bf-e72fe7fe345b.png',
+      category: language === 'de' ? 'Standort' : 'Location',
+    },
+    {
+      id: 4,
+      title: language === 'de' ? 'Lebendiger Kreativraum' : 'Vibrant Creative Space',
+      description: language === 'de' 
+        ? 'Ein offener, transparenter Arbeitsplatz mit modernster Ausstattung, der Kollaboration und Innovation in einer inspirierenden Atmosphäre fördert.' 
+        : 'An open, transparent workspace with state-of-the-art equipment that promotes collaboration and innovation in an inspiring atmosphere.',
+      image: '/lovable-uploads/232b3df4-791b-4cf4-9080-4d9526309077.png',
+      category: language === 'de' ? 'Arbeitsplatz' : 'Workspace',
     },
   ];
 
@@ -70,149 +78,211 @@ const Testimonials = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, 5000);
+    if (!isExpanded) {
+      const interval = setInterval(() => {
+        setActiveIndex((prevIndex) => (prevIndex + 1) % visionSlides.length);
+      }, 6000);
 
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
+      return () => clearInterval(interval);
+    }
+  }, [visionSlides.length, isExpanded]);
 
   const goToPrevious = () => {
-    setActiveIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
+    setActiveIndex((prevIndex) => (prevIndex - 1 + visionSlides.length) % visionSlides.length);
   };
 
   const goToNext = () => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+    setActiveIndex((prevIndex) => (prevIndex + 1) % visionSlides.length);
   };
 
   const goToIndex = (index: number) => {
     setActiveIndex(index);
   };
 
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <section
-      id="testimonials"
+      id="vision"
       ref={sectionRef}
       className="section-transition py-24 relative bg-white/[0.02] dark:bg-transparent"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-pink/10"></div>
       
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">{t('testimonials.title')}</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-reform-cyan to-reform-purple mx-auto rounded-full"></div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <span className="text-gradient heading-glow">
+              {language === 'de' ? 'Unsere Vision' : 'Our Vision'}
+            </span>
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-reform-cyan to-reform-purple mx-auto rounded-full mb-6"></div>
+          <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
+            {language === 'de' 
+              ? 'Entdecken Sie unsere Vision für Re:Form Hub - wo Innovation auf Tradition trifft'
+              : 'Discover our vision for Re:Form Hub - where innovation meets tradition'
+            }
+          </p>
         </div>
 
-        <div className="relative">
-          {/* Main Testimonial Card */}
-          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
-            <div className="absolute -top-6 left-8">
-              <div className="bg-gradient-to-r from-reform-cyan to-reform-purple p-4 rounded-2xl shadow-lg">
-                <Quote size={32} className="text-white" />
-              </div>
-            </div>
+        <div className={`relative transition-all duration-700 ${isExpanded ? 'fixed inset-4 z-50 bg-background/95 backdrop-blur-xl rounded-3xl' : ''}`}>
+          {isExpanded && (
+            <div className="absolute inset-0 bg-gradient-to-br from-reform-cyan/5 via-reform-purple/5 to-reform-pink/5 rounded-3xl"></div>
+          )}
+          
+          {/* Main Carousel Container */}
+          <div className={`relative bg-white/10 dark:bg-white/5 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden ${isExpanded ? 'h-full p-8' : 'p-4 md:p-8'}`}>
             
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center mt-6">
-              {/* Testimonial Content */}
-              <div className="lg:col-span-2 space-y-6">
-                {testimonials.map((testimonial, index) => (
-                  <div 
-                    key={testimonial.id}
+            {/* Carousel Header */}
+            <div className="flex justify-between items-center mb-6">
+              <div className="flex items-center space-x-4">
+                <div className="bg-gradient-to-r from-reform-cyan to-reform-purple p-2 rounded-xl">
+                  <div className="w-6 h-6 bg-white rounded opacity-80"></div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-foreground">Re:Form Hub Vision</h3>
+                  <p className="text-sm text-foreground/60">{visionSlides[activeIndex].category}</p>
+                </div>
+              </div>
+              
+              <button
+                onClick={toggleExpanded}
+                className="p-3 rounded-xl bg-white/10 hover:bg-white/20 text-foreground transition-all duration-300 backdrop-blur-sm border border-white/20"
+              >
+                <Maximize2 size={20} />
+              </button>
+            </div>
+
+            {/* Carousel Content */}
+            <div className={`grid ${isExpanded ? 'grid-cols-1 lg:grid-cols-2 gap-12 h-[calc(100%-120px)]' : 'grid-cols-1 lg:grid-cols-5 gap-8'} items-center`}>
+              
+              {/* Image Section */}
+              <div className={`relative ${isExpanded ? 'order-2 lg:order-1' : 'lg:col-span-3'}`}>
+                <div className={`relative overflow-hidden rounded-2xl shadow-2xl ${isExpanded ? 'h-full min-h-[400px]' : 'aspect-[16/10]'}`}>
+                  {visionSlides.map((slide, index) => (
+                    <img
+                      key={slide.id}
+                      src={slide.image}
+                      alt={slide.title}
+                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${
+                        index === activeIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                      }`}
+                    />
+                  ))}
+                  
+                  {/* Image Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                  
+                  {/* Image Navigation */}
+                  <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                    <div className="bg-black/50 backdrop-blur-sm rounded-lg px-3 py-2">
+                      <p className="text-white text-sm font-medium">{visionSlides[activeIndex].category}</p>
+                    </div>
+                    
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={goToPrevious}
+                        className="p-2 bg-black/50 backdrop-blur-sm rounded-lg text-white hover:bg-black/70 transition-all duration-300"
+                      >
+                        <ChevronLeft size={16} />
+                      </button>
+                      <button
+                        onClick={goToNext}
+                        className="p-2 bg-black/50 backdrop-blur-sm rounded-lg text-white hover:bg-black/70 transition-all duration-300"
+                      >
+                        <ChevronRight size={16} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Section */}
+              <div className={`space-y-8 ${isExpanded ? 'order-1 lg:order-2 flex flex-col justify-center' : 'lg:col-span-2'}`}>
+                {visionSlides.map((slide, index) => (
+                  <div
+                    key={slide.id}
                     className={`transition-all duration-700 ${
                       index === activeIndex ? 'opacity-100 transform translate-x-0' : 'opacity-0 transform translate-x-8 absolute'
                     }`}
                   >
-                    <div className="flex mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} size={20} className="text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    <blockquote className="text-xl md:text-2xl font-medium text-foreground leading-relaxed mb-8">
-                      "{testimonial.text}"
-                    </blockquote>
-                    <div className="flex items-center space-x-4">
-                      <div className="w-16 h-16 rounded-full overflow-hidden border-3 border-white/20 shadow-lg">
-                        <img 
-                          src={testimonial.image} 
-                          alt={testimonial.author}
-                          className="w-full h-full object-cover"
-                        />
+                    <div className="space-y-6">
+                      <div className="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-reform-cyan/20 to-reform-purple/20 text-sm font-medium text-foreground border border-white/20">
+                        {slide.category}
                       </div>
-                      <div>
-                        <div className="font-semibold text-lg text-foreground">{testimonial.author}</div>
-                        <div className="text-sm text-foreground/70">{testimonial.role}</div>
+                      
+                      <h3 className={`font-bold text-foreground leading-tight ${isExpanded ? 'text-3xl' : 'text-xl md:text-2xl'}`}>
+                        {slide.title}
+                      </h3>
+                      
+                      <p className={`text-foreground/80 leading-relaxed ${isExpanded ? 'text-lg' : 'text-base'}`}>
+                        {slide.description}
+                      </p>
+                      
+                      <div className="flex items-center space-x-3 text-reform-cyan hover:text-reform-purple transition-colors duration-300 cursor-pointer">
+                        <span className="font-medium">
+                          {language === 'de' ? 'Mehr erfahren' : 'Learn more'}
+                        </span>
+                        <ArrowRight size={16} />
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Carousel Navigation */}
+            <div className="flex justify-center items-center space-x-6 mt-8">
+              <button
+                onClick={goToPrevious}
+                className="p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 text-foreground transition-all duration-300 backdrop-blur-sm hover:scale-110"
+              >
+                <ChevronLeft size={20} />
+              </button>
               
-              {/* Large User Image */}
-              <div className="flex flex-col items-center space-y-8">
-                <div className="relative">
-                  <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
-                    {testimonials.map((testimonial, index) => (
-                      <img 
-                        key={testimonial.id}
-                        src={testimonial.image}
-                        alt={testimonial.author}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-                          index === activeIndex ? 'opacity-100' : 'opacity-0'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <div className="absolute -inset-4 bg-gradient-to-r from-reform-cyan via-reform-purple to-reform-pink rounded-full opacity-20 animate-pulse"></div>
-                </div>
-                
-                {/* Navigation Controls */}
-                <div className="flex items-center space-x-4">
-                  <button 
-                    className="p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 text-foreground transition-all duration-300 backdrop-blur-sm"
-                    onClick={goToPrevious}
-                  >
-                    <ChevronLeft size={20} />
-                  </button>
-                  
-                  <div className="flex space-x-2">
-                    {testimonials.map((_, index) => (
-                      <button
-                        key={index}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                          index === activeIndex 
-                            ? 'bg-reform-cyan shadow-lg shadow-reform-cyan/50' 
-                            : 'bg-white/30 hover:bg-white/50'
-                        }`}
-                        onClick={() => goToIndex(index)}
-                      />
-                    ))}
-                  </div>
-                  
-                  <button 
-                    className="p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 text-foreground transition-all duration-300 backdrop-blur-sm"
-                    onClick={goToNext}
-                  >
-                    <ChevronRight size={20} />
-                  </button>
-                </div>
+              <div className="flex space-x-2">
+                {visionSlides.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`transition-all duration-300 rounded-full ${
+                      index === activeIndex 
+                        ? 'w-8 h-3 bg-gradient-to-r from-reform-cyan to-reform-purple shadow-lg' 
+                        : 'w-3 h-3 bg-white/30 hover:bg-white/50'
+                    }`}
+                    onClick={() => goToIndex(index)}
+                  />
+                ))}
               </div>
+              
+              <button
+                onClick={goToNext}
+                className="p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 text-foreground transition-all duration-300 backdrop-blur-sm hover:scale-110"
+              >
+                <ChevronRight size={20} />
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl p-8 rounded-2xl text-center border border-white/20 shadow-lg">
-            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-reform-blue to-reform-cyan bg-clip-text text-transparent mb-3">25+</div>
-            <p className="text-foreground/80 font-medium">{language === 'de' ? 'Workshops' : 'Workshops'}</p>
+        {/* Vision Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16">
+          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl p-6 rounded-2xl text-center border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-reform-blue to-reform-cyan bg-clip-text text-transparent mb-2">2024</div>
+            <p className="text-foreground/80 font-medium">{language === 'de' ? 'Projektstart' : 'Project Launch'}</p>
           </div>
-          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl p-8 rounded-2xl text-center border border-white/20 shadow-lg">
-            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-reform-purple to-reform-pink bg-clip-text text-transparent mb-3">300+</div>
-            <p className="text-foreground/80 font-medium">{language === 'de' ? 'Teilnehmer' : 'Participants'}</p>
+          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl p-6 rounded-2xl text-center border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-reform-purple to-reform-pink bg-clip-text text-transparent mb-2">100+</div>
+            <p className="text-foreground/80 font-medium">{language === 'de' ? 'Community' : 'Community'}</p>
           </div>
-          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl p-8 rounded-2xl text-center border border-white/20 shadow-lg">
-            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-reform-pink to-reform-orange bg-clip-text text-transparent mb-3">15+</div>
-            <p className="text-foreground/80 font-medium">{language === 'de' ? 'Digitale Projekte' : 'Digital Projects'}</p>
+          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl p-6 rounded-2xl text-center border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-reform-pink to-reform-orange bg-clip-text text-transparent mb-2">24/7</div>
+            <p className="text-foreground/80 font-medium">{language === 'de' ? 'Zugang' : 'Access'}</p>
+          </div>
+          <div className="bg-white/10 dark:bg-white/5 backdrop-blur-xl p-6 rounded-2xl text-center border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-reform-cyan to-reform-blue bg-clip-text text-transparent mb-2">∞</div>
+            <p className="text-foreground/80 font-medium">{language === 'de' ? 'Möglichkeiten' : 'Possibilities'}</p>
           </div>
         </div>
       </div>

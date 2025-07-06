@@ -5,7 +5,7 @@ export const translations = {
       about: 'Über uns',
       features: 'Angebote',
       events: 'Veranstaltungen',
-      testimonials: 'Stimmen',
+      vision: 'Vision',
       faq: 'FAQ',
       contact: 'Kontakt'
     },
@@ -44,8 +44,8 @@ export const translations = {
       location: 'Ort: Re:Form Hub - Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg',
       cta: 'Jetzt anmelden'
     },
-    testimonials: {
-      title: 'Stimmen & Wirkung',
+    vision: {
+      title: 'Unsere Vision',
       quote: 'Re:Form Hub verändert, wie wir Stadtentwicklung & Innovation denken.'
     },
     faq: {
@@ -89,7 +89,7 @@ export const translations = {
       about: 'About',
       features: 'Features',
       events: 'Events',
-      testimonials: 'Testimonials',
+      vision: 'Vision',
       faq: 'FAQ',
       contact: 'Contact'
     },
@@ -128,8 +128,8 @@ export const translations = {
       location: 'Location: Re:Form Hub - Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg',
       cta: 'Sign up now'
     },
-    testimonials: {
-      title: 'Testimonials & Impact',
+    vision: {
+      title: 'Our Vision',
       quote: 'Re:Form Hub is changing how we think about urban development & innovation.'
     },
     faq: {
