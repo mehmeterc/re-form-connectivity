@@ -122,13 +122,19 @@ const EventCalendar = () => {
     <section
       id="events"
       ref={sectionRef}
-      className="section-transition py-24 relative"
+      className="section-transition py-24 relative bg-white/[0.02]"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-blue/10"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-pink/10"></div>
       
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">{t('events.title')}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <span className="text-gradient heading-glow">{t('events.title')}</span>
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-reform-cyan to-reform-purple mx-auto rounded-full mb-6"></div>
+          <p className="text-lg text-foreground/80 max-w-3xl mx-auto">
+            {t('events.location')}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

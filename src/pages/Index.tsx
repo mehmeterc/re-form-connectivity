@@ -1,8 +1,10 @@
+
 import React, { useEffect } from 'react';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
+import Partners from '@/components/Partners';
 import Features from '@/components/Features';
 import EventCalendar from '@/components/EventCalendar';
 import Testimonials from '@/components/Testimonials';
@@ -40,6 +42,7 @@ const Index = () => {
         <Header />
         <Hero />
         <About />
+        <Partners />
         <Features />
         <EventCalendar />
         <Testimonials />
