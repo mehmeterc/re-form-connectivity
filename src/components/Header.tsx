@@ -23,7 +23,7 @@ const Header = () => {
     { href: '#about', label: t('nav.about') },
     { href: '#features', label: t('nav.features') },
     { href: '#events', label: t('nav.events') },
-    { href: '#testimonials', label: t('nav.testimonials') },
+    { href: '#vision', label: t('nav.vision') },
     { href: '#faq', label: t('nav.faq') },
     { href: '#contact', label: t('nav.contact') },
   ];
@@ -69,8 +69,8 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`absolute top-full left-0 right-0 glassmorphism shadow-md transition-all duration-300 ease-expo-out ${
-          isMenuOpen ? 'max-h-screen py-4' : 'max-h-0 py-0 overflow-hidden'
+        className={`absolute top-full left-0 right-0 bg-background/95 dark:bg-background/95 backdrop-blur-md shadow-lg border-t border-border/50 transition-all duration-300 ease-expo-out ${
+          isMenuOpen ? 'max-h-screen py-4 opacity-100' : 'max-h-0 py-0 overflow-hidden opacity-0'
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6 flex flex-col space-y-4">

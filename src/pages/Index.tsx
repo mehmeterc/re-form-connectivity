@@ -4,10 +4,10 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
+import Vision from '@/components/Vision';
 import Partners from '@/components/Partners';
 import Features from '@/components/Features';
 import EventCalendar from '@/components/EventCalendar';
-import Vision from '@/components/Vision';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -42,10 +42,10 @@ const Index = () => {
         <Header />
         <Hero />
         <About />
+        <Vision />
         <Partners />
         <Features />
         <EventCalendar />
-        <Vision />
         <FAQ />
         <Contact />
         <Footer />

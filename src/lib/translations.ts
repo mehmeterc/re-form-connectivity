@@ -30,6 +30,10 @@ export const translations = {
         description: 'KI, VR und interaktive Kunstprojekte'
       }
     },
+    partners: {
+      title: 'Partner',
+      subtitle: 'Diese Institutionen unterstützen Re:Form Hub ideell und/oder finanziell'
+    },
     features: {
       title: 'Was erwartet dich im Re:Form Hub?',
       subtitle: 'Offene Werkstatt, inspirierender Austausch und digitale Zukunftsprojekte – alles an einem Ort!',
@@ -49,14 +53,14 @@ export const translations = {
       quote: 'Re:Form Hub verändert, wie wir Stadtentwicklung & Innovation denken.',
       community: {
         title: 'Gemeinschaft',
-        description: 'Über 500+ Kreative, Entwickler und Innovatoren sind bereits Teil unserer wachsenden Community.',
+        description: 'Über 250+ Kreative, Entwickler und Innovatoren sind bereits Teil unserer wachsenden Community.',
         stats: {
-          members: '500+',
+          members: '250+',
           membersLabel: 'Community Mitglieder',
-          projects: '50+',
-          projectsLabel: 'Laufende Projekte',
-          events: '100+',
-          eventsLabel: 'Veranstaltungen geplant',
+          projects: '15+',
+          projectsLabel: 'Aktive Projekte',
+          events: '50+',
+          eventsLabel: 'Geplante Events',
           partnerships: '15+',
           partnershipsLabel: 'Partnerschaften'
         }
@@ -150,6 +154,10 @@ export const translations = {
         description: 'AI, VR and interactive art projects'
       }
     },
+    partners: {
+      title: 'Partners',
+      subtitle: 'These institutions support Re:Form Hub ideally and/or financially'
+    },
     features: {
       title: 'What can you expect at Re:Form Hub?',
       subtitle: 'Open workshop, inspiring exchange, and digital future projects – all in one place!',
@@ -169,13 +177,13 @@ export const translations = {
       quote: 'Re:Form Hub is changing how we think about urban development & innovation.',
       community: {
         title: 'Community',
-        description: 'Over 500+ creatives, developers and innovators are already part of our growing community.',
+        description: 'Over 250+ creatives, developers and innovators are already part of our growing community.',
         stats: {
-          members: '500+',
+          members: '250+',
           membersLabel: 'Community Members',
-          projects: '50+',
+          projects: '15+',
           projectsLabel: 'Active Projects',
-          events: '100+',
+          events: '50+',
           eventsLabel: 'Events Planned',
           partnerships: '15+',
           partnershipsLabel: 'Partnerships'
