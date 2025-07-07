@@ -1,15 +1,18 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Mail, Instagram, Linkedin, Send, MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
+import { useNewsletterSubscription } from '@/hooks/useNewsletterSubscription';
+import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
   const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { subscribe, isLoading } = useNewsletterSubscription();
+  const { toast } = useToast();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,20 +35,48 @@ const Contact = () => {
     };
   }, []);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (emailRef.current?.value) {
-      toast.success(
-        language === 'de' 
-          ? 'Newsletter-Anmeldung erfolgreich!' 
-          : 'Newsletter subscription successful!',
-        {
-          description: language === 'de'
-            ? 'Vielen Dank für deine Anmeldung.'
-            : 'Thank you for subscribing.'
-        }
-      );
-      if (emailRef.current) emailRef.current.value = '';
+    
+    if (!emailRef.current?.value) {
+      toast({
+        title: language === 'de' ? 'Fehler' : 'Error',
+        description: language === 'de' 
+          ? 'Bitte geben Sie eine E-Mail-Adresse ein.' 
+          : 'Please enter an email address.',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const result = await subscribe(emailRef.current.value, language, 'contact_form');
+      
+      if (result.success) {
+        toast({
+          title: language === 'de' ? 'Erfolgreich!' : 'Success!',
+          description: result.message,
+        });
+        if (emailRef.current) emailRef.current.value = '';
+      } else {
+        toast({
+          title: language === 'de' ? 'Fehler' : 'Error',
+          description: result.message,
+          variant: 'destructive'
+        });
+      }
+    } catch (error) {
+      toast({
+        title: language === 'de' ? 'Fehler' : 'Error',
+        description: language === 'de' 
+          ? 'Ein unerwarteter Fehler ist aufgetreten.' 
+          : 'An unexpected error occurred.',
+        variant: 'destructive'
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -111,17 +142,19 @@ const Contact = () => {
 
             <div>
               <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.newsletter.title')}</h3>
-              <form onSubmit={handleSubscribe} className="flex">
+              <form onSubmit={handleSubscribe} className="flex gap-2">
                 <Input
                   ref={emailRef}
                   type="email"
                   placeholder={t('contact.newsletter.placeholder')}
                   className="flex-grow bg-secondary/50 border-input text-foreground"
                   required
+                  disabled={isSubmitting || isLoading}
                 />
                 <button 
                   type="submit" 
-                  className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
+                  disabled={isSubmitting || isLoading}
+                  className="p-3 rounded-full bg-gradient-to-r from-reform-teal to-reform-cyan text-white hover:from-reform-cyan hover:to-reform-teal transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="h-4 w-4" />
                 </button>
