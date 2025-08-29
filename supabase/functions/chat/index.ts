@@ -24,7 +24,8 @@ WLAN, kreative Arbeitsplätze, Co-Working Space, moderne Infrastruktur für Star
 Wo befindet sich der Re:Form Hub genau?
 Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg.
 
-Weitere Informationen:
+Website und weitere Informationen:
+- Website: www.reformhub.de
 - Kontakt für Partnerships und mehr Infos über die Website
 
 Beliebte Fragen:
@@ -49,7 +50,8 @@ Wi-Fi, creative workspaces, co-working space, modern infrastructure for startups
 Where exactly is Re:Form Hub located?
 Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg.
 
-Additional Information:
+Website and Additional Information:
+- Website: www.reformhub.de
 - Contact for partnerships and more info through the website
 
 Popular Questions:
