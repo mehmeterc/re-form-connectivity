@@ -31,8 +31,16 @@ export const translations = {
       }
     },
     partners: {
-      title: 'Partner',
-      subtitle: 'Diese Institutionen unterstützen Re:Form Hub ideell und/oder finanziell'
+      title: 'Partner werden',
+      subtitle: 'Gestalte die Zukunft Wittenbergs mit – werde Teil der Re:Form Hub Vision!',
+      cta: 'Kontakt aufnehmen',
+      types: {
+        title: 'Partnerschaftsformen',
+        financial: 'Finanzielle Unterstützung',
+        expertise: 'Fachliche Expertise',
+        space: 'Raum & Infrastruktur',
+        network: 'Netzwerk & Reichweite'
+      }
     },
     features: {
       title: 'Was erwartet dich im Re:Form Hub?',
@@ -155,8 +163,16 @@ export const translations = {
       }
     },
     partners: {
-      title: 'Partners',
-      subtitle: 'These institutions support Re:Form Hub ideally and/or financially'
+      title: 'Become a Partner',
+      subtitle: 'Shape Wittenberg\'s future together – join the Re:Form Hub vision!',
+      cta: 'Get in touch',
+      types: {
+        title: 'Partnership Types',
+        financial: 'Financial Support',
+        expertise: 'Professional Expertise',
+        space: 'Space & Infrastructure',
+        network: 'Network & Outreach'
+      }
     },
     features: {
       title: 'What can you expect at Re:Form Hub?',
