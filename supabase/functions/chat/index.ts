@@ -86,7 +86,7 @@ serve(async (req) => {
       if (lowerMessage.includes('where') && (lowerMessage.includes('located') || lowerMessage.includes('address') || lowerMessage.includes('location'))) {
         return 'Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg.';
       }
-      if (lowerMessage.includes('founder') || lowerMessage.includes('initiator'))) {
+      if (lowerMessage.includes('founder') || lowerMessage.includes('initiator')) {
         return 'Mehmet and Elif Ercan.';
       }
       return 'Sorry, our AI assistants are currently busy. Please try again later or contact us via www.reformhub.de for more information.';
