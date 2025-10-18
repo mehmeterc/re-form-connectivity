@@ -70,50 +70,56 @@ serve(async (req) => {
       throw new Error("Ungültiges Nachrichtenformat.");
     }
 
-    const apiKey = Deno.env.get("GEMINI_API_KEY");
-    if (!apiKey) {
-      throw new Error("Gemini API-Schlüssel fehlt.");
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    if (!LOVABLE_API_KEY) {
+      throw new Error("LOVABLE_API_KEY ist nicht konfiguriert.");
     }
 
     // Select system prompt based on language
     const systemPrompt = lang === 'en' ? SYSTEM_PROMPT_EN : SYSTEM_PROMPT_DE;
 
-    const requestBody = {
-      contents: [
-        {
-          parts: [{ text: `${systemPrompt}\n\n${messages.map(m => m.content).join("\n")}` }],
-        },
-      ],
-      generationConfig: {
-        temperature: 0.7,
-        maxOutputTokens: 1024,
-        topP: 0.95,
-        topK: 40,
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+        "Content-Type": "application/json",
       },
-    };
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [
+          { role: "system", content: systemPrompt },
+          ...messages
+        ],
+      }),
+    });
 
-    const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody),
+    if (!response.ok) {
+      if (response.status === 429) {
+        return new Response(JSON.stringify({ error: "Rate-Limit erreicht, bitte versuchen Sie es später erneut." }), {
+          status: 429,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
       }
-    );
-
-    if (!geminiResponse.ok) {
-      const errorData = await geminiResponse.json();
-      throw new Error(errorData.error?.message || "Gemini API Fehler.");
+      if (response.status === 402) {
+        return new Response(JSON.stringify({ error: "Zahlungspflicht, bitte fügen Sie Guthaben zu Ihrem Lovable AI Workspace hinzu." }), {
+          status: 402,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      const errorText = await response.text();
+      console.error("AI Gateway-Fehler:", response.status, errorText);
+      throw new Error("AI Gateway-Fehler");
     }
 
-    const data = await geminiResponse.json();
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Keine Antwort erhalten.";
+    const data = await response.json();
+    const reply = data.choices?.[0]?.message?.content || "Keine Antwort erhalten.";
 
     return new Response(JSON.stringify({ message: reply }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
 
   } catch (error) {
+    console.error("Chat-Fehler:", error);
     return new Response(JSON.stringify({ error: error.message || "Verarbeitung der Anfrage fehlgeschlagen." }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
