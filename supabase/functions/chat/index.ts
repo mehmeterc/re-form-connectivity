@@ -64,6 +64,35 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Fallback responses for when AI is unavailable
+  const getFallbackResponse = (userMessage: string, lang: string): string => {
+    const lowerMessage = userMessage.toLowerCase();
+    
+    if (lang === 'de') {
+      if (lowerMessage.includes('was ist') && lowerMessage.includes('reform hub')) {
+        return 'Ein innovativer Startup-Hub in Wittenberg, wo junge Menschen mit Ideen zusammenkommen, um zu networken, Infrastruktur zu nutzen und gemeinsam an zukunftsweisenden Projekten zu arbeiten.';
+      }
+      if (lowerMessage.includes('wo') && (lowerMessage.includes('befindet') || lowerMessage.includes('adresse') || lowerMessage.includes('standort'))) {
+        return 'Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg.';
+      }
+      if (lowerMessage.includes('gründer') || lowerMessage.includes('initiatoren')) {
+        return 'Mehmet und Elif Ercan.';
+      }
+      return 'Entschuldigung, unsere KI-Assistenten sind gerade beschäftigt. Bitte versuchen Sie es später noch einmal oder kontaktieren Sie uns über www.reformhub.de für weitere Informationen.';
+    } else {
+      if (lowerMessage.includes('what is') && lowerMessage.includes('reform hub')) {
+        return 'An innovative startup hub in Wittenberg where young people with ideas come together to network, access infrastructure, and collaborate on forward-thinking projects.';
+      }
+      if (lowerMessage.includes('where') && (lowerMessage.includes('located') || lowerMessage.includes('address') || lowerMessage.includes('location'))) {
+        return 'Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg.';
+      }
+      if (lowerMessage.includes('founder') || lowerMessage.includes('initiator'))) {
+        return 'Mehmet and Elif Ercan.';
+      }
+      return 'Sorry, our AI assistants are currently busy. Please try again later or contact us via www.reformhub.de for more information.';
+    }
+  };
+
   try {
     const { messages, lang = 'de' } = await req.json();
     if (!messages || !Array.isArray(messages)) {
@@ -71,52 +100,59 @@ serve(async (req) => {
     }
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    
+    // If no API key, use fallback
     if (!LOVABLE_API_KEY) {
-      throw new Error("LOVABLE_API_KEY ist nicht konfiguriert.");
+      const lastMessage = messages[messages.length - 1]?.content || '';
+      const fallbackReply = getFallbackResponse(lastMessage, lang);
+      return new Response(JSON.stringify({ message: fallbackReply }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
     // Select system prompt based on language
     const systemPrompt = lang === 'en' ? SYSTEM_PROMPT_EN : SYSTEM_PROMPT_DE;
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${LOVABLE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
-        messages: [
-          { role: "system", content: systemPrompt },
-          ...messages
-        ],
-      }),
-    });
+    try {
+      const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${LOVABLE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "google/gemini-2.5-flash",
+          messages: [
+            { role: "system", content: systemPrompt },
+            ...messages
+          ],
+        }),
+      });
 
-    if (!response.ok) {
-      if (response.status === 429) {
-        return new Response(JSON.stringify({ error: "Rate-Limit erreicht, bitte versuchen Sie es später erneut." }), {
-          status: 429,
+      if (!response.ok) {
+        // Use fallback for AI errors
+        const lastMessage = messages[messages.length - 1]?.content || '';
+        const fallbackReply = getFallbackResponse(lastMessage, lang);
+        return new Response(JSON.stringify({ message: fallbackReply }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      if (response.status === 402) {
-        return new Response(JSON.stringify({ error: "Zahlungspflicht, bitte fügen Sie Guthaben zu Ihrem Lovable AI Workspace hinzu." }), {
-          status: 402,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
-      const errorText = await response.text();
-      console.error("AI Gateway-Fehler:", response.status, errorText);
-      throw new Error("AI Gateway-Fehler");
+
+      const data = await response.json();
+      const reply = data.choices?.[0]?.message?.content || "Keine Antwort erhalten.";
+
+      return new Response(JSON.stringify({ message: reply }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    } catch (aiError) {
+      // Fallback on AI fetch errors
+      console.error("AI Gateway-Fehler:", aiError);
+      const lastMessage = messages[messages.length - 1]?.content || '';
+      const fallbackReply = getFallbackResponse(lastMessage, lang);
+      return new Response(JSON.stringify({ message: fallbackReply }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
-
-    const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content || "Keine Antwort erhalten.";
-
-    return new Response(JSON.stringify({ message: reply }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
 
   } catch (error) {
     console.error("Chat-Fehler:", error);
