@@ -86,16 +86,27 @@ const Header = () => {
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6 flex flex-col space-y-4">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-base font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan py-2 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            'to' in link ? (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-base font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan py-2 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-base font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan py-2 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </div>
       </div>
     </header>
