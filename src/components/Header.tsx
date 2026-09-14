@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageToggle from './LanguageToggle';
 import ThemeToggle from './ThemeToggle';
@@ -26,6 +27,7 @@ const Header = () => {
     { href: '#vision', label: t('nav.vision') },
     { href: '#faq', label: t('nav.faq') },
     { href: '#contact', label: t('nav.contact') },
+    { to: '/portfolio', label: t('nav.portfolio') },
   ];
 
   return (
@@ -43,15 +45,25 @@ const Header = () => {
 
         {/* Desktop navigation hidden on mobile */}
         <nav className="hidden md:hidden items-center space-x-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan transition-colors relative after:absolute after:w-full after:h-0.5 after:bg-reform-teal dark:after:bg-reform-cyan after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:origin-right hover:after:origin-left after:transition-transform after:duration-300"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            'to' in link ? (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-sm font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan transition-colors relative after:absolute after:w-full after:h-0.5 after:bg-reform-teal dark:after:bg-reform-cyan after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:origin-right hover:after:origin-left after:transition-transform after:duration-300"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan transition-colors relative after:absolute after:w-full after:h-0.5 after:bg-reform-teal dark:after:bg-reform-cyan after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:origin-right hover:after:origin-left after:transition-transform after:duration-300"
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </nav>
 
         <div className="flex items-center space-x-3">
@@ -74,16 +86,27 @@ const Header = () => {
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6 flex flex-col space-y-4">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-base font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan py-2 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            'to' in link ? (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-base font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan py-2 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-base font-medium text-foreground/80 hover:text-reform-teal dark:hover:text-reform-cyan py-2 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </div>
       </div>
     </header>
