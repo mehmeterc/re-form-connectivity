@@ -7,7 +7,8 @@ export const translations = {
       events: 'Veranstaltungen',
       vision: 'Vision',
       faq: 'FAQ',
-      contact: 'Kontakt'
+      contact: 'Kontakt',
+      portfolio: 'Portfolio'
     },
     hero: {
       title: 'Re:Form Hub – Wo Vergangenheit und Zukunft aufeinandertreffen.',
@@ -139,7 +140,8 @@ export const translations = {
       events: 'Events',
       vision: 'Vision',
       faq: 'FAQ',
-      contact: 'Contact'
+      contact: 'Contact',
+      portfolio: 'Portfolio'
     },
     hero: {
       title: 'Re:Form Hub – Where Past and Future Connect.',
