@@ -133,6 +133,7 @@ const Portfolio = () => {
         </div>
       </footer>
     </div>
+    </LanguageProvider>
   );
 };
 
