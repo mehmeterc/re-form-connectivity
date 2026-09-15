@@ -8,6 +8,7 @@ import { Menu, X } from 'lucide-react';
 
 const Header = () => {
   const { t } = useLanguage();
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
