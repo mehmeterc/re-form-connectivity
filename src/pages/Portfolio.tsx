@@ -32,19 +32,9 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
-      {/* Minimal top bar */}
-      <div className="border-b border-border/50">
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 py-5 flex items-center justify-between">
-          <Link to="/" className="reformed-logo text-2xl sm:text-3xl hover:opacity-90 transition-opacity">
-            Re:Form Hub
-          </Link>
-          <span className="text-xs sm:text-sm font-medium tracking-widest uppercase text-foreground/50">
-            Portfolio
-          </span>
-        </div>
-      </div>
+      <Header />
 
-      <main className="container max-w-4xl mx-auto px-4 sm:px-6 py-16 md:py-24">
+      <main className="container max-w-4xl mx-auto px-4 sm:px-6 pt-32 pb-16 md:pt-40 md:pb-24">
         {/* Page header */}
         <div className="mb-16 md:mb-20 text-center">
           <p className="text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-reform-cyan mb-4">
@@ -60,7 +50,7 @@ const Portfolio = () => {
           {works.map((work) => (
             <article
               key={work.id}
-              className="glow-card glassmorphism rounded-2xl p-5 sm:p-8 md:p-10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-reform-cyan/10"
+              className="glassmorphism rounded-2xl p-5 sm:p-8 md:p-10 transition-shadow duration-300 hover:shadow-xl hover:shadow-reform-cyan/10"
             >
               <div className="mb-6">
                 <p className="text-xs sm:text-sm font-medium tracking-widest uppercase text-reform-cyan/80 mb-2">
