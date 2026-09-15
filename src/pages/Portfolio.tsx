@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { Linkedin, Instagram } from 'lucide-react';
+import Header from '@/components/Header';
 
 const works = [
   {
