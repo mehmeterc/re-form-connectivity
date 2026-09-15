@@ -61,7 +61,7 @@ const Portfolio = () => {
                 </h2>
               </div>
 
-              <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 dark:border-reform-cyan/20 shadow-lg group">
+              <div className="relative z-10 w-full aspect-video rounded-xl overflow-hidden border border-white/10 dark:border-reform-cyan/20 shadow-lg select-none">
                 <iframe
                   src={work.embedUrl}
                   title={work.title}
