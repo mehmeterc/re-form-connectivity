@@ -42,9 +42,9 @@ const Header = () => {
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <div className="flex items-center">
-          <a href="#" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <h1 className="reformed-logo text-2xl sm:text-3xl">Re:Form Hub</h1>
-          </a>
+          </Link>
         </div>
 
         {/* Desktop navigation hidden on mobile */}
