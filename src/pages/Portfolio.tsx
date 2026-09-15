@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { Linkedin, Instagram } from 'lucide-react';
 import Header from '@/components/Header';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const works = [
   {
