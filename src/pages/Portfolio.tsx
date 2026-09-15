@@ -32,6 +32,7 @@ const Portfolio = () => {
   }, []);
 
   return (
+    <LanguageProvider>
     <div className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
       <Header />
 
