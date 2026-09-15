@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageToggle from './LanguageToggle';
 import ThemeToggle from './ThemeToggle';
@@ -8,6 +8,7 @@ import { Menu, X } from 'lucide-react';
 
 const Header = () => {
   const { t } = useLanguage();
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -20,13 +21,16 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isHome = location.pathname === '/';
+  const sectionHref = (hash: string) => (isHome ? hash : `/${hash}`);
+
   const navLinks = [
-    { href: '#about', label: t('nav.about') },
-    { href: '#features', label: t('nav.features') },
-    { href: '#events', label: t('nav.events') },
-    { href: '#vision', label: t('nav.vision') },
-    { href: '#faq', label: t('nav.faq') },
-    { href: '#contact', label: t('nav.contact') },
+    { href: sectionHref('#about'), label: t('nav.about') },
+    { href: sectionHref('#features'), label: t('nav.features') },
+    { href: sectionHref('#events'), label: t('nav.events') },
+    { href: sectionHref('#vision'), label: t('nav.vision') },
+    { href: sectionHref('#faq'), label: t('nav.faq') },
+    { href: sectionHref('#contact'), label: t('nav.contact') },
     { to: '/portfolio', label: t('nav.portfolio') },
   ];
 
@@ -38,9 +42,9 @@ const Header = () => {
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <div className="flex items-center">
-          <a href="#" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <h1 className="reformed-logo text-2xl sm:text-3xl">Re:Form Hub</h1>
-          </a>
+          </Link>
         </div>
 
         {/* Desktop navigation hidden on mobile */}
