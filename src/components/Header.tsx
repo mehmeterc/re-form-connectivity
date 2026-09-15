@@ -20,13 +20,16 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isHome = location.pathname === '/';
+  const sectionHref = (hash: string) => (isHome ? hash : `/${hash}`);
+
   const navLinks = [
-    { href: '#about', label: t('nav.about') },
-    { href: '#features', label: t('nav.features') },
-    { href: '#events', label: t('nav.events') },
-    { href: '#vision', label: t('nav.vision') },
-    { href: '#faq', label: t('nav.faq') },
-    { href: '#contact', label: t('nav.contact') },
+    { href: sectionHref('#about'), label: t('nav.about') },
+    { href: sectionHref('#features'), label: t('nav.features') },
+    { href: sectionHref('#events'), label: t('nav.events') },
+    { href: sectionHref('#vision'), label: t('nav.vision') },
+    { href: sectionHref('#faq'), label: t('nav.faq') },
+    { href: sectionHref('#contact'), label: t('nav.contact') },
     { to: '/portfolio', label: t('nav.portfolio') },
   ];
 
