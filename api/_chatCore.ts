@@ -1,96 +1,140 @@
 // Shared chat logic used by the Vercel serverless function and the Vite dev middleware.
 // The Gemini API key is read from the server environment only and never reaches the browser.
 
-const SYSTEM_PROMPT_DE = `Du bist ein hilfreicher Assistent für den Re:Form Hub Wittenberg. Antworte kurz, direkt aber mit links wenn nötig, und locker auf Augenhöhe mit jungen Entrepreneurs. Hauptsprache Deutsch.
+const SYSTEM_PROMPT_DE = `Du bist der digitale Assistent von Re:Form Hub.
 
-Was ist der Re:Form Hub?
-Ein innovativer Startup-Hub in Wittenberg, wo junge Menschen mit Ideen zusammenkommen, um zu networken, Infrastruktur zu nutzen und gemeinsam an zukunftsweisenden Projekten zu arbeiten.
+Antworte in der Sprache der jeweiligen Frage. Antworte kurz, klar und freundlich. Nutze Links nur, wenn sie hilfreich sind. Erfinde keine Projekte, Termine, Kooperationen, Öffnungszeiten oder Angebote. Wenn dir eine konkrete Information fehlt, verweise auf https://www.reformhub.de.
 
-Wer sind die Gründer des Re:Form Hubs?
-Mehmet und Elif Ercan.
+Über Re:Form Hub:
+Re:Form Hub ist eine unabhängige Bildungs- und Kreativinitiative an der Schnittstelle von künstlicher Intelligenz, Film, digitalen Medien und kreativer Technologie. Die Initiative arbeitet zwischen Berlin und Lutherstadt Wittenberg.
 
-Was bietet der Re:Form Hub?
-Co-Working Space, Networking-Events, Workshops und Veranstaltungen von August bis Oktober 2025. Zugang zu modernster Technik wie VR, 360°-Kameras und KI-Werkzeugen für innovative Projekte.
+Re:Form Hub entwickelt Workshops, Lernformate und kreative Projekte rund um:
+- künstliche Intelligenz und ihre praktische Anwendung
+- KI-gestützte Film- und Videoproduktion
+- digitale Medien und Medienkompetenz
+- kreative Technologien und neue Produktionsmethoden
 
-Ausstattung?
-WLAN, kreative Arbeitsplätze, Co-Working Space, moderne Infrastruktur für Startups und junge Unternehmer.
+Die Angebote richten sich je nach Projekt an junge Menschen, Lehrkräfte, zivilgesellschaftliche Akteur:innen, Kreative und weitere interessierte Gruppen.
 
-Wo befindet sich der Re:Form Hub genau?
-Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg.
+Wer sind die Initiator:innen?
+Re:Form Hub wurde von Mehmet Ercan und Elif Ercan initiiert.
 
-Website und weitere Informationen:
-- Website: www.reformhub.de
-- Kontakt für Partnerships und mehr Infos über die Website
+Wo befindet sich Re:Form Hub?
+Der Projektstandort in Lutherstadt Wittenberg befindet sich in der Straße der Befreiung 139, 06886 Lutherstadt Wittenberg. Re:Form Hub arbeitet zugleich von Berlin aus.
 
-Beliebte Fragen:
-1. Was ist der Re:Form Hub?
-2. Wo befindet sich der Re:Form Hub?
-3. Wer sind die Initiatoren des Re:Form Hubs?`;
+Kontakt und aktuelle Informationen:
+https://www.reformhub.de`;
 
-const SYSTEM_PROMPT_EN = `You are a helpful assistant for Re:Form Hub Wittenberg. Respond concisely and directly, with links when needed, and maintain a casual tone suitable for young entrepreneurs. Main language English.
+const SYSTEM_PROMPT_EN = `You are the digital assistant for Re:Form Hub.
 
-What is Re:Form Hub?
-An innovative startup hub in Wittenberg where young people with ideas come together to network, access infrastructure, and collaborate on forward-thinking projects.
+Answer in the language of the question. Keep answers concise, clear and friendly. Only include links when useful. Do not invent projects, dates, partnerships, opening hours or services. If specific information is unavailable, direct the user to https://www.reformhub.de.
 
-Who founded Re:Form Hub?
-Mehmet and Elif Ercan.
+About Re:Form Hub:
+Re:Form Hub is an independent education and creative initiative working at the intersection of artificial intelligence, film, digital media and creative technology. The initiative operates between Berlin and Lutherstadt Wittenberg.
 
-What does Re:Form Hub offer?
-Co-working space, networking events, workshops and events from August to October 2025. Access to cutting-edge technology like VR, 360° cameras, and AI tools for innovative projects.
+Re:Form Hub develops workshops, learning formats and creative projects related to:
+- artificial intelligence and its practical application
+- AI-assisted film and video production
+- digital media and media literacy
+- creative technologies and new production methods
 
-Equipment?
-Wi-Fi, creative workspaces, co-working space, modern infrastructure for startups and young entrepreneurs.
+Depending on the project, its activities are aimed at young people, educators, civil society actors, creatives and other interested groups.
 
-Where exactly is Re:Form Hub located?
-Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg.
+Who are the initiators?
+Re:Form Hub was initiated by Mehmet Ercan and Elif Ercan.
 
-Website and Additional Information:
-- Website: www.reformhub.de
-- Contact for partnerships and more info through the website
+Where is Re:Form Hub located?
+The project location in Lutherstadt Wittenberg is at Straße der Befreiung 139, 06886 Lutherstadt Wittenberg. Re:Form Hub also operates from Berlin.
 
-Popular Questions:
-1. What is Re:Form Hub?
-2. Where is Re:Form Hub located?
-3. Who are the initiators of Re:Form Hub?`;
+Contact and current information:
+https://www.reformhub.de`;
 
 export const MAX_MESSAGE_LENGTH = 500;
 const MAX_CONTEXT_MESSAGES = 6;
 
-export type ChatMessage = { role: 'user' | 'assistant'; content: string };
+export type ChatMessage = {
+  role: 'user' | 'assistant';
+  content: string;
+};
 
-export function getFallbackResponse(userMessage: string, lang: string): string {
-  const m = (userMessage || '').toLowerCase();
+export function getFallbackResponse(
+  userMessage: string,
+  lang: string
+): string {
+  const message = (userMessage || '').toLowerCase();
 
   if (lang === 'de') {
-    if (m.includes('wo ') || m.includes('wo?') || m.includes('adresse') || m.includes('standort') || m.includes('befindet')) {
-      return 'Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg. Mehr Infos: www.reformhub.de';
+    if (
+      message.includes('adresse') ||
+      message.includes('standort') ||
+      message.includes('wo befindet') ||
+      message.includes('wo ist')
+    ) {
+      return 'Der Projektstandort in Lutherstadt Wittenberg befindet sich in der Straße der Befreiung 139, 06886 Lutherstadt Wittenberg. Re:Form Hub arbeitet zugleich von Berlin aus. Mehr Informationen: https://www.reformhub.de';
     }
-    if (m.includes('gründer') || m.includes('grunder') || m.includes('initiator')) {
-      return 'Die Initiatoren sind Mehmet und Elif Ercan. Mehr Infos: www.reformhub.de';
+
+    if (
+      message.includes('gründer') ||
+      message.includes('grunder') ||
+      message.includes('initiator')
+    ) {
+      return 'Re:Form Hub wurde von Mehmet Ercan und Elif Ercan initiiert. Mehr Informationen: https://www.reformhub.de';
     }
-    if (m.includes('angebot') || m.includes('bietet') || m.includes('ausstattung') || m.includes('technik')) {
-      return 'Co-Working Space, Networking-Events, Workshops und Veranstaltungen von August bis Oktober 2025 – plus Zugang zu VR, 360°-Kameras und KI-Werkzeugen. Mehr Infos: www.reformhub.de';
+
+    if (
+      message.includes('angebot') ||
+      message.includes('bietet') ||
+      message.includes('workshop') ||
+      message.includes('themen') ||
+      message.includes('macht ihr')
+    ) {
+      return 'Re:Form Hub entwickelt Workshops, Lernformate und kreative Projekte rund um KI, Film, digitale Medien, Medienkompetenz und kreative Technologien. Mehr Informationen: https://www.reformhub.de';
     }
-    if (m.includes('was ist') || m.includes('re:form hub?') || m.includes('reform hub?')) {
-      return 'Der Re:Form Hub ist ein innovativer Startup-Hub in Wittenberg, wo junge Menschen mit Ideen zusammenkommen, um zu networken, Infrastruktur zu nutzen und gemeinsam an zukunftsweisenden Projekten zu arbeiten. Mehr Infos: www.reformhub.de';
+
+    if (
+      message.includes('was ist') ||
+      message.includes('re:form hub?') ||
+      message.includes('reform hub?')
+    ) {
+      return 'Re:Form Hub ist eine unabhängige Bildungs- und Kreativinitiative an der Schnittstelle von künstlicher Intelligenz, Film, digitalen Medien und kreativer Technologie. Die Initiative arbeitet zwischen Berlin und Lutherstadt Wittenberg. Mehr Informationen: https://www.reformhub.de';
     }
-    return 'Unsere Bots sind gerade ziemlich beschäftigt. Schau gern später nochmal vorbei oder finde alles Wichtige auf www.reformhub.de – wir freuen uns auf dich!';
+
+    return 'Der Chat ist momentan nicht verfügbar. Bitte versuche es später erneut oder besuche https://www.reformhub.de.';
   }
 
-  if (m.includes('where') || m.includes('address') || m.includes('location')) {
-    return 'Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg. More: www.reformhub.de';
+  if (
+    message.includes('where') ||
+    message.includes('address') ||
+    message.includes('location')
+  ) {
+    return 'The project location in Lutherstadt Wittenberg is at Straße der Befreiung 139, 06886 Lutherstadt Wittenberg. Re:Form Hub also operates from Berlin. More information: https://www.reformhub.de';
   }
-  if (m.includes('founder') || m.includes('initiator')) {
-    return 'The initiators are Mehmet and Elif Ercan. More: www.reformhub.de';
-  }
-  if (m.includes('offer') || m.includes('equipment') || m.includes('tech')) {
-    return 'Co-working space, networking events, workshops and events from August to October 2025 – plus access to VR, 360° cameras and AI tools. More: www.reformhub.de';
-  }
-  if (m.includes('what is') || m.includes('re:form hub?') || m.includes('reform hub?')) {
-    return 'Re:Form Hub is an innovative startup hub in Wittenberg where young people with ideas come together to network, access infrastructure and build forward-thinking projects. More: www.reformhub.de';
-  }
-  return 'Our bots are pretty busy right now. Please come back a bit later or find everything you need on www.reformhub.de – we would love to hear from you!';
 
+  if (
+    message.includes('founder') ||
+    message.includes('initiator')
+  ) {
+    return 'Re:Form Hub was initiated by Mehmet Ercan and Elif Ercan. More information: https://www.reformhub.de';
+  }
+
+  if (
+    message.includes('offer') ||
+    message.includes('workshop') ||
+    message.includes('topics') ||
+    message.includes('what do you do')
+  ) {
+    return 'Re:Form Hub develops workshops, learning formats and creative projects related to AI, film, digital media, media literacy and creative technologies. More information: https://www.reformhub.de';
+  }
+
+  if (
+    message.includes('what is') ||
+    message.includes('re:form hub?') ||
+    message.includes('reform hub?')
+  ) {
+    return 'Re:Form Hub is an independent education and creative initiative working at the intersection of artificial intelligence, film, digital media and creative technology. It operates between Berlin and Lutherstadt Wittenberg. More information: https://www.reformhub.de';
+  }
+
+  return 'The chat is currently unavailable. Please try again later or visit https://www.reformhub.de.';
 }
 
 const ALLOWED_ORIGIN_PATTERNS = [
@@ -102,15 +146,25 @@ const ALLOWED_ORIGIN_PATTERNS = [
   /^https:\/\/([a-z0-9-]+\.)*vercel\.app$/i,
 ];
 
-export function isAllowedOrigin(origin?: string | null): boolean {
-  if (!origin) return true; // same-origin requests often omit the header
-  return ALLOWED_ORIGIN_PATTERNS.some((re) => re.test(origin));
+export function isAllowedOrigin(
+  origin?: string | null
+): boolean {
+  if (!origin) return true;
+
+  return ALLOWED_ORIGIN_PATTERNS.some((pattern) =>
+    pattern.test(origin)
+  );
 }
 
-export function corsHeadersFor(origin?: string | null): Record<string, string> {
+export function corsHeadersFor(
+  origin?: string | null
+): Record<string, string> {
   return {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': origin && isAllowedOrigin(origin) ? origin : 'https://www.reformhub.de',
+    'Access-Control-Allow-Origin':
+      origin && isAllowedOrigin(origin)
+        ? origin
+        : 'https://www.reformhub.de',
     'Access-Control-Allow-Headers': 'content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     Vary: 'Origin',
@@ -120,61 +174,164 @@ export function corsHeadersFor(origin?: string | null): Record<string, string> {
 export async function handleChat(
   payload: unknown,
   apiKey?: string
-): Promise<{ status: number; body: Record<string, unknown> }> {
-  const data = (payload || {}) as { messages?: unknown; lang?: unknown };
+): Promise<{
+  status: number;
+  body: Record<string, unknown>;
+}> {
+  const data = (payload || {}) as {
+    messages?: unknown;
+    lang?: unknown;
+  };
+
   const lang = data.lang === 'en' ? 'en' : 'de';
 
-  if (!Array.isArray(data.messages) || data.messages.length === 0) {
-    return { status: 400, body: { error: 'Invalid message format.' } };
+  if (
+    !Array.isArray(data.messages) ||
+    data.messages.length === 0
+  ) {
+    return {
+      status: 400,
+      body: { error: 'Invalid message format.' },
+    };
   }
 
-  const messages: ChatMessage[] = (data.messages as ChatMessage[])
-    .filter((m) => m && typeof m.content === 'string' && (m.role === 'user' || m.role === 'assistant'))
-    .map((m) => ({ role: m.role, content: m.content.slice(0, MAX_MESSAGE_LENGTH) }));
+  const messages: ChatMessage[] = (
+    data.messages as ChatMessage[]
+  )
+    .filter(
+      (message) =>
+        message &&
+        typeof message.content === 'string' &&
+        (message.role === 'user' ||
+          message.role === 'assistant')
+    )
+    .map((message) => ({
+      role: message.role,
+      content: message.content
+        .trim()
+        .slice(0, MAX_MESSAGE_LENGTH),
+    }))
+    .filter((message) => message.content.length > 0);
 
   if (messages.length === 0) {
-    return { status: 400, body: { error: 'Invalid message format.' } };
+    return {
+      status: 400,
+      body: { error: 'Invalid message format.' },
+    };
   }
 
-  const lastMessage = messages[messages.length - 1].content;
-  const context = messages.slice(-MAX_CONTEXT_MESSAGES);
-  const systemPrompt = lang === 'en' ? SYSTEM_PROMPT_EN : SYSTEM_PROMPT_DE;
+  const lastMessage =
+    messages[messages.length - 1].content;
+
+  const context = messages.slice(
+    -MAX_CONTEXT_MESSAGES
+  );
+
+  const systemPrompt =
+    lang === 'en'
+      ? SYSTEM_PROMPT_EN
+      : SYSTEM_PROMPT_DE;
 
   if (!apiKey) {
-    return { status: 200, body: { message: getFallbackResponse(lastMessage, lang) } };
+    console.error(
+      'GEMINI_API_KEY is not configured.'
+    );
+
+    return {
+      status: 200,
+      body: {
+        message: getFallbackResponse(
+          lastMessage,
+          lang
+        ),
+      },
+    };
   }
 
   try {
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent',
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey,
+        },
         body: JSON.stringify({
-          systemInstruction: { parts: [{ text: systemPrompt }] },
-          contents: context.map((m) => ({
-            role: m.role === 'assistant' ? 'model' : 'user',
-            parts: [{ text: m.content }],
+          systemInstruction: {
+            parts: [{ text: systemPrompt }],
+          },
+          contents: context.map((message) => ({
+            role:
+              message.role === 'assistant'
+                ? 'model'
+                : 'user',
+            parts: [{ text: message.content }],
           })),
-          generationConfig: { temperature: 0.7, maxOutputTokens: 500 },
+          generationConfig: {
+            temperature: 0.4,
+            maxOutputTokens: 500,
+          },
         }),
       }
     );
 
     if (!response.ok) {
-      return { status: 200, body: { message: getFallbackResponse(lastMessage, lang) } };
+      const errorText = await response.text();
+
+      console.error(
+        `Gemini API error ${response.status}:`,
+        errorText.slice(0, 1000)
+      );
+
+      return {
+        status: 200,
+        body: {
+          message: getFallbackResponse(
+            lastMessage,
+            lang
+          ),
+        },
+      };
     }
 
     const json = (await response.json()) as {
-      candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+      candidates?: Array<{
+        content?: {
+          parts?: Array<{ text?: string }>;
+        };
+      }>;
     };
-    const reply = json.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('').trim();
+
+    const reply = json.candidates?.[0]?.content?.parts
+      ?.map((part) => part.text || '')
+      .join('')
+      .trim();
 
     return {
       status: 200,
-      body: { message: reply || getFallbackResponse(lastMessage, lang) },
+      body: {
+        message:
+          reply ||
+          getFallbackResponse(lastMessage, lang),
+      },
     };
-  } catch {
-    return { status: 200, body: { message: getFallbackResponse(lastMessage, lang) } };
+  } catch (error) {
+    console.error(
+      'Gemini request failed:',
+      error instanceof Error
+        ? error.message
+        : 'Unknown error'
+    );
+
+    return {
+      status: 200,
+      body: {
+        message: getFallbackResponse(
+          lastMessage,
+          lang
+        ),
+      },
+    };
   }
 }
