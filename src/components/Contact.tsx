@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Mail, Instagram, Linkedin, Send, MapPin } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { useNewsletterSubscription } from '@/hooks/useNewsletterSubscription';
 import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
@@ -11,8 +10,8 @@ const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { subscribe, isLoading } = useNewsletterSubscription();
   const { toast } = useToast();
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
