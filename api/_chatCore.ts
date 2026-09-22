@@ -62,10 +62,7 @@ export function getFallbackResponse(userMessage: string, lang: string): string {
   const m = (userMessage || '').toLowerCase();
 
   if (lang === 'de') {
-    if (m.includes('was ist') || m.includes('re:form hub?') || m.includes('reform hub?')) {
-      return 'Der Re:Form Hub ist ein innovativer Startup-Hub in Wittenberg, wo junge Menschen mit Ideen zusammenkommen, um zu networken, Infrastruktur zu nutzen und gemeinsam an zukunftsweisenden Projekten zu arbeiten. Mehr Infos: www.reformhub.de';
-    }
-    if (m.includes('wo') || m.includes('adresse') || m.includes('standort')) {
+    if (m.includes('wo ') || m.includes('wo?') || m.includes('adresse') || m.includes('standort') || m.includes('befindet')) {
       return 'Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg. Mehr Infos: www.reformhub.de';
     }
     if (m.includes('gründer') || m.includes('grunder') || m.includes('initiator')) {
@@ -74,12 +71,12 @@ export function getFallbackResponse(userMessage: string, lang: string): string {
     if (m.includes('angebot') || m.includes('bietet') || m.includes('ausstattung') || m.includes('technik')) {
       return 'Co-Working Space, Networking-Events, Workshops und Veranstaltungen von August bis Oktober 2025 – plus Zugang zu VR, 360°-Kameras und KI-Werkzeugen. Mehr Infos: www.reformhub.de';
     }
+    if (m.includes('was ist') || m.includes('re:form hub?') || m.includes('reform hub?')) {
+      return 'Der Re:Form Hub ist ein innovativer Startup-Hub in Wittenberg, wo junge Menschen mit Ideen zusammenkommen, um zu networken, Infrastruktur zu nutzen und gemeinsam an zukunftsweisenden Projekten zu arbeiten. Mehr Infos: www.reformhub.de';
+    }
     return 'Unsere Bots sind gerade ziemlich beschäftigt. Schau gern später nochmal vorbei oder finde alles Wichtige auf www.reformhub.de – wir freuen uns auf dich!';
   }
 
-  if (m.includes('what is') || m.includes('re:form hub?') || m.includes('reform hub?')) {
-    return 'Re:Form Hub is an innovative startup hub in Wittenberg where young people with ideas come together to network, access infrastructure and build forward-thinking projects. More: www.reformhub.de';
-  }
   if (m.includes('where') || m.includes('address') || m.includes('location')) {
     return 'Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg. More: www.reformhub.de';
   }
@@ -89,7 +86,11 @@ export function getFallbackResponse(userMessage: string, lang: string): string {
   if (m.includes('offer') || m.includes('equipment') || m.includes('tech')) {
     return 'Co-working space, networking events, workshops and events from August to October 2025 – plus access to VR, 360° cameras and AI tools. More: www.reformhub.de';
   }
+  if (m.includes('what is') || m.includes('re:form hub?') || m.includes('reform hub?')) {
+    return 'Re:Form Hub is an innovative startup hub in Wittenberg where young people with ideas come together to network, access infrastructure and build forward-thinking projects. More: www.reformhub.de';
+  }
   return 'Our bots are pretty busy right now. Please come back a bit later or find everything you need on www.reformhub.de – we would love to hear from you!';
+
 }
 
 const ALLOWED_ORIGIN_PATTERNS = [
