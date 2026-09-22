@@ -142,11 +142,11 @@ const Contact = () => {
                   placeholder={t('contact.newsletter.placeholder')}
                   className="flex-grow bg-secondary/50 border-input text-foreground"
                   required
-                  disabled={isSubmitting || isLoading}
+                  disabled={isSubmitting}
                 />
                 <button 
                   type="submit" 
-                  disabled={isSubmitting || isLoading}
+                  disabled={isSubmitting}
                   className="p-3 rounded-full bg-gradient-to-r from-reform-teal to-reform-cyan text-white hover:from-reform-cyan hover:to-reform-teal transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="h-4 w-4" />
