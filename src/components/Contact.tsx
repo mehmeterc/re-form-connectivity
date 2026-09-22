@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Mail, Instagram, Linkedin, Send, MapPin } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { useNewsletterSubscription } from '@/hooks/useNewsletterSubscription';
 import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
@@ -11,8 +10,8 @@ const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { subscribe, isLoading } = useNewsletterSubscription();
   const { toast } = useToast();
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,14 +34,16 @@ const Contact = () => {
     };
   }, []);
 
-  const handleSubscribe = async (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!emailRef.current?.value) {
+
+    const email = emailRef.current?.value?.trim();
+
+    if (!email) {
       toast({
         title: language === 'de' ? 'Fehler' : 'Error',
-        description: language === 'de' 
-          ? 'Bitte geben Sie eine E-Mail-Adresse ein.' 
+        description: language === 'de'
+          ? 'Bitte geben Sie eine E-Mail-Adresse ein.'
           : 'Please enter an email address.',
         variant: 'destructive'
       });
@@ -50,35 +51,27 @@ const Contact = () => {
     }
 
     setIsSubmitting(true);
-    
-    try {
-      const result = await subscribe(emailRef.current.value, language, 'contact_form');
-      
-      if (result.success) {
-        toast({
-          title: language === 'de' ? 'Erfolgreich!' : 'Success!',
-          description: result.message,
-        });
-        if (emailRef.current) emailRef.current.value = '';
-      } else {
-        toast({
-          title: language === 'de' ? 'Fehler' : 'Error',
-          description: result.message,
-          variant: 'destructive'
-        });
-      }
-    } catch (error) {
-      toast({
-        title: language === 'de' ? 'Fehler' : 'Error',
-        description: language === 'de' 
-          ? 'Ein unerwarteter Fehler ist aufgetreten.' 
-          : 'An unexpected error occurred.',
-        variant: 'destructive'
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+
+    const subject = language === 'de' ? 'Newsletter-Anmeldung Re:Form Hub' : 'Re:Form Hub newsletter signup';
+    const body = language === 'de'
+      ? `Hallo Re:Form Hub Team,\n\nbitte nehmt mich in den Newsletter auf.\n\nE-Mail: ${email}\n`
+      : `Hello Re:Form Hub team,\n\nplease add me to the newsletter.\n\nEmail: ${email}\n`;
+
+    window.location.href = `mailto:mehmeterc@gmail.com?cc=elifnurm@gmail.com&subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    toast({
+      title: language === 'de' ? 'Fast fertig!' : 'Almost done!',
+      description: language === 'de'
+        ? 'Dein E-Mail-Programm öffnet sich – einfach die Mail abschicken und du bist dabei.'
+        : 'Your email app is opening – just send the message and you are in.',
+    });
+
+    if (emailRef.current) emailRef.current.value = '';
+    setIsSubmitting(false);
   };
+
 
   return (
     <section
@@ -149,11 +142,11 @@ const Contact = () => {
                   placeholder={t('contact.newsletter.placeholder')}
                   className="flex-grow bg-secondary/50 border-input text-foreground"
                   required
-                  disabled={isSubmitting || isLoading}
+                  disabled={isSubmitting}
                 />
                 <button 
                   type="submit" 
-                  disabled={isSubmitting || isLoading}
+                  disabled={isSubmitting}
                   className="p-3 rounded-full bg-gradient-to-r from-reform-teal to-reform-cyan text-white hover:from-reform-cyan hover:to-reform-teal transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="h-4 w-4" />

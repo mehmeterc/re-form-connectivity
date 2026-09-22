@@ -1,7 +1,5 @@
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useToast } from './use-toast';
-import { supabase } from "@/integrations/supabase/client";
 
 export interface Message {
   role: 'user' | 'assistant';
@@ -14,33 +12,55 @@ export const popularQuestions = [
   "Wer sind die Initiatoren des Re:Form Hubs?"
 ];
 
+const STORAGE_KEY = 'reformhub-chat';
+const MAX_MESSAGE_LENGTH = 500;
+
+const loadMessages = (): Message[] => {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as Message[]) : [];
+  } catch {
+    return [];
+  }
+};
+
 export const useChat = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(loadMessages);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    } catch {
+      // ignore storage failures (private mode)
+    }
+  }, [messages]);
+
   const sendMessage = async (content: string) => {
+    const trimmed = content.trim().slice(0, MAX_MESSAGE_LENGTH);
+    if (!trimmed) return;
+
     setIsLoading(true);
-    const newMessage: Message = { role: 'user', content };
+    const newMessage: Message = { role: 'user', content: trimmed };
     setMessages(prev => [...prev, newMessage]);
 
     try {
-      // Get user's browser language and simplify to 'en' or 'de'
       const userLang = navigator.language.startsWith('de') ? 'de' : 'en';
 
-      const { data, error } = await supabase.functions.invoke('chat', {
-        body: { 
-          messages: [...messages, newMessage],
-          lang: userLang 
-        },
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [...messages, newMessage].slice(-6),
+          lang: userLang,
+        }),
       });
 
-      if (error) {
-        throw new Error(error.message || 'Nachricht konnte nicht gesendet werden.');
-      }
+      const data = await response.json().catch(() => null);
 
-      if (!data?.message) {
-        throw new Error('Ungültige Antwort vom Server.');
+      if (!response.ok || !data?.message) {
+        throw new Error(data?.error || 'Nachricht konnte nicht gesendet werden.');
       }
 
       setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
@@ -57,6 +77,11 @@ export const useChat = () => {
 
   const clearMessages = () => {
     setMessages([]);
+    try {
+      sessionStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // ignore
+    }
   };
 
   return {

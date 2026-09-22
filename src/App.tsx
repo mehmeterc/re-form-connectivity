@@ -8,7 +8,6 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
-import AdminSubscribersPage from "./pages/AdminSubscribers";
 
 const queryClient = new QueryClient();
 
@@ -22,7 +21,6 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/admin/subscribers" element={<AdminSubscribersPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
