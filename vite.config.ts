@@ -23,13 +23,15 @@ const devChatApi = (): Plugin => ({
         return;
       }
 
-      const chunks: Buffer[] = [];
-      for await (const chunk of req) chunks.push(chunk as Buffer);
+      const chunks: Uint8Array[] = [];
+      for await (const chunk of req) chunks.push(chunk as Uint8Array);
 
       let payload: unknown = null;
       try {
-        payload = JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}");
+        const raw = chunks.map((c) => Buffer.from(c).toString("utf8")).join("");
+        payload = JSON.parse(raw || "{}");
       } catch {
+
         res.statusCode = 400;
         res.end(JSON.stringify({ error: "Invalid JSON body." }));
         return;
