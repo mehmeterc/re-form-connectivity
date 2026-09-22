@@ -1,4 +1,4 @@
-import { corsHeadersFor, handleChat, isAllowedOrigin } from './_chatCore';
+import { corsHeadersFor, handleChat, isAllowedOrigin } from './_chatCore.js';
 
 // Vercel serverless function. GEMINI_API_KEY lives only in the server environment.
 export default async function handler(req: any, res: any) {
