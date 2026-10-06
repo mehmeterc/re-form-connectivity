@@ -11,7 +11,6 @@ import EventCalendar from '@/components/EventCalendar';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import ChatButton from '@/components/ChatButton';
 
 const Index = () => {
   useEffect(() => {
@@ -49,7 +48,6 @@ const Index = () => {
         <FAQ />
         <Contact />
         <Footer />
-        <ChatButton />
       </div>
     </LanguageProvider>
   );

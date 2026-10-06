@@ -2,6 +2,7 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import LegalLinks from '@/components/LegalLinks';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -33,6 +34,7 @@ const Footer = () => {
               © 2025 Re:Form Hub. {t('footer.rights')}
             </p>
           </div>
+          <LegalLinks className="mb-4 md:mb-0" />
           <div>
             <p className="text-foreground/60 text-sm">
               {t('footer.madeWith')}
