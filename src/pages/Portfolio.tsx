@@ -1,6 +1,7 @@
 
-import { useEffect } from 'react';
-import { Linkedin, Instagram } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Linkedin, Instagram, Play } from 'lucide-react';
+import LegalLinks from '@/components/LegalLinks';
 import Header from '@/components/Header';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 
@@ -24,6 +25,7 @@ const works = [
 ];
 
 const Portfolio = () => {
+  const [playing, setPlaying] = useState<Record<string, boolean>>({});
   useEffect(() => {
     document.title = 'Selected Moving-Image Work — Mehmet Dadal Ercan';
     return () => {
@@ -63,15 +65,29 @@ const Portfolio = () => {
                 </h2>
               </div>
 
-              <div className="relative z-10 w-full aspect-video rounded-xl overflow-hidden border border-white/10 dark:border-reform-cyan/20 shadow-lg select-none">
-                <iframe
-                  src={work.embedUrl}
-                  title={work.title}
-                  className="absolute inset-0 w-full h-full"
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  loading="lazy"
-                />
+              <div className="relative z-10 w-full aspect-video rounded-xl overflow-hidden border border-white/10 dark:border-reform-cyan/20 shadow-lg select-none bg-secondary/40">
+                {playing[work.id] ? (
+                  <iframe
+                    src={`${work.embedUrl.replace('www.youtube.com', 'www.youtube-nocookie.com')}?autoplay=1`}
+                    title={work.title}
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setPlaying((p) => ({ ...p, [work.id]: true }))}
+                    className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center bg-gradient-to-br from-reform-teal/20 via-background to-reform-pink/20 hover:from-reform-teal/30 transition-colors"
+                  >
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-reform-cyan/90 shadow-lg">
+                      <Play className="h-7 w-7 text-background ml-1" fill="currentColor" />
+                    </span>
+                    <span className="text-sm text-foreground/80 max-w-md">
+                      Video abspielen – erst durch Klick wird YouTube geladen und es werden Daten an YouTube/Google übertragen.
+                    </span>
+                  </button>
+                )}
               </div>
 
               <p className="mt-6 text-base md:text-lg text-foreground/80 leading-relaxed">
@@ -130,6 +146,7 @@ const Portfolio = () => {
           <p className="text-sm md:text-base text-foreground/60">
             Mehmet Dadal Ercan · Filmmaker, Visual Anthropologist & AI-Native Storyteller · Berlin / Lutherstadt Wittenberg
           </p>
+          <LegalLinks className="mt-4 justify-center" />
         </div>
       </footer>
     </div>

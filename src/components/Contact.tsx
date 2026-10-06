@@ -1,86 +1,33 @@
-
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Mail, Instagram, Linkedin, Send, MapPin } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { useToast } from '@/hooks/use-toast';
+import { Mail, Instagram, Linkedin, MapPin, ExternalLink } from 'lucide-react';
+
+const MAPS_URL =
+  'https://www.google.com/maps/search/?api=1&query=' +
+  encodeURIComponent('Straße der Befreiung 139, 06886 Lutherstadt Wittenberg');
 
 const Contact = () => {
   const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-
 
   useEffect(() => {
+    const el = sectionRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          sectionRef.current?.classList.add('in-view');
-        }
+        if (entry.isIntersecting) el?.classList.add('in-view');
       },
       { threshold: 0.1 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (el) observer.observe(el);
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      if (el) observer.unobserve(el);
     };
   }, []);
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const email = emailRef.current?.value?.trim();
-
-    if (!email) {
-      toast({
-        title: language === 'de' ? 'Fehler' : 'Error',
-        description: language === 'de'
-          ? 'Bitte geben Sie eine E-Mail-Adresse ein.'
-          : 'Please enter an email address.',
-        variant: 'destructive'
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    const subject = language === 'de' ? 'Newsletter-Anmeldung Re:Form Hub' : 'Re:Form Hub newsletter signup';
-    const body = language === 'de'
-      ? `Hallo Re:Form Hub Team,\n\nbitte nehmt mich in den Newsletter auf.\n\nE-Mail: ${email}\n`
-      : `Hello Re:Form Hub team,\n\nplease add me to the newsletter.\n\nEmail: ${email}\n`;
-
-    window.location.href = `mailto:mehmeterc@gmail.com?cc=elifnurm@gmail.com&subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-
-    toast({
-      title: language === 'de' ? 'Fast fertig!' : 'Almost done!',
-      description: language === 'de'
-        ? 'Dein E-Mail-Programm öffnet sich – einfach die Mail abschicken und du bist dabei.'
-        : 'Your email app is opening – just send the message and you are in.',
-    });
-
-    if (emailRef.current) emailRef.current.value = '';
-    setIsSubmitting(false);
-  };
-
-
   return (
-    <section
-      id="contact"
-      ref={sectionRef}
-      className="section-transition py-24 relative bg-white/[0.02]"
-    >
+    <section id="contact" ref={sectionRef} className="section-transition py-24 relative bg-white/[0.02]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-orange/10"></div>
-      
+
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -93,83 +40,53 @@ const Contact = () => {
           <div className="glassmorphism p-8 rounded-2xl">
             <div className="mb-6">
               <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.email')}</h3>
-              <a 
-                href="mailto:elifnurm@gmail.com" 
-                className="flex items-center text-foreground/80 hover:text-foreground transition-colors"
-              >
+              <a href="mailto:elifnurm@gmail.com" className="flex items-center text-foreground/80 hover:text-foreground transition-colors">
                 <Mail className="mr-2 h-5 w-5 text-reform-blue" />
                 <span>elifnurm@gmail.com</span>
               </a>
-              <a 
-                href="mailto:mehmeterc@gmail.com" 
-                className="flex items-center mt-2 text-foreground/80 hover:text-foreground transition-colors"
-              >
+              <a href="mailto:mehmeterc@gmail.com" className="flex items-center mt-2 text-foreground/80 hover:text-foreground transition-colors">
                 <Mail className="mr-2 h-5 w-5 text-reform-blue" />
                 <span>mehmeterc@gmail.com</span>
               </a>
+              <a
+                href="mailto:mehmeterc@gmail.com"
+                className="cyber-button inline-flex items-center gap-2 mt-6 px-6 py-3 text-white font-medium rounded-md"
+              >
+                <Mail className="h-4 w-4" />
+                {language === 'de' ? 'E-Mail schreiben' : 'Write an email'}
+              </a>
             </div>
 
-            <div className="mb-6">
+            <div>
               <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.follow')}</h3>
               <div className="flex space-x-4">
-                <a 
-                  href="https://www.instagram.com/antiapp.berlin/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
-                  aria-label="Instagram"
-                >
+                <a href="https://www.instagram.com/antiapp.berlin/" target="_blank" rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors" aria-label="Instagram">
                   <Instagram className="h-5 w-5" />
                 </a>
-                <a 
-                  href="https://www.linkedin.com/in/mehmet-ercan/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors"
-                  aria-label="LinkedIn"
-                >
+                <a href="https://www.linkedin.com/in/mehmet-ercan/" target="_blank" rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-secondary hover:bg-secondary/80 text-foreground/80 hover:text-foreground transition-colors" aria-label="LinkedIn">
                   <Linkedin className="h-5 w-5" />
                 </a>
               </div>
             </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.newsletter.title')}</h3>
-              <form onSubmit={handleSubscribe} className="flex gap-2">
-                <Input
-                  ref={emailRef}
-                  type="email"
-                  placeholder={t('contact.newsletter.placeholder')}
-                  className="flex-grow bg-secondary/50 border-input text-foreground"
-                  required
-                  disabled={isSubmitting}
-                />
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="p-3 rounded-full bg-gradient-to-r from-reform-teal to-reform-cyan text-white hover:from-reform-cyan hover:to-reform-teal transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Send className="h-4 w-4" />
-                </button>
-              </form>
-            </div>
           </div>
 
-          <div className="glassmorphism p-8 rounded-2xl">
+          <div className="glassmorphism p-8 rounded-2xl flex flex-col">
             <h3 className="text-xl font-semibold mb-4 text-foreground">{t('contact.location')}</h3>
-            <div className="flex items-start mb-4">
+            <div className="flex items-start mb-6">
               <MapPin className="mr-2 h-5 w-5 text-reform-pink mt-1" />
               <p className="text-foreground/80">Re:Form Hub - Strasse der Befreiung 139, 06886 Lutherstadt Wittenberg</p>
             </div>
-            
-            <div className="rounded-xl overflow-hidden h-64 mt-6">
-              <iframe
-                title="Re:Form Hub Location"
-                className="w-full h-full border-0"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2449.8472636010254!2d12.648844015816656!3d51.86730219784913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a65a7c06a21e85%3A0xe0a01bccf8e3ccf7!2sStrasse%20der%20Befreiung%20139%2C%2006886%20Lutherstadt%20Wittenberg!5e0!3m2!1sen!2sde!4v1621458252045!5m2!1sen!2sde"
-                loading="lazy"
-              ></iframe>
-            </div>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 self-start px-6 py-3 rounded-md border border-border/60 bg-secondary/50 hover:bg-secondary text-foreground font-medium transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              {language === 'de' ? 'In Google Maps öffnen' : 'Open in Google Maps'}
+            </a>
           </div>
         </div>
       </div>
