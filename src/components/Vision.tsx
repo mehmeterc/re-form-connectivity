@@ -1,8 +1,8 @@
 
 import React, { useRef, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import VisionCarousel from './vision/VisionCarousel';
-import VisionStats from './vision/VisionStats';
+import gardenImg from '@/assets/reformhub-garden.png.asset.json';
+import eveningImg from '@/assets/reformhub-evening.png.asset.json';
 
 const Vision = () => {
   const { language } = useLanguage();
@@ -53,8 +53,21 @@ const Vision = () => {
           </p>
         </div>
 
-        <VisionCarousel />
-        <VisionStats />
+        <div className="flex flex-col gap-10 md:gap-14">
+          {[gardenImg, eveningImg].map((img, i) => (
+            <figure
+              key={i}
+              className="glassmorphism p-2 md:p-3 rounded-3xl border border-reform-cyan/20 shadow-2xl shadow-reform-teal/10"
+            >
+              <img
+                src={img.url}
+                alt={language === 'de' ? 'Re:Form Hub Containergebäude in Lutherstadt Wittenberg' : 'Re:Form Hub container building in Lutherstadt Wittenberg'}
+                loading="lazy"
+                className="w-full h-auto rounded-2xl block"
+              />
+            </figure>
+          ))}
+        </div>
       </div>
     </section>
   );

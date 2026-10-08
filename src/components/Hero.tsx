@@ -14,10 +14,6 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-reform-teal/10 via-background to-background dark:from-reform-teal-dark/30 dark:via-background dark:to-background"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-teal/10 dark:from-reform-teal/20"></div>
-        <div 
-          className="absolute inset-0 bg-[url('/images/wittenberg-abstract.jpg')] bg-cover bg-center opacity-10 dark:opacity-20 mix-blend-overlay"
-          style={{ backgroundImage: "url('/images/wittenberg-abstract.jpg')" }}
-        ></div>
       </div>
 
       {/* Floating elements - repositioned to not overlap with text */}
