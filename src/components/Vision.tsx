@@ -1,8 +1,11 @@
 
 import React, { useRef, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import gardenImg from '@/assets/reformhub-garden.png.asset.json';
-import eveningImg from '@/assets/reformhub-evening.png.asset.json';
+const images = [
+  { url: '/images/reformhub-1-garten.webp' },
+  { url: '/images/reformhub-2-abend.webp' },
+  { url: '/images/reformhub-3-abend-front.webp' },
+];
 
 const Vision = () => {
   const { language } = useLanguage();
@@ -54,7 +57,7 @@ const Vision = () => {
         </div>
 
         <div className="flex flex-col gap-10 md:gap-14">
-          {[gardenImg, eveningImg].map((img, i) => (
+          {images.map((img, i) => (
             <figure
               key={i}
               className="glassmorphism p-2 md:p-3 rounded-3xl border border-reform-cyan/20 shadow-2xl shadow-reform-teal/10"
