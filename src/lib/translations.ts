@@ -17,7 +17,14 @@ export const translations = {
     },
     about: {
       title: 'Was ist Re:Form Hub?',
-      description: 'Re:Form Hub ist ein temporärer Kreativ- und Innovationsraum, der Bürger:innen, junge Talente und Expert:innen zusammenbringt. Hier verbinden wir Vergangenheit mit digitaler Zukunft – durch Co-Working, Maker-Projekte, KI-Experimente und öffentliche Ausstellungen.',
+      spotlight: 'Ein Ort für neue Ideen, kreative Experimente und digitale Zukunft.',
+      description: 'Re:Form Hub verbindet Menschen, Technologie und Kreativität. Mit KI, Medienproduktion und innovativen Bildungsformaten schaffen wir Raum zum Experimentieren und gemeinsamen Gestalten.',
+      why: {
+        wittenbergTitle: 'Warum Wittenberg?',
+        wittenberg: 'Wittenberg steht für Geschichte und Wandel. Wir möchten hier neue Technologien und kreative Perspektiven zugänglich machen.',
+        nowTitle: 'Warum jetzt?',
+        now: 'KI verändert, wie wir lernen, arbeiten und gestalten. Re:Form Hub bringt diese Möglichkeiten auch abseits der Metropolen dorthin, wo neue Ideen entstehen können.'
+      },
       coworking: {
         title: 'Co-Working Space',
         description: 'Offener Raum mit WLAN & kreativer Atmosphäre'
@@ -150,7 +157,14 @@ export const translations = {
     },
     about: {
       title: 'What is Re:Form Hub?',
-      description: 'Re:Form Hub is a temporary creative and innovation space that brings together citizens, young talents, and experts. Here, we connect the past with the digital future – through co-working, maker projects, AI experiments, and public exhibitions.',
+      spotlight: 'A place for new ideas, creative experiments and a digital future.',
+      description: 'Re:Form Hub connects people, technology and creativity. With AI, media production and innovative educational formats, we create space for experimentation and shaping things together.',
+      why: {
+        wittenbergTitle: 'Why Wittenberg?',
+        wittenberg: 'Wittenberg stands for history and transformation. We want to make new technologies and creative perspectives accessible here.',
+        nowTitle: 'Why now?',
+        now: 'AI is changing how we learn, work and create. Re:Form Hub brings these opportunities beyond the metropolises, to where new ideas emerge.'
+      },
       coworking: {
         title: 'Co-Working Space',
         description: 'Open space with Wi-Fi & creative atmosphere'

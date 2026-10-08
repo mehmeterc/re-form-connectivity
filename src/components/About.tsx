@@ -28,6 +28,17 @@ const About = () => {
     };
   }, []);
 
+  const whyCards = [
+    {
+      title: t('about.why.wittenbergTitle'),
+      text: t('about.why.wittenberg'),
+    },
+    {
+      title: t('about.why.nowTitle'),
+      text: t('about.why.now'),
+    },
+  ];
+
   const features = [
     {
       icon: <Wifi className="h-10 w-10 text-reform-cyan" />,
@@ -53,20 +64,36 @@ const About = () => {
       className="section-transition py-24 relative"
     >
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             <span className="text-gradient heading-glow">{t('about.title')}</span>
           </h2>
+          <p className="text-xl md:text-2xl font-medium text-foreground max-w-3xl mx-auto mb-5 neon-text">
+            {t('about.spotlight')}
+          </p>
           <p className="text-lg text-foreground/80 max-w-3xl mx-auto">
             {t('about.description')}
           </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {whyCards.map((card, index) => (
+            <div
+              key={index}
+              className="glow-card glassmorphism p-8 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-reform-teal/20 hover:-translate-y-1"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <h3 className="text-xl font-semibold mb-3 neon-text">{card.title}</h3>
+              <p className="text-foreground/70 leading-relaxed">{card.text}</p>
+            </div>
+          ))}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="glow-card glassmorphism p-8 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-reform-teal/20 hover:-translate-y-1 pixel-corners"
+              className="glow-card glassmorphism p-8 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-reform-teal/20 hover:-translate-y-1"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="mb-4 p-3 rounded-xl bg-foreground/5 inline-block">
