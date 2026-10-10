@@ -8,7 +8,6 @@ import Vision from '@/components/Vision';
 import Partners from '@/components/Partners';
 import Features from '@/components/Features';
 import EventCalendar from '@/components/EventCalendar';
-import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 

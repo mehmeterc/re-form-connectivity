@@ -29,7 +29,6 @@ const Header = () => {
     { href: sectionHref('#features'), label: t('nav.features') },
     { href: sectionHref('#events'), label: t('nav.events') },
     { href: sectionHref('#vision'), label: t('nav.vision') },
-    { href: sectionHref('#faq'), label: t('nav.faq') },
     { href: sectionHref('#contact'), label: t('nav.contact') },
     { to: '/portfolio', label: t('nav.portfolio') },
   ];
