@@ -7,6 +7,14 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const works = [
   {
+    id: 'mundane-miracle',
+    title: 'A Mundane Miracle',
+    format: 'AI-assisted short film · 2026 · 2 min',
+    embedUrl: 'https://www.youtube.com/embed/rGqvah_Wj2I',
+    description:
+      'A childhood dream of flying just 30 centimeters above the ground becomes a reflection on the early days of AI. A playful reminder that even the smallest miracle is still a miracle.',
+  },
+  {
     id: 'odyssey',
     title: 'Life Is an Odyssey',
     format: 'AI-assisted fictional commercial film · 2026',
