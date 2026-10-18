@@ -2,21 +2,13 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-import { useTheme } from '@/contexts/ThemeContext';
+
 
 const Hero = () => {
   const { t } = useLanguage();
-  const { theme } = useTheme();
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center pt-24 pb-12">
-      {/* Background with gradient overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-reform-teal/10 via-background to-background dark:from-reform-teal-dark/30 dark:via-background dark:to-background"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-teal/10 dark:from-reform-teal/20"></div>
-      </div>
-
-
       {/* Content */}
       <div className="container max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center mt-10">
         <div className="mb-6 md:mb-10 flex justify-center">

@@ -124,7 +124,6 @@ const EventCalendar = () => {
       ref={sectionRef}
       className="section-transition py-24 relative bg-white/[0.02]"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-pink/10"></div>
       
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
@@ -189,7 +188,7 @@ const EventCalendar = () => {
                       <div className="mt-3 pt-3 border-t border-border animate-slide-up">
                         <p className="text-sm text-foreground/70 mb-3">{event.description}</p>
                         <Button 
-                          className="shimmer-button w-full bg-reform-orange hover:bg-reform-orange/90 text-white"
+                          className="cyber-button w-full text-primary-foreground"
                           onClick={() => handleRSVP(event.id)}
                         >
                           {t('events.rsvp')}
@@ -212,8 +211,8 @@ const EventCalendar = () => {
                 {t('events.location')}
               </p>
               <Button 
-                variant="teal"
-                className="shimmer-button w-full text-white font-medium hover:bg-reform-teal-light/90 dark:hover:bg-reform-teal/90"
+                variant="default"
+                className="cyber-button w-full text-primary-foreground font-medium"
               >
                 {t('events.cta')}
               </Button>
