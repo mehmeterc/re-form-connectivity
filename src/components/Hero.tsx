@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Lightbulb, Stars, Gamepad2 } from 'lucide-react';
+
 import { useTheme } from '@/contexts/ThemeContext';
 
 const Hero = () => {
@@ -30,7 +30,7 @@ const Hero = () => {
         </p>
         <a
           href="#contact"
-          className="cyber-button inline-flex items-center justify-center px-8 py-4 text-white font-medium rounded-md shadow-lg hover:shadow-reform-teal/30 dark:hover:shadow-reform-cyan/30 transition-all duration-300 hover:-translate-y-1 animate-fade-in"
+          className="cyber-button inline-flex items-center justify-center px-8 py-4 text-white font-medium rounded-md"
         >
           {t('hero.cta')}
         </a>

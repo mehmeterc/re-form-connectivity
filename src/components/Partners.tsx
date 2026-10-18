@@ -69,7 +69,7 @@ const Partners = () => {
           
           <Button 
             size="lg"
-            className="bg-gradient-to-r from-reform-cyan to-reform-purple text-white hover:from-reform-cyan/90 hover:to-reform-purple/90 shadow-lg"
+            className="cyber-button text-white rounded-md"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             {t('partners.cta')}
