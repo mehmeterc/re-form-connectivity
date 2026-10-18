@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Lightbulb, Stars, Gamepad2 } from 'lucide-react';
+
 import { useTheme } from '@/contexts/ThemeContext';
 
 const Hero = () => {
@@ -16,28 +16,6 @@ const Hero = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-teal/10 dark:from-reform-teal/20"></div>
       </div>
 
-      {/* Floating elements - repositioned to not overlap with text */}
-      <div className="absolute top-32 right-[15%] animate-dance" style={{ zIndex: 5 }}>
-        <div className="floating-icon">
-          <div className="floating-icon-inner bg-reform-teal/20 dark:bg-reform-cyan/20"></div>
-          <Lightbulb className="floating-icon-svg text-reform-teal dark:text-reform-cyan" />
-        </div>
-      </div>
-      
-      <div className="absolute bottom-[40%] left-[10%] animate-bounce-soft" style={{ zIndex: 5 }}>
-        <div className="floating-icon">
-          <div className="floating-icon-inner bg-reform-violet/10 dark:bg-reform-violet/20"></div>
-          <Stars className="floating-icon-svg text-reform-violet" />
-        </div>
-      </div>
-      
-      {/* Repositioned the gamepad icon to the left side where there's no text */}
-      <div className="absolute top-[15%] left-[8%] animate-orbit" style={{ zIndex: 5, animationDuration: '15s' }}>
-        <div className="floating-icon">
-          <div className="floating-icon-inner bg-reform-yellow/10 dark:bg-reform-yellow/20"></div>
-          <Gamepad2 className="floating-icon-svg text-reform-orange" />
-        </div>
-      </div>
 
       {/* Content */}
       <div className="container max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center mt-10">
@@ -52,7 +30,7 @@ const Hero = () => {
         </p>
         <a
           href="#contact"
-          className="cyber-button inline-flex items-center justify-center px-8 py-4 text-white font-medium rounded-md shadow-lg hover:shadow-reform-teal/30 dark:hover:shadow-reform-cyan/30 transition-all duration-300 hover:-translate-y-1 animate-fade-in"
+          className="cyber-button inline-flex items-center justify-center px-8 py-4 text-white font-medium rounded-md"
         >
           {t('hero.cta')}
         </a>
