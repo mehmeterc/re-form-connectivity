@@ -59,7 +59,6 @@ const Features = () => {
       ref={sectionRef}
       className="section-transition py-24 relative bg-foreground/[0.02]"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-teal/5 dark:from-reform-teal/10"></div>
       
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">

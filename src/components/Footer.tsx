@@ -8,8 +8,7 @@ const Footer = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="relative bg-gradient-to-br from-background via-background to-reform-teal/10 dark:to-reform-cyan/10 border-t border-border/50">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-purple/10"></div>
+    <footer className="relative bg-background border-t border-border/50">
       
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         {/* CTA Section */}

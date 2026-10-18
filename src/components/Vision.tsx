@@ -38,7 +38,6 @@ const Vision = () => {
       ref={sectionRef}
       className="section-transition py-24 relative bg-white/[0.02] dark:bg-transparent"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-from)_0%,_transparent_70%)] from-reform-pink/10"></div>
       
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-16">
