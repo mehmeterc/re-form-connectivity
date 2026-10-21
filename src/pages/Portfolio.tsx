@@ -15,6 +15,14 @@ const works = [
       'A childhood dream of flying just 30 centimeters above the ground becomes a reflection on the early days of AI. A playful reminder that even the smallest miracle is still a miracle.',
   },
   {
+    id: 'dag-ve-cocuk',
+    title: 'Dağ ve Çocuk (The Mountain and the Child)',
+    format: 'AI-assisted animated short · 2026 · 4:19 min',
+    embedUrl: 'https://www.youtube.com/embed/qbIDwdWnIe8',
+    description:
+      'A journey into the psychedelic heart of Anatolia. Inspired by Moğollar and 1960s–70s Anatolian rock, a little mountain child drifts into a trance as mountains breathe and rivers turn into melodies — blending Turkish folk-art aesthetics, vintage screen printing and handmade collage with experimental AI animation. A tribute to the pioneering spirit of Anatolian rock.',
+  },
+  {
     id: 'odyssey',
     title: 'Life Is an Odyssey',
     format: 'AI-assisted fictional commercial film · 2026',
